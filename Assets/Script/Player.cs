@@ -187,8 +187,9 @@ public class Player : MonoBehaviour
                         AddInventory(HitObj, item.CloneObjectNumber,true);
 
                     }
-                    if(hit.collider.gameObject.GetComponent<Item>().ThisType == Item.ItemType.bullet)
+                    if(item.ThisType == Item.ItemType.bullet)
                     {
+                       // Debug.Log(item.CloneObjectNumber);
                         AddInventory(HitObj, item.CloneObjectNumber, true);
                     }
                    
@@ -200,7 +201,7 @@ public class Player : MonoBehaviour
     {
         GameObject CloneObject = _itemData.ItemObject[CloneObjectNumber];
 
-        Item item = CloneObject.GetComponent<Item>();
+        Item item = hit.GetComponent<Item>();
         if (ItemName.Contains(item.ItemName))
         {
             int ListNumber = ItemName.IndexOf(item.ItemName);
@@ -215,38 +216,40 @@ public class Player : MonoBehaviour
         }
         else
         {
-            int i = 0;
-            foreach(GameObject a in ItemObject)
-            {
-                if ((item.ThisType == Item.ItemType.Gun || item.ThisType == Item.ItemType.recovery) && (a.GetComponent<Item>().ThisType == Item.ItemType.Gun || a.GetComponent<Item>().ThisType == Item.ItemType.recovery))//追加しようとしている種類とinventory内のアイテムの種類と一致したら
-                {
-                    i++;
-                }
-            }
+         
            // Debug.Log(i);
-            if (item.ThisType == Item.ItemType.Gun && i < 3)
+            if (item.ThisType == Item.ItemType.Gun)
             {
-                ItemName.Add(item.ItemName);
-                ItemCount.Add(1);
-                ItemObject.Add(CloneObject);
-                
-                if(i == 0)
+                int i = 0;
+                foreach (GameObject a in ItemObject)
                 {
-                    _Inventory.select = 1;
+                    if ((item.ThisType == Item.ItemType.Gun || item.ThisType == Item.ItemType.recovery) && (a.GetComponent<Item>().ThisType == Item.ItemType.Gun || a.GetComponent<Item>().ThisType == Item.ItemType.recovery))//追加しようとしている種類とinventory内のアイテムの種類と一致したら
+                    {
+                        i++;
+                    }
                 }
-                _Inventory.RoadItem();
-                _gun.GanHave();
+
+                if(i < 3)
+                {
+                    ItemName.Add(item.ItemName);
+                    ItemCount.Add(1);
+                    ItemObject.Add(CloneObject);
+
+                    if (i == 0)
+                    {
+                        _Inventory.select = 1;
+                    }
+                    _Inventory.RoadItem();
+                    _gun.GanHave();
+                    _Inventory.RoadItem();
+                }
+               
             }
-            if (item.ThisType == Item.ItemType.bullet && i < 3)
+            else if (item.ThisType == Item.ItemType.bullet)
             {
                 ItemName.Add(item.ItemName);
                 ItemCount.Add(item.count);
                 ItemObject.Add(CloneObject);
-
-                if (i == 0)
-                {
-                    _Inventory.select = 1;
-                }
                 _Inventory.RoadItem();
             }
             else
@@ -254,11 +257,22 @@ public class Player : MonoBehaviour
 
           
         }
+       // Debug.Log(delete + "" + hit);
         if (delete && hit != null)
         {
             Destroy(hit);
         }
     }
-   
+    public void ReMoveItem(int index, int count)
+    {
+        ItemCount[index] -= count;
+        if (ItemCount[index] <= 0)
+        {
+            ItemName.RemoveAt(index);
+            ItemCount.RemoveAt(index);
+            ItemObject.RemoveAt(index);
+        }
+
+    }
   
 }

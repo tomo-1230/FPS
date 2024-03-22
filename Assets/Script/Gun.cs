@@ -15,15 +15,20 @@ public class Gun :MonoBehaviour
     public float Reticle_u;
     public float Reticle_b;
     public Sprite cross_hair;
+    public GameObject CircleGauge;
     public int ZoomValue;
     //public List<Transform> childrens;
     private GameObject CloneObject;
     public bool firing = false;
+    private bool reloading;
     public GameObject Prefab_HaveGun;
     public GameObject Clone_HaveGun;
+    private int i;
+
     // Start is called before the first frame update
     void Start()
     {
+        CircleGauge.SetActive(false);
         pointer.sprite = cross_hair;
         player.anim.SetLayerWeight(1, 1f);
     }
@@ -42,6 +47,7 @@ public class Gun :MonoBehaviour
             vector1.z = player.CameraObject.transform.localEulerAngles.y * -1;
             Clone_HaveGun.transform.localEulerAngles = vector1;
         }
+        Reload(Input.GetKeyDown(KeyCode.R));
     }
     public void GunSelect()
     {
@@ -95,9 +101,22 @@ public class Gun :MonoBehaviour
     }
     public void zoom(bool button)
     {
-       
+        if (reloading)
+        {
+            player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
+            pointer.sprite = cross_hair;
+            Reticle_Object.GetComponent<RectTransform>().localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
+            Debug.Log("a");
+            return;
+        }
+
         if (button && Prefab_HaveGun != null)
         {
+            Debug.Log("b");
+            if (Clone_HaveGun.GetComponent<Item>().SetBullet <= 0 || reloading)
+            {
+                return;
+            }
             player.CameraObject.GetComponent<Camera>().fieldOfView = Prefab_HaveGun.GetComponent<Item>().ZoomValue;
             pointer.sprite = Prefab_HaveGun.GetComponent<Item>().Set_cross_hair;
             if (Prefab_HaveGun.GetComponent<Item>().CloneObjectNumber == 4)
@@ -124,12 +143,17 @@ public class Gun :MonoBehaviour
         
         
         Item item = null;
-        
-        if (Prefab_HaveGun != null)
+
+        if (Clone_HaveGun != null)
         {
-            item = Prefab_HaveGun.GetComponent<Item>();
+            item = Clone_HaveGun.GetComponent<Item>();
         }
         else
+        {
+            return;
+        }
+
+        if (item.SetBullet <= 0 || reloading)
         {
             return;
         }
@@ -174,10 +198,95 @@ public class Gun :MonoBehaviour
             //vector.y += 90;
             CloneObject.transform.localEulerAngles = vector;
             CloneObject.AddComponent<Bullet>().item = item;
-
+            item.SetBullet--;
+            inventory.RoadItem();
             await Task.Delay(item.FiringInterval);
             firing = false;
         }
        
+    }
+    public async void Reload(bool ButtonDown)
+    {
+        if (!ButtonDown || reloading)
+        {
+            return;
+        }
+
+        //check
+        reloading = true;
+        Item item = null;
+
+        if(Clone_HaveGun != null)
+        {
+            item = Clone_HaveGun.GetComponent<Item>();
+        }
+        else
+        {
+            reloading = false;
+            return;
+        }
+
+        if(item.SetBullet >= item.MaxBullet)
+        {
+            reloading = false;
+            return;
+        }
+        bool existence = false;
+        int value = 0;
+        foreach (GameObject a in player.ItemObject)
+        {
+            if(a.GetComponent<Item>() == null)
+            {
+                return;
+            }
+            Item InventoryItem = a.GetComponent<Item>();
+            if (InventoryItem.ThisType != Item.ItemType.bullet || InventoryItem.ThisBulletType != Prefab_HaveGun.GetComponent<Item>().BulletType)
+            {
+                value++;
+            }
+            else
+            {
+                existence = true;
+            }
+
+        }
+
+        if (!existence)
+        {
+            reloading = false;
+            return;
+        }
+
+        int Havebullet = player.ItemCount[value];
+
+        //count
+
+
+        int consumableBullets;
+
+        if(Havebullet >= item.MaxBullet)
+        {
+            consumableBullets = item.MaxBullet - item.SetBullet;
+        }
+        else
+        {
+            consumableBullets = Havebullet;
+        }
+
+        // Debug.Log(consumableBullets);
+
+        //Reload
+
+        CircleGauge.SetActive(true);
+        await Task.Delay(Clone_HaveGun.GetComponent<Item>().ReRoadTiem);
+
+
+        item.SetBullet += consumableBullets;
+
+       
+        player.ReMoveItem(value, consumableBullets);
+        inventory.RoadItem();
+        CircleGauge.SetActive(false);
+        reloading = false;
     }
 }

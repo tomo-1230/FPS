@@ -52,7 +52,7 @@ public class Item : MonoBehaviour
     [Header("ItemType == bullet ‚Ì‚Ý")]
     [Header("--------------------")]
     [Space(5)]
-    public string NameNnitials;
+    public int ThisBulletType;
     public int count;
     public GameObject Firing_Bullet;
     [HideInInspector]

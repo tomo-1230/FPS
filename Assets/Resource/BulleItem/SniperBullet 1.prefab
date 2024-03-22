@@ -68,15 +68,24 @@ MonoBehaviour:
   ItemName: "\u30E9\u30A4\u30D5\u30EB\u5F3E"
   ThisType: 1
   CloneObjectNumber: 6
-  Damage: 0
-  SetAmmunition: 0
   HavePosition: {x: 0, y: 0, z: 0}
   GumImage: {fileID: 0}
   Have_cross_hair: {fileID: 0}
   Set_cross_hair: {fileID: 0}
   ZoomValue: 0
-  NameNnitials: R
-  count: 10
+  SetBullet: 0
+  MaxBullet: 0
+  ReRoadTiem: 0
+  BulletObj: {fileID: 0}
+  MuzzleObj: {fileID: 0}
+  BulletType: 0
+  distance: 0
+  Damage: 0
+  HeadDamage: 0
+  FiringInterval: 0
+  RapidFire: 0
+  ThisBulletType: 1
+  count: 30
   Firing_Bullet: {fileID: 1000011023395326, guid: 2ce15a1900ef14a459f78260cd05a3dc, type: 3}
   CLoneObject: {fileID: 0}
 --- !u!1 &1000011260505556

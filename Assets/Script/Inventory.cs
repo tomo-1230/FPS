@@ -12,11 +12,15 @@ public class Inventory : MonoBehaviour
     [HideInInspector]
     public List<GameObject> bur;
     [Header("UI")]
+    public GameObject panel;
     public GameObject panel1;
     public GameObject panel2;
     public GameObject panel3;
+    public Text BulletSet;
+    public Text BulletHave;
     public Image ImageGun;
     public List<GameObject> search;
+    public Gun gun;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,11 +76,14 @@ public class Inventory : MonoBehaviour
             panel2.SetActive(false);
             panel3.SetActive(false);
         }
+
+
         if(select == 0)
         {
             panel1.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             panel2.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             panel3.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
+            panel.SetActive(false);
         }
         if(select == 1)
         {
@@ -100,6 +107,59 @@ public class Inventory : MonoBehaviour
             ImageGun.sprite = search[2].GetComponent<Item>().GumImage;
         }
 
+        //’e‚ÌŽc—Ê•\Ž¦
+
+        if(select != 0 && gun.Clone_HaveGun != null)
+        {
+            panel.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
+
+        if (gun.Clone_HaveGun.GetComponent<Item>().SetBullet < 10)
+        {
+            BulletSet.text = "0" + gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
+        }
+        else
+        {
+            BulletSet.text = gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
+        }
+       
+
+        int value = -1;
+        int index = 0;
+        foreach (GameObject a in player.ItemObject)
+        {
+            Item item = a.GetComponent<Item>();
+            if (item != null && gun.Clone_HaveGun.GetComponent<Item>().BulletType == item.ThisBulletType)
+            {
+                value = index;
+            }
+            else
+            {
+                index++;
+            }
+        }
+
+        if(value != -1)
+        {
+            if (player.ItemCount[value] < 10)
+            {
+                BulletHave.text = "0"+player.ItemCount[value].ToString();
+            }
+            else
+            {
+                BulletHave.text = player.ItemCount[value].ToString();
+            }
+        }
+        else
+        {
+            BulletHave.text = "00";
+        }
+      
+
     }
 
     public void CreateInventory()
@@ -114,6 +174,12 @@ public class Inventory : MonoBehaviour
             int i = 0;
             foreach (GameObject a in player.ItemObject)
             {
+                if(a.GetComponent<Item>() == null)
+                {
+                    Debug.Log("CreateInventoryError");
+                    return;
+                }
+
                 if (a.GetComponent<Item>().ThisType == Type)
                 {
                     GameObject clonebutton = Instantiate(CloneButton);
