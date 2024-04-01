@@ -18,9 +18,14 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject != null)
         {
-            if(collision.gameObject.GetComponent<Enemy>() != null)
+            if (collision.gameObject.GetComponent<Enemy>() != null)
             {
                 collision.gameObject.GetComponent<Enemy>().damage(item.Damage);
+            }
+            else if (collision.gameObject.GetComponent<Player>() != null)
+            {
+                Player player = collision.gameObject.GetComponent<Player>();
+                player.PlayerHP = player._hp.Decrease(player.PlayerHP, item.Damage);
             }
             Destroy(this.gameObject);
  

@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public List<int> ItemCount;
     public List<GameObject> ItemObject;
     public Inventory _Inventory;
+    public HP _hp;
+    public int PlayerHP = 100;
     public Gun _gun;
     private bool OpenInventory;
     public static bool HaveGun;
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         Contact();
         TakeItem();
         Inventory();
+        _hp.PlayerHP(PlayerHP);
     }
     public void Move()
     {
