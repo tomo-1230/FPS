@@ -16,18 +16,12 @@ public class Bullet : MonoBehaviour
     }
     public void OnCollisionStay(Collision collision)
     {
-        //Debug.Log(collision.gameObject);
         if (collision.gameObject != null)
         {
             if(collision.gameObject.GetComponent<Enemy>() != null)
             {
                 collision.gameObject.GetComponent<Enemy>().damage(item.Damage);
             }
-            if (collision.gameObject.GetComponent<Player>() != null)
-            {
-                Debug.Log("Hit");
-            }
-
             Destroy(this.gameObject);
  
         }

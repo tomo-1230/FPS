@@ -5,16 +5,23 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
-{
+{    
+    public int HP;
     public float WalkSpeed;
     public float RunSpeed;
-    public float RayDistance;
-    public float PlayerDistance;
-    public float RunDistance;
+    public float RayDistance;//見える距離
+    public float PlayerDistance;//攻撃が始まる距離
+    public float RunDistance;//走り始める距離
+    public float WaitTime;
+    public float aim;
+    public Vector3 TargetPosition;
+    public Action Situation;
+    public bool PlayerView;
+    public List<Vector3> PatrolPoint;
     public GameObject PlayerObject;
     public GameObject RayPosition;
-    public GameObject Canvas;
-    public GameObject Clone_HaveGun;
+    public GameObject DamageCanvas;
+    public GameObject HaveGun;
     public GameObject Target;
     public GameObject Head;
     public Text text;
@@ -24,17 +31,10 @@ public class Enemy : MonoBehaviour
     {
         Wait, patrol, chase, attack
     }
-    public Vector3 TargetPosition;
-    public Action situation;
-    public bool PlayerView;
-    public int HP;
     private NavMeshAgent nav;
-    public float WaitTime;
-    public float time;
-    public List<Vector3> PatrolPoint;
-    public int Point;
-    public float aim;
-    private bool firng;
+    private float time;
+    private int Point;
+    private bool firng = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,98 +45,80 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         action();
+        animation_();
         conditions();
     }
     public void conditions()
     {
-        if (situation == Action.Wait)
+        if (Situation == Action.Wait)
         {
             Ray();
             if (PlayerView)
             {
-                situation = Action.chase;
+                Situation = Action.chase;
             }
             else if (time >= WaitTime)
             {
                 ShortestPoint();
-                situation = Action.patrol;
+                Situation = Action.patrol;
             }
 
         }
-        else if (situation == Action.patrol)
+        else if (Situation == Action.patrol)
         {
             Ray();
             if (PlayerView)
             {
-                situation = Action.chase;
+                Situation = Action.chase;
             }
             else
             {
-                situation = Action.patrol;
+                Situation = Action.patrol;
             }
         }
-        else if (situation == Action.chase)
+        else if (Situation == Action.chase)
         {
             Ray();
-            if (!PlayerView && Vector3.Distance(this.gameObject.transform.position, TargetPosition) < 0.5f)
+            if (!PlayerView && Vector3.Distance(this.gameObject.transform.position, TargetPosition) < 0.5f)//プレイヤーが見えなくてtargetpositionに近づいたら
             {
                 time = 0;
-                situation = Action.Wait;
+                Situation = Action.Wait;
             }
             if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) < PlayerDistance && PlayerView)
             {
-               // Debug.Log("A");
-                situation = Action.attack;
+                Situation = Action.attack;
             }
             if(Vector3.Distance(this.gameObject.transform.position, TargetPosition) > PlayerDistance)
             {
-               // Debug.Log("B");
-                situation = Action.chase;
+                Situation = Action.chase;
             }
-           // Debug.Log(Vector3.Distance(this.gameObject.transform.position, TargetPosition));
         }
-        else if(situation == Action.attack)
+        else if(Situation == Action.attack)
         {
             if (!PlayerView)
             {
                 time = 0;
-                //situation = Action.Wait;
             }
             else if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < PlayerDistance)
             {
-                //Debug.Log("A");
-                situation = Action.attack;
+                Situation = Action.attack;
             }
             else
             {
-                //Debug.Log("B");
-                situation = Action.chase;
+                Situation = Action.chase;
             }
         }
     }
     public void action()
     {
-       
-        //Debug.Log(nav.stoppingDistance);
-        if (situation == Action.Wait)
+        if (Situation == Action.Wait)
         {
             nav.stoppingDistance = 100;
             time += Time.deltaTime;
-            anim.SetBool("move", false);
-            anim.SetLayerWeight(2, 0f);
-            anim.SetBool("Have", false);
-            anim.SetBool("WS", false);
-            anim.SetBool("AD", false);
-            anim.SetFloat("Blend", 0f);
+         
         }
-        else if (situation == Action.patrol)
+        else if (Situation == Action.patrol)
         {
-            anim.SetBool("move", true);
-            anim.SetBool("Have", false);
-            anim.SetLayerWeight(2, 0f);
-            anim.SetBool("WS", true);
-            anim.SetBool("AD", false);
-            anim.SetFloat("Blend", 0.5f);
             nav.stoppingDistance = 0;
             nav.speed = WalkSpeed;
             nav.SetDestination(PatrolPoint[Point]);
@@ -151,7 +133,7 @@ public class Enemy : MonoBehaviour
                 Point++;
             }
         }
-        else if (situation == Action.chase)
+        else if (Situation == Action.chase)
         {
             Ray();
             if (PlayerView)
@@ -162,6 +144,60 @@ public class Enemy : MonoBehaviour
                     TargetPosition = PlayerObject.transform.position;
                     nav.stoppingDistance = PlayerDistance;
                     nav.SetDestination(TargetPosition);
+                }
+                else
+                {
+                    nav.speed = WalkSpeed;
+                    TargetPosition = PlayerObject.transform.position;
+                    nav.stoppingDistance = PlayerDistance;
+                    nav.SetDestination(TargetPosition);
+                }
+               
+            }
+            else
+            {
+                nav.stoppingDistance = 0;
+                nav.SetDestination(TargetPosition);
+            }
+        }
+        else if(Situation == Action.attack)
+        {
+            Ray();
+            this.transform.LookAt(PlayerObject.transform.position);
+            Vector3 vector = this.transform.localEulerAngles;
+            vector.x = 0;
+            this.transform.localEulerAngles = vector;
+            Firing();
+        }
+        DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
+    }
+    public void animation_()
+    {
+        if (Situation == Action.Wait)
+        {
+            anim.SetBool("move", false);
+            anim.SetLayerWeight(2, 0f);
+            anim.SetBool("Have", false);
+            anim.SetBool("WS", false);
+            anim.SetBool("AD", false);
+            anim.SetFloat("Blend", 0f);
+        }
+        else if (Situation == Action.patrol)
+        {
+            anim.SetBool("move", true);
+            anim.SetBool("Have", false);
+            anim.SetLayerWeight(2, 0f);
+            anim.SetBool("WS", true);
+            anim.SetBool("AD", false);
+            anim.SetFloat("Blend", 0.5f);
+            
+        }
+        else if (Situation == Action.chase)
+        {
+            if (PlayerView)
+            {
+                if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
+                {//run
                     anim.SetBool("move", true);
                     anim.SetLayerWeight(2, 0f);
                     anim.SetBool("Have", false);
@@ -171,10 +207,6 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    nav.speed = WalkSpeed;
-                    TargetPosition = PlayerObject.transform.position;
-                    nav.stoppingDistance = PlayerDistance;
-                    nav.SetDestination(TargetPosition);
                     anim.SetBool("move", true);
                     anim.SetLayerWeight(2, 0f);
                     anim.SetBool("Have", false);
@@ -182,12 +214,10 @@ public class Enemy : MonoBehaviour
                     anim.SetBool("AD", false);
                     anim.SetFloat("Blend", 0.5f);
                 }
-               
+
             }
             else
             {
-                nav.stoppingDistance = 0;
-                nav.SetDestination(TargetPosition);
                 anim.SetBool("Have", false);
                 anim.SetLayerWeight(2, 0f);
                 anim.SetBool("move", true);
@@ -196,22 +226,16 @@ public class Enemy : MonoBehaviour
                 anim.SetFloat("Blend", 0.5f);
             }
         }
-        else if(situation == Action.attack)
+        else if (Situation == Action.attack)
         {
-            Ray();
             anim.SetBool("Have", true);
             anim.SetLayerWeight(2, 1f);
             anim.SetBool("move", false);
             anim.SetBool("WS", false);
             anim.SetBool("AD", false);
             anim.SetFloat("Blend", 0f);
-            this.transform.LookAt(PlayerObject.transform.position);
-            Vector3 vector = this.transform.localEulerAngles;
-            vector.x = 0;
-            this.transform.localEulerAngles = vector;
-            Firing();
+          
         }
-        Canvas.transform.LookAt(player.CameraObject.transform.position);
     }
     async void Firing()
     {
@@ -221,21 +245,17 @@ public class Enemy : MonoBehaviour
             return;
         }
         firng = true;
-        Item item = Clone_HaveGun.GetComponent<Item>();
+        Item item = HaveGun.GetComponent<Item>();
         Ray ray = new Ray(Head.transform.position, Head.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.black);
-        
-      //  Debug.Log(hit.point);
         GameObject CloneObject = Instantiate(item.BulletObj);
-        //CloneObject.SetActive(false);
-        CloneObject.transform.position = Clone_HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
+        CloneObject.transform.position = HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
         Vector3 HitPoint = new Vector3(0,0,0);
         if (Physics.Raycast(ray, out hit, item.distance))
         {
             if (hit.point != new Vector3(0, 0, 0) && hit.collider.gameObject.tag == "player")
             {
-                Debug.Log("A");
                 HitPoint = hit.point;
             }
             else
@@ -243,7 +263,7 @@ public class Enemy : MonoBehaviour
                 HitPoint = ray.GetPoint(item.distance);
             }
         }
-        if (Random.Range(0, 1) == 1)
+        if (Random.Range(0, 1) == 1)//ランダム
         {
             HitPoint.x += Random.Range(0, aim);
         }
@@ -281,7 +301,6 @@ public class Enemy : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * RayDistance, Color.red);
         bool angle = ((RayPosition.transform.localEulerAngles.x >= 0 && RayPosition.transform.localEulerAngles.x <= 90) || (RayPosition.transform.localEulerAngles.x >= 270 && RayPosition.transform.localEulerAngles.x <= 360));
-       // Debug.Log(RayPosition.transform.localEulerAngles.x + "" + angle);
         if (Physics.Raycast(ray, out hit, RayDistance))
         {
 

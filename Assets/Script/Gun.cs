@@ -8,10 +8,11 @@ public class Gun :MonoBehaviour
 {
     public Inventory inventory;
     public Player player;
-    public GameObject HavePosition;
-    public Image pointer;
+    public GameObject HavePosition;  
     public GameObject Reticle_Object;
     public GameObject HitObj;
+
+    public Image pointer;
     public float Reticle_u;
     public float Reticle_b;
     public Sprite cross_hair;
