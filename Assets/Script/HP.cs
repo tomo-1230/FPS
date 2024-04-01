@@ -1,12 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class HP : MonoBehaviour
 {
     public Slider HPSlider;
     public Slider DecreaseSlider;
     public Text HPvaule;
     public Image Fill;
+
+    public float duration = 0.5f;
+    public float strength = 20f;
+    public int vibrate = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +92,7 @@ public class HP : MonoBehaviour
         //{
         //    DecreaseSlider.value--;
         //} while (DecreaseSlider.value == HP);
-       
+        transform.DOShakePosition(duration / 2f, strength, vibrate);
         return HP;
     }
 }
