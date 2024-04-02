@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     private float time;
     private int Point;
     private bool firng = false;
+    private bool reloading = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -244,8 +245,13 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        firng = true;
         Item item = HaveGun.GetComponent<Item>();
+        if (item.SetBullet <= 0)
+        {
+            reload(item);
+            return;
+        }
+        firng = true;
         Ray ray = new Ray(Head.transform.position, Head.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.black);
@@ -292,6 +298,21 @@ public class Enemy : MonoBehaviour
         item.SetBullet--;
         await Task.Delay(item.FiringInterval);
         firng = false;
+    }
+    async void reload(Item item)
+    {
+        if (reloading)
+        {
+            return;
+        }
+        reloading = true;
+        anim.SetBool("reload", true);
+        anim.SetFloat("speed",item.ReRoadTiem / 1000 - 0.2f);
+        await Task.Delay(item.ReRoadTiem);
+        item.SetBullet = item.MaxBullet;
+        anim.SetBool("reload", false);
+        
+        reloading = false;
     }
    public void Ray()
     {

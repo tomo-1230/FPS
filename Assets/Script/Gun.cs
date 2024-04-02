@@ -279,8 +279,12 @@ public class Gun :MonoBehaviour
         //Reload
 
         CircleGauge.SetActive(true);
+        
+        player.anim.SetBool("reload", true);
+        player.anim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
         await Task.Delay(Clone_HaveGun.GetComponent<Item>().ReRoadTiem);
-
+        item.SetBullet = item.MaxBullet;
+        player.anim.SetBool("reload", false);
 
         item.SetBullet += consumableBullets;
 

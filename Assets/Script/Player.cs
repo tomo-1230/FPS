@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public float RunSpeed;
     public float JumpPower;
     public float CameraSpeed;
-    public int IsGround_maxDistance;
+    public float IsGround_maxDistance;
     public int TakeItem_maxDistance;
     public GameObject PlayerObject;
     public GameObject CameraObject;
@@ -146,10 +146,14 @@ public class Player : MonoBehaviour
     {
         Ray ray = new Ray(RayPosition.transform.position, RayPosition.transform.forward);
         RaycastHit hit;
-      //  Debug.DrawRay(ray.origin, ray.direction * IsGround_maxDistance, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * IsGround_maxDistance, Color.green);
         if (Physics.Raycast(ray, out hit, IsGround_maxDistance))
         {
             IsGround = (hit.collider.gameObject.tag == "Ground");
+        }
+        else
+        {
+            IsGround = false;
         }
     }
     public void Inventory()
