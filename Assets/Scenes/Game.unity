@@ -2940,6 +2940,7 @@ GameObject:
   - component: {fileID: 1056506203}
   - component: {fileID: 1056506205}
   - component: {fileID: 1056506204}
+  - component: {fileID: 1056506206}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3005,6 +3006,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056506202}
   m_CullTransparentMesh: 1
+--- !u!95 &1056506206
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056506202}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c4c5aa0145eb6f4f9046a61ef181423, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1058408290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,7 +5024,8 @@ MonoBehaviour:
   CameraObject: {fileID: 683023773}
   RayPosition: {fileID: 1935052227}
   Player_Mesh: {fileID: 1717240211}
-  anim: {fileID: 1724546795}
+  PlayerAnim: {fileID: 1724546795}
+  GageAnim: {fileID: 1056506206}
   ItemData: {fileID: 11400000, guid: 5f632bacfa935254d8518a902d1e9347, type: 2}
   IsGround: 0
   inventory: {fileID: 808142297}

@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public GameObject CameraObject;
     public GameObject RayPosition;
     public GameObject Player_Mesh;
-    public Animator anim;
+    public Animator PlayerAnim;
+    public Animator GageAnim;
     public ItemData ItemData;
     public static ItemData _itemData;
     [SerializeField]
@@ -54,67 +55,67 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 vector += PlayerObject.transform.forward * RunSpeed * Time.deltaTime;
-                anim.SetBool("move", true);
-                anim.SetBool("WS", true);
-                anim.SetBool("AD", false);
-                anim.SetFloat("Blend", 1f);
+                PlayerAnim.SetBool("move", true);
+                PlayerAnim.SetBool("WS", true);
+                PlayerAnim.SetBool("AD", false);
+                PlayerAnim.SetFloat("Blend", 1f);
                 run = false;
             }
             else
             {
                 vector += PlayerObject.transform.forward * WalkSpeed * Time.deltaTime;
-                anim.SetBool("move", true);
-                anim.SetBool("WS", true);
-                anim.SetBool("AD", false);
-                anim.SetFloat("Blend", 0.5f);
+                PlayerAnim.SetBool("move", true);
+                PlayerAnim.SetBool("WS", true);
+                PlayerAnim.SetBool("AD", false);
+                PlayerAnim.SetFloat("Blend", 0.5f);
                 run = true;
             }
           
         }
         if (HaveGun)
         {
-            anim.SetBool("Have", run);
+            PlayerAnim.SetBool("Have", run);
         }
         if (Input.GetKey(KeyCode.S))
         {
             vector += PlayerObject.transform.forward * WalkSpeed * Time.deltaTime * -1;
-            anim.SetBool("move", true);
-            anim.SetBool("WS", true);
-            anim.SetBool("AD", false);
-            anim.SetFloat("Blend", 0.5f);
+            PlayerAnim.SetBool("move", true);
+            PlayerAnim.SetBool("WS", true);
+            PlayerAnim.SetBool("AD", false);
+            PlayerAnim.SetFloat("Blend", 0.5f);
         }
         if (Input.GetKey(KeyCode.D))
         {
             vector += PlayerObject.transform.right * WalkSpeed * Time.deltaTime;
-            anim.SetBool("move", true);
-            anim.SetBool("WS", false);
-            anim.SetBool("AD", false);
+            PlayerAnim.SetBool("move", true);
+            PlayerAnim.SetBool("WS", false);
+            PlayerAnim.SetBool("AD", false);
         }
         if (Input.GetKey(KeyCode.A))
         {
             vector += PlayerObject.transform.right * WalkSpeed * Time.deltaTime * -1;
-            anim.SetBool("move", true);
-            anim.SetBool("WS", false);
-            anim.SetBool("AD", true);
+            PlayerAnim.SetBool("move", true);
+            PlayerAnim.SetBool("WS", false);
+            PlayerAnim.SetBool("AD", true);
         }
         if (PlayerObject.transform.position == vector)
         {
-            anim.SetBool("move", false);
-            anim.SetBool("WS", false);
-            anim.SetBool("AD", false);
-            anim.SetFloat("Blend", 0f);
+            PlayerAnim.SetBool("move", false);
+            PlayerAnim.SetBool("WS", false);
+            PlayerAnim.SetBool("AD", false);
+            PlayerAnim.SetFloat("Blend", 0f);
         }
 
         PlayerObject.transform.position = vector;
         if (Input.GetKey(KeyCode.Space) && IsGround)
         {
             PlayerObject.GetComponent<Rigidbody>().velocity = Vector3.up * JumpPower;
-            anim.SetBool("Jump", true);
-            anim.SetBool("move", true);
+            PlayerAnim.SetBool("Jump", true);
+            PlayerAnim.SetBool("move", true);
         }
         else
         {
-            anim.SetBool("Jump", false);
+            PlayerAnim.SetBool("Jump", false);
         }
     }
     public void Camera()

@@ -31,7 +31,7 @@ public class Gun :MonoBehaviour
     {
         CircleGauge.SetActive(false);
         pointer.sprite = cross_hair;
-        player.anim.SetLayerWeight(1, 1f);
+        player.PlayerAnim.SetLayerWeight(1, 1f);
     }
 
     // Update is called once per frame
@@ -74,8 +74,8 @@ public class Gun :MonoBehaviour
     }
     public void GanHave()
     {
-        player.anim.SetBool("Have", true);
-        player.anim.SetLayerWeight(2, 1f);
+        player.PlayerAnim.SetBool("Have", true);
+        player.PlayerAnim.SetLayerWeight(2, 1f);
         Player.HaveGun = true;
         //player.anim.SetLayerWeight(1, 0.5f);
         if(CloneObject != null)
@@ -278,20 +278,23 @@ public class Gun :MonoBehaviour
 
         //Reload
 
-        CircleGauge.SetActive(true);
+       CircleGauge.SetActive(true);
         
-        player.anim.SetBool("reload", true);
-        player.anim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
+        player.PlayerAnim.SetBool("reload", true);
+        player.PlayerAnim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
+        player.GageAnim.SetBool("reload", true);
+        player.GageAnim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
         await Task.Delay(Clone_HaveGun.GetComponent<Item>().ReRoadTiem);
-        item.SetBullet = item.MaxBullet;
-        player.anim.SetBool("reload", false);
+        //item.SetBullet = item.MaxBullet;
+        player.PlayerAnim.SetBool("reload", false);
+        player.GageAnim.SetBool("reload", false);
 
         item.SetBullet += consumableBullets;
 
        
         player.ReMoveItem(value, consumableBullets);
         inventory.RoadItem();
-        CircleGauge.SetActive(false);
+       // CircleGauge.SetActive(false);
         reloading = false;
     }
 }
