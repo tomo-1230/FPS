@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8919811071071691480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,15 +130,25 @@ MonoBehaviour:
   ItemName: "\u30B9\u30CA\u30A4\u30D1\u30FC\u30E9\u30A4\u30D5\u30EB"
   ThisType: 0
   CloneObjectNumber: 4
-  Damage: 0
-  SetAmmunition: 0
   HavePosition: {x: -0.245, y: -0.072, z: 0.063}
   GumImage: {fileID: 21300000, guid: 71e733585745e044689a2019370a7fe6, type: 3}
   Have_cross_hair: {fileID: 21300000, guid: a6abbdde7f4b7ff4e8a1d682f50d44ac, type: 3}
   Set_cross_hair: {fileID: 21300000, guid: ffbeea6426013df4d997ac95f9bd5104, type: 3}
   ZoomValue: 5
-  NameNnitials: 
+  SetBullet: 3
+  MaxBullet: 3
+  ReRoadTiem: 3000
+  BulletObj: {fileID: 1000011866055842, guid: 3b79e6f8a415f7841a8a55733c4683cd, type: 3}
+  MuzzleObj: {fileID: 3861406394535016208}
+  BulletType: 1
+  distance: 100
+  Damage: 50
+  HeadDamage: 100
+  FiringInterval: 1500
+  RapidFire: 0
+  ThisBulletType: 0
   count: 0
+  Firing_Bullet: {fileID: 0}
   CLoneObject: {fileID: 0}
 --- !u!54 &3762638756905525853
 Rigidbody:
@@ -155,3 +166,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!1 &3861406394535016208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8919811071071691480}
+  m_Layer: 0
+  m_Name: muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8919811071071691480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3861406394535016208}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.81, y: 0.034, z: 0.016}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4607488173793914894}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

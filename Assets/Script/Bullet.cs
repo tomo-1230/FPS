@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public Item item;
     void Update()
     {
-        this.transform.position += this.gameObject.transform.forward * 10 * Time.deltaTime;
+        this.transform.position += this.gameObject.transform.forward * 50 * Time.deltaTime;
         if (Vector3.Distance(FiringPosition, this.transform.position) >= item.distance)
         {
             Destroy(this.gameObject);

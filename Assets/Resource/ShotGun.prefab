@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7720942791333606924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8292373801868956579}
+  m_Layer: 0
+  m_Name: muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8292373801868956579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7720942791333606924}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.945, y: 0.0649, z: -0.00007176399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7238679705242057013}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8016165969816216463
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,7 +64,8 @@ Transform:
   m_LocalPosition: {x: -0.67649007, y: 0.077, z: 1.7637503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8292373801868956579}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,15 +161,25 @@ MonoBehaviour:
   ItemName: "\u30B7\u30E7\u30C3\u30C8\u30AC\u30F3"
   ThisType: 0
   CloneObjectNumber: 2
-  Damage: 0
-  SetAmmunition: 0
   HavePosition: {x: -0.146, y: 0.006, z: 0.077}
   GumImage: {fileID: 21300000, guid: 4938b2784e9ab8346bfc7499ef5704a7, type: 3}
   Have_cross_hair: {fileID: 21300000, guid: 677f446d12aa5c443bc046e4d8073ddb, type: 3}
   Set_cross_hair: {fileID: 21300000, guid: 71b47ae573cd2a443a2e043e2b3a903f, type: 3}
   ZoomValue: 25
-  NameNnitials: 
+  SetBullet: 5
+  MaxBullet: 10
+  ReRoadTiem: 1000
+  BulletObj: {fileID: 1000011866055842, guid: 3b79e6f8a415f7841a8a55733c4683cd, type: 3}
+  MuzzleObj: {fileID: 7720942791333606924}
+  BulletType: 3
+  distance: 50
+  Damage: 25
+  HeadDamage: 0
+  FiringInterval: 1000
+  RapidFire: 1
+  ThisBulletType: 0
   count: 0
+  Firing_Bullet: {fileID: 0}
   CLoneObject: {fileID: 0}
 --- !u!54 &6753852646324579753
 Rigidbody:

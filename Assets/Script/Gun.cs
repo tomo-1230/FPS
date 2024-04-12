@@ -107,13 +107,13 @@ public class Gun :MonoBehaviour
             player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
             pointer.sprite = cross_hair;
             Reticle_Object.GetComponent<RectTransform>().localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
-            Debug.Log("a");
+           // Debug.Log("a");
             return;
         }
 
         if (button && Prefab_HaveGun != null)
         {
-            Debug.Log("b");
+          //  Debug.Log("b");
             if (Clone_HaveGun.GetComponent<Item>().SetBullet <= 0 || reloading)
             {
                 return;
@@ -241,9 +241,13 @@ public class Gun :MonoBehaviour
                 return;
             }
             Item InventoryItem = a.GetComponent<Item>();
-            if (InventoryItem.ThisType != Item.ItemType.bullet || InventoryItem.ThisBulletType != Prefab_HaveGun.GetComponent<Item>().BulletType)
+            if (InventoryItem.ThisBulletType != Prefab_HaveGun.GetComponent<Item>().BulletType)
             {
                 value++;
+            }
+            else  if (InventoryItem.ThisType != Item.ItemType.bullet)
+            {
+               value++;   
             }
             else
             {
@@ -254,6 +258,7 @@ public class Gun :MonoBehaviour
 
         if (!existence)
         {
+            Debug.Log("Not existence");
             reloading = false;
             return;
         }
@@ -261,31 +266,34 @@ public class Gun :MonoBehaviour
         int Havebullet = player.ItemCount[value];
 
         //count
+        
 
-
-        int consumableBullets;
-
-        if(Havebullet >= item.MaxBullet)
+        int consumableBullets = 0;
+        int difference = item.MaxBullet - item.SetBullet;
+        if (difference <= Havebullet)
         {
-            consumableBullets = item.MaxBullet - item.SetBullet;
+            consumableBullets = difference;
         }
         else
         {
             consumableBullets = Havebullet;
         }
 
-        // Debug.Log(consumableBullets);
-
+       // Debug.Log(consumableBullets);
+        if (consumableBullets >= item.MaxBullet)
+        {
+            Debug.Log("era-");
+        }
         //Reload
 
-       CircleGauge.SetActive(true);
+        CircleGauge.SetActive(true);
         
         player.PlayerAnim.SetBool("reload", true);
-        player.PlayerAnim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
+        player.PlayerAnim.SetFloat("speed", item.ReRoadTiem / 100);
+        Debug.Log(item.ReRoadTiem);
         player.GageAnim.SetBool("reload", true);
-        player.GageAnim.SetFloat("speed", item.ReRoadTiem / 1000 - 0.2f);
+        player.GageAnim.SetFloat("speed", item.ReRoadTiem / 100);
         await Task.Delay(Clone_HaveGun.GetComponent<Item>().ReRoadTiem);
-        //item.SetBullet = item.MaxBullet;
         player.PlayerAnim.SetBool("reload", false);
         player.GageAnim.SetBool("reload", false);
 

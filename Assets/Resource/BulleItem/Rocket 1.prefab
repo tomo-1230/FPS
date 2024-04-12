@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7290355802135556768}
   - component: {fileID: 29845684981371573}
   - component: {fileID: 8630453186913495102}
+  - component: {fileID: -5419776512700249014}
   m_Layer: 0
   m_Name: Rocket 1
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5525513028256590456}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.7199999, y: 0.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4168398333086360667}
@@ -99,6 +100,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.562137, y: 0.32860506, z: 1}
   m_Center: {x: 0.78106886, y: -0.00000008195639, z: 0.00000023841858}
+--- !u!114 &-5419776512700249014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525513028256590456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca046a1f19f4b794098f4ac0fc03c3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: "\u30ED\u30B1\u30C3\u30C8\u5F3E"
+  ThisType: 1
+  CloneObjectNumber: 0
+  HavePosition: {x: 0, y: 0, z: 0}
+  GumImage: {fileID: 0}
+  Have_cross_hair: {fileID: 0}
+  Set_cross_hair: {fileID: 0}
+  ZoomValue: 0
+  SetBullet: 0
+  MaxBullet: 0
+  ReRoadTiem: 0
+  BulletObj: {fileID: 0}
+  MuzzleObj: {fileID: 0}
+  BulletType: 0
+  distance: 0
+  Damage: 0
+  HeadDamage: 0
+  FiringInterval: 0
+  RapidFire: 0
+  ThisBulletType: 4
+  count: 10
+  Firing_Bullet: {fileID: 5525513028256590456, guid: 5deb3bb00af12b9449c191ae6f20b45b, type: 3}
+  CLoneObject: {fileID: 0}
 --- !u!1 &6063962838436067755
 GameObject:
   m_ObjectHideFlags: 0

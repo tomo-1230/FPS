@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
                 PlayerAnim.SetBool("WS", true);
                 PlayerAnim.SetBool("AD", false);
                 PlayerAnim.SetFloat("Blend", 1f);
+                PlayerAnim.SetLayerWeight(2, 0f);
                 run = false;
             }
             else
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
                 PlayerAnim.SetBool("WS", true);
                 PlayerAnim.SetBool("AD", false);
                 PlayerAnim.SetFloat("Blend", 0.5f);
+                PlayerAnim.SetLayerWeight(2, 1f);
                 run = true;
             }
           
