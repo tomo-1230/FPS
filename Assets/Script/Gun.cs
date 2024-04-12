@@ -289,10 +289,10 @@ public class Gun :MonoBehaviour
         CircleGauge.SetActive(true);
         
         player.PlayerAnim.SetBool("reload", true);
-        player.PlayerAnim.SetFloat("speed", item.ReRoadTiem / 100);
-        Debug.Log(item.ReRoadTiem);
-        player.GageAnim.SetBool("reload", true);
-        player.GageAnim.SetFloat("speed", item.ReRoadTiem / 100);
+        player.PlayerAnim.SetFloat("speed", (item.ReRoadTiem / 100)*item.TimeTweak);
+        //Debug.Log(item.ReRoadTiem);
+        //player.GageAnim.SetBool("reload", true);
+        //player.GageAnim.SetFloat("speed", item.ReRoadTiem / 100);
         await Task.Delay(Clone_HaveGun.GetComponent<Item>().ReRoadTiem);
         player.PlayerAnim.SetBool("reload", false);
         player.GageAnim.SetBool("reload", false);

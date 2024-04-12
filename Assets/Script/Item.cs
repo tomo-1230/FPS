@@ -33,6 +33,7 @@ public class Item : MonoBehaviour
     public int SetBullet;
     public int MaxBullet;
     public int ReRoadTiem;
+    public float TimeTweak;
     [Space(3)]
     [Header("弾オブジェクト")]
     [Space(1)]

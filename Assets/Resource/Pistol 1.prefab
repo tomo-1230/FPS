@@ -138,6 +138,7 @@ MonoBehaviour:
   SetBullet: 20
   MaxBullet: 30
   ReRoadTiem: 800
+  TimeTweak: 1.5
   BulletObj: {fileID: 1000013972658500, guid: f6b31320c619d6243a0cbdd32d3e2d91, type: 3}
   MuzzleObj: {fileID: 3920225909456913828}
   BulletType: 2
