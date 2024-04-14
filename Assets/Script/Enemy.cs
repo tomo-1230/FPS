@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public Action Situation;
     public bool PlayerView;
     public List<Vector3> PatrolPoint;
+    public int PointObject;
     public GameObject PlayerObject;
     public GameObject RayPosition;
     public GameObject DamageCanvas;
@@ -31,15 +32,16 @@ public class Enemy : MonoBehaviour
     {
         Wait, patrol, chase, attack
     }
-    private NavMeshAgent nav;
+    public NavMeshAgent nav;
     private float time;
     private int Point;
     private bool firng = false;
     private bool reloading = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
+
     }
 
     // Update is called once per frame
@@ -142,14 +144,20 @@ public class Enemy : MonoBehaviour
                 if(Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
                 {//run
                     nav.speed = RunSpeed;
-                    TargetPosition = PlayerObject.transform.position;
+                    if (player.IsGround)
+                    {
+                        TargetPosition = PlayerObject.transform.position;
+                    }
                     nav.stoppingDistance = PlayerDistance;
                     nav.SetDestination(TargetPosition);
                 }
                 else
                 {
                     nav.speed = WalkSpeed;
-                    TargetPosition = PlayerObject.transform.position;
+                    if (player.IsGround)
+                    {
+                        TargetPosition = PlayerObject.transform.position;
+                    }
                     nav.stoppingDistance = PlayerDistance;
                     nav.SetDestination(TargetPosition);
                 }

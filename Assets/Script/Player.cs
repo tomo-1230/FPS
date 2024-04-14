@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public ItemData ItemData;
     public static ItemData _itemData;
     [SerializeField]
-    private bool IsGround;
+    public bool IsGround;
     [Header("UI")]
     public GameObject inventory;
     [Header("inventory")]
