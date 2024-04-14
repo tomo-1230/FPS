@@ -45,6 +45,11 @@ public class Player : MonoBehaviour
         TakeItem();
         Inventory();
         _hp.PlayerHP(PlayerHP);
+
+        if (Input.GetKey(KeyCode.Y))
+        {
+            _Inventory.RoadItem();
+        }
     }
     public void Move()
     {

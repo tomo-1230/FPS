@@ -307,7 +307,7 @@ public class Enemy : MonoBehaviour
         }
         reloading = true;
         anim.SetBool("reload", true);
-        anim.SetFloat("speed",item.ReRoadTiem / 1000 - 0.2f);
+        anim.SetFloat("speed", (item.ReRoadTiem / 100) * item.TimeTweak);
         await Task.Delay(item.ReRoadTiem);
         item.SetBullet = item.MaxBullet;
         anim.SetBool("reload", false);

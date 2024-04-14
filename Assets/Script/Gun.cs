@@ -49,25 +49,24 @@ public class Gun :MonoBehaviour
             Clone_HaveGun.transform.localEulerAngles = vector1;
         }
         Reload(Input.GetKeyDown(KeyCode.R));
+
+       // Debug.Log(Clone_HaveGun);
     }
     public void GunSelect()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventory.panel1.activeSelf)
         {
             inventory.select = 1;
-            inventory.RoadItem();
             GanHave();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && inventory.panel2.activeSelf)
         { 
             inventory.select = 2;
-            inventory.RoadItem();
             GanHave();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && inventory.panel3.activeSelf)
         { 
             inventory.select = 3;
-            inventory.RoadItem();
             GanHave();
         }
 
@@ -99,6 +98,7 @@ public class Gun :MonoBehaviour
         Destroy(CloneObject.GetComponent<BoxCollider>());
         Destroy(CloneObject.GetComponent<Rigidbody>());
         pointer.sprite = Prefab_HaveGun.GetComponent<Item>().Have_cross_hair;
+        inventory.RoadItem();
     }
     public void zoom(bool button)
     {
@@ -169,7 +169,7 @@ public class Gun :MonoBehaviour
             Trigger = LeftButtonDown;
         }
 
-        if (Trigger && !firing )
+        if (Trigger && !firing && Clone_HaveGun.GetComponent<Item>().CloneObjectNumber != 2)
         {
             firing = true;
             Ray ray = new Ray(player.CameraObject.transform.position,player.CameraObject.transform.forward);
@@ -199,6 +199,74 @@ public class Gun :MonoBehaviour
             //vector.y += 90;
             CloneObject.transform.localEulerAngles = vector;
             CloneObject.AddComponent<Bullet>().item = item;
+            item.SetBullet--;
+            inventory.RoadItem();
+            await Task.Delay(item.FiringInterval);
+            firing = false;
+        }
+        else if(Trigger && !firing && Clone_HaveGun.GetComponent<Item>().CloneObjectNumber == 2)
+        {
+            firing = true;
+            int Amount = 0;
+            do
+            {
+                Ray ray = new Ray(player.CameraObject.transform.position, player.CameraObject.transform.forward);
+                RaycastHit hit;
+                //Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.red);
+                if (Physics.Raycast(ray, out hit, item.distance))
+                {
+
+                }
+                GameObject CloneObject = Instantiate(item.BulletObj);
+                CloneObject.SetActive(false);
+                Vector3 ClonePosition = Clone_HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
+                CloneObject.transform.position = ClonePosition;
+                CloneObject.SetActive(true);
+                Vector3 HitPoint = new  Vector3(0,0,0);
+                if (hit.point != new Vector3(0, 0, 0))
+                {
+                    //Debug.Log(hit.point);
+                    HitPoint = hit.point;
+                }
+                else
+                {
+                  HitPoint = ray.GetPoint(item.distance);
+                    //Debug.Log(ray.GetPoint(item.distance) +"a");
+                }
+                float aim = Clone_HaveGun.GetComponent<Item>().ShotAim;
+                if (Random.Range(0, 1) == 1)//ƒ‰ƒ“ƒ_ƒ€
+                {
+                    HitPoint.x += Random.Range(0, aim);
+                }
+                else
+                {
+                    HitPoint.x -= Random.Range(0, aim);
+                }
+                if (Random.Range(0, 1) == 1)
+                {
+                    HitPoint.y += Random.Range(0, aim);
+                }
+                else
+                {
+                    HitPoint.y -= Random.Range(0, aim);
+                }
+                if (Random.Range(0, 1) == 1)
+                {
+                    HitPoint.z += Random.Range(0, aim);
+                }
+                else
+                {
+                    HitPoint.z -= Random.Range(0, aim);
+                }
+                CloneObject.transform.LookAt(HitPoint);
+                Vector3 vector = CloneObject.transform.localEulerAngles;
+                //vector.y += 90;
+                CloneObject.transform.localEulerAngles = vector;
+                CloneObject.AddComponent<Bullet>().item = item;
+                Debug.Log("A");
+                Amount++;
+            } while (Amount <= Clone_HaveGun.GetComponent<Item>().ShotAmount);
+            
             item.SetBullet--;
             inventory.RoadItem();
             await Task.Delay(item.FiringInterval);
@@ -279,7 +347,7 @@ public class Gun :MonoBehaviour
             consumableBullets = Havebullet;
         }
 
-       // Debug.Log(consumableBullets);
+       //Debug.Log(consumableBullets);
         if (consumableBullets >= item.MaxBullet)
         {
             Debug.Log("era-");
@@ -302,7 +370,7 @@ public class Gun :MonoBehaviour
        
         player.ReMoveItem(value, consumableBullets);
         inventory.RoadItem();
-       // CircleGauge.SetActive(false);
+        CircleGauge.SetActive(false);
         reloading = false;
     }
 }

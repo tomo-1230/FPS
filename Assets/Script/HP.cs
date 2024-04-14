@@ -67,7 +67,7 @@ public class HP : MonoBehaviour
         {
             Debug.Log("HPColorError");
         }
-        Debug.Log(float.Parse(R.ToString("f0")) + " " + float.Parse(G.ToString("f0")));
+       // Debug.Log(float.Parse(R.ToString("f0")) + " " + float.Parse(G.ToString("f0")));
         Color fillColor = new Color(0f,0f,0f);
         fillColor.r = float.Parse(R.ToString("f0"))/ 255f;
         fillColor.g = float.Parse(G.ToString("f0"))/ 255f;

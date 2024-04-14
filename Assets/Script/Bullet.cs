@@ -27,8 +27,11 @@ public class Bullet : MonoBehaviour
                 Player player = collision.gameObject.GetComponent<Player>();
                 player.PlayerHP = player._hp.Decrease(player.PlayerHP, item.Damage);
             }
-            Destroy(this.gameObject);
- 
+            if(collision.gameObject.tag != "gun" && collision.gameObject.tag != "bullet")
+            {
+                Destroy(this.gameObject);
+            }
+
         }
     }
 }

@@ -48,6 +48,12 @@ public class Item : MonoBehaviour
     public int HeadDamage;
     public int FiringInterval;
     public bool RapidFire;
+    [Space(3)]
+    [Header("‚»‚Ì‘¼")]
+    [Space(1)]
+    public float ShotAim;
+    public int ShotAmount;
+    public GameObject RocketBullet;
     [Space(10)]
     [Header("--------------------")]
     [Header("ItemType == bullet ‚Ì‚Ý")]
@@ -68,6 +74,9 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(CloneObjectNumber == 5)
+        {
+            RocketBullet.SetActive(SetBullet != 0);
+        }
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - player
+  - bullet
+  - gun
   layers:
   - Default
   - TransparentFX

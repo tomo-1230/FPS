@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3762638756905525853}
   m_Layer: 0
   m_Name: Sniper
-  m_TagString: Untagged
+  m_TagString: gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   SetBullet: 3
   MaxBullet: 3
   ReRoadTiem: 3000
+  TimeTweak: 1
   BulletObj: {fileID: 1000011866055842, guid: 3b79e6f8a415f7841a8a55733c4683cd, type: 3}
   MuzzleObj: {fileID: 3861406394535016208}
   BulletType: 1

@@ -109,56 +109,118 @@ public class Inventory : MonoBehaviour
 
         //’e‚ÌŽc—Ê•\Ž¦
 
-        if(select != 0 && gun.Clone_HaveGun != null)
+        if(select == 0 || gun.Clone_HaveGun == null)
+        {
+            panel.SetActive(false);
+            return;
+        }
+        else
         {
             panel.SetActive(true);
         }
+
+        //SetBullet
+        int SetBullet = gun.Clone_HaveGun.GetComponent<Item>().SetBullet;
+
+        if(SetBullet < 10)
+        {
+            BulletSet.text = "0" + SetBullet.ToString();
+        }
         else
         {
-            return;
+            BulletSet.text = SetBullet.ToString();
         }
 
-        if (gun.Clone_HaveGun.GetComponent<Item>().SetBullet < 10)
-        {
-            BulletSet.text = "0" + gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
-        }
-        else
-        {
-            BulletSet.text = gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
-        }
-       
-
+        int HaveBullet = 0;
         int value = -1;
-        int index = 0;
+        int index = -1;
         foreach (GameObject a in player.ItemObject)
         {
+            value++;
             Item item = a.GetComponent<Item>();
-            if (item != null && gun.Clone_HaveGun.GetComponent<Item>().BulletType == item.ThisBulletType)
+            if (item == null)
             {
-                value = index;
+                return;
             }
-            else
+            
+            if(item.ThisType == Item.ItemType.bullet)
             {
-                index++;
+                if(item.ThisBulletType == gun.Clone_HaveGun.GetComponent<Item>().BulletType)
+                {
+                    index = value;
+                    Debug.Log("a");
+                }
             }
         }
-
-        if(value != -1)
+        //Debug.Log(index);
+        if(index != -1 && player.ItemCount[index] > 0 )
         {
-            if (player.ItemCount[value] < 10)
-            {
-                BulletHave.text = "0"+player.ItemCount[value].ToString();
-            }
-            else
-            {
-                BulletHave.text = player.ItemCount[value].ToString();
-            }
+            HaveBullet = player.ItemCount[index];
         }
         else
         {
-            BulletHave.text = "00";
+            HaveBullet = 0;
         }
-      
+        
+
+        if (HaveBullet < 10)
+        {
+            BulletHave.text = "0" + HaveBullet.ToString();
+        }
+        else
+        {
+            BulletHave.text = HaveBullet.ToString();
+        }
+        //if(select != 0 && gun.Clone_HaveGun != null)
+        //{
+        //    panel.SetActive(true);
+        //}
+        //else
+        //{
+        //    return;
+        //}
+
+        //if (gun.Clone_HaveGun.GetComponent<Item>().SetBullet < 10)
+        //{
+        //    BulletSet.text = "0" + gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
+        //}
+        //else
+        //{
+        //    BulletSet.text = gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
+        //}
+
+
+        //int value = -1;
+        //int index = 0;
+        //foreach (GameObject a in player.ItemObject)
+        //{
+        //    Item item = a.GetComponent<Item>();
+        //    if (item != null && gun.Clone_HaveGun.GetComponent<Item>().BulletType == item.ThisBulletType)
+        //    {
+        //        value = index;
+        //    }
+        //    else
+        //    {
+        //        index++;
+        //    }
+        //}
+
+        //if(value != -1)
+        //{
+        //    if (player.ItemCount[value] < 10)
+        //    {
+        //        BulletHave.text = "0"+player.ItemCount[value].ToString();
+        //    }
+        //    else
+        //    {
+        //        BulletHave.text = player.ItemCount[value].ToString();
+        //    }
+        //}
+        //else
+        //{
+        //    BulletHave.text = "00";
+        //}
+
 
     }
 
