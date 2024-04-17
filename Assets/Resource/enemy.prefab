@@ -927,15 +927,7 @@ MonoBehaviour:
   TargetPosition: {x: 0, y: 0, z: 0}
   Situation: 0
   PlayerView: 0
-  PatrolPoint:
-  - {x: 0, y: -32, z: 50}
-  - {x: 0, y: -32, z: 30}
-  - {x: 10, y: -32, z: 30}
-  - {x: 21, y: -32, z: 30}
-  - {x: 21, y: -32, z: 50}
-  - {x: 21, y: -32, z: 70}
-  - {x: 10, y: -32, z: 70}
-  - {x: 0, y: -32, z: 70}
+  PatrolPoint: []
   PointObject: 0
   PlayerObject: {fileID: 0}
   RayPosition: {fileID: 8118470644186327308}
@@ -946,6 +938,7 @@ MonoBehaviour:
   text: {fileID: 8118470644898923133}
   anim: {fileID: 8118470644888124019}
   player: {fileID: 0}
+  nav: {fileID: 0}
 --- !u!95 &8118470644888124019
 Animator:
   serializedVersion: 5

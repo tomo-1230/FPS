@@ -10,13 +10,27 @@ public class Clone : MonoBehaviour
     public int EnemyAmount;
     public List<GameObject> PointObj;
     public List<int> UsePoint;
+    public List<int> copy;
+    private bool addition = false;
     // Start is called before the first frame update
     void Start()
     {
+       foreach(int i in UsePoint)
+       {
+            copy.Add(i);
+       }
         
         int a = 0;
         do
         {
+            if (UsePoint.Count == 0)
+            {
+                addition = true;
+                foreach (int i in copy)
+                {
+                    UsePoint.Add(i);
+                }
+            }
             GameObject CloneObject = Instantiate(CloneEnemy);
             Enemy enemy = CloneObject.GetComponent<Enemy>();
             enemy.PlayerObject = PlayerObject;
@@ -25,6 +39,7 @@ public class Clone : MonoBehaviour
             int random;
             int random2;
             random = Random.Range(0, UsePoint.Count);
+            Debug.Log(random);
             random2 = UsePoint[random];
             UsePoint.RemoveAt(random);
             Transform[] chilleds = new Transform[PointObj[random2].transform.childCount];
@@ -38,7 +53,15 @@ public class Clone : MonoBehaviour
             {
                 enemy.PatrolPoint.Add(b.position);
             }
-            enemy.nav.Warp(chilleds[0].position);
+            if (addition)
+            {
+                enemy.nav.Warp(chilleds[Random.Range(0,chilleds.Length)].position);
+            }
+            else
+            {
+                enemy.nav.Warp(chilleds[0].position);
+            }
+           
             enemy.Situation = Enemy.Action.patrol;
             a++;
         } while (a <= EnemyAmount-1);
