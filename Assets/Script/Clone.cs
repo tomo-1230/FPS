@@ -39,7 +39,7 @@ public class Clone : MonoBehaviour
             int random;
             int random2;
             random = Random.Range(0, UsePoint.Count);
-            Debug.Log(random);
+           // Debug.Log(random);
             random2 = UsePoint[random];
             UsePoint.RemoveAt(random);
             Transform[] chilleds = new Transform[PointObj[random2].transform.childCount];

@@ -148,7 +148,7 @@ public class Inventory : MonoBehaviour
                 if(item.ThisBulletType == gun.Clone_HaveGun.GetComponent<Item>().BulletType)
                 {
                     index = value;
-                    Debug.Log("a");
+                   // Debug.Log("a");
                 }
             }
         }

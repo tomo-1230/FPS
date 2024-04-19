@@ -350,7 +350,7 @@ public class Gun :MonoBehaviour
        //Debug.Log(consumableBullets);
         if (consumableBullets >= item.MaxBullet)
         {
-            Debug.Log("era-");
+            //Debug.Log("era-");
         }
         //Reload
 
