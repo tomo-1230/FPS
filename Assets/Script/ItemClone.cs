@@ -6,8 +6,9 @@ public class ItemClone : MonoBehaviour
 {
     public int CloneItem;
     public GameObject ItemPoint;
-    public List<GameObject> Item;
+    public List<GameObject> _Item;
     public List<int> Probability;
+    public List<GameObject> Bullet;
     public List<GameObject> Copy;
     public List<int> Number;
     public List<Transform> point;
@@ -19,7 +20,7 @@ public class ItemClone : MonoBehaviour
             return;
         }
         int i = 0;
-        foreach(GameObject a in Item)
+        foreach(GameObject a in _Item)
         {
             for(int b = 0; b < Probability[i]-1; b++)
             {
@@ -30,7 +31,7 @@ public class ItemClone : MonoBehaviour
         i = 0;
         foreach(GameObject a in Copy)
         {
-            Item.Add(a);
+            _Item.Add(a);
             Number.Add(i);
         }
         Copy.Clear();
@@ -47,12 +48,22 @@ public class ItemClone : MonoBehaviour
         i = 0;
         do
         {
-            int CloneObjNumber = RandomNumber(Item.Count);
+            int CloneObjNumber = RandomNumber(_Item.Count);
             int PositionNumber = RandomNumber(point.Count);
-
-            GameObject CloneObject = Instantiate(Item[CloneObjNumber]);
+            GameObject CloneObject = Instantiate(_Item[CloneObjNumber]);
             CloneObject.transform.position = point[PositionNumber].position;
             point.RemoveAt(PositionNumber);
+
+            Item item = CloneObject.GetComponent<Item>();
+            if(item.ThisType == Item.ItemType.Gun)
+            {
+                GameObject CloneBulletObj = Instantiate(Bullet[item.BulletType-1]);
+                Vector3 position = CloneObject.transform.position;
+                position.x += Random.Range(-1f, 1f);
+                position.z += Random.Range(-1f, 1f);
+                CloneBulletObj.transform.position = position;
+            }
+
             i++;
         } while (i < CloneItem && point.Count > 0);
        

@@ -8226,7 +8226,6 @@ Transform:
   - {fileID: 428334265}
   - {fileID: 293526341}
   - {fileID: 1291912533}
-  - {fileID: 1668456115}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15188,12 +15187,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668456113}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.234566, y: 15.339649, z: 39.531353}
+  m_LocalPosition: {x: 20.495014, y: -30.101116, z: 46.643238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 843792687}
-  m_RootOrder: 5
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1668456116
 MonoBehaviour:
@@ -15207,12 +15206,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e1901b5d007f2428f1f4e80bf3ed21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CloneItem: 19
+  CloneItem: 10
   ItemPoint: {fileID: 1944766122}
-  Item:
+  _Item:
   - {fileID: 4767851719230098083, guid: 00a90bf27c06a1c46a03be2a07a5c133, type: 3}
   - {fileID: 1000011023395326, guid: 372f041aae37e8c449a035040606df5b, type: 3}
-  Probability: 0100000002000000
+  - {fileID: 3697902821735249754, guid: 4724ab8646b3e5648be68cc8ad5aee4d, type: 3}
+  - {fileID: 8434079860282063045, guid: 2d2d9f0f807b15c49941bee270ac0cfb, type: 3}
+  - {fileID: 8016165969816216463, guid: c8af8c75de3a4ee4e8ffa1e0aec4c562, type: 3}
+  - {fileID: 259546062692518345, guid: ab3e9cba786625a4ba4661905136f065, type: 3}
+  - {fileID: 1000013972658500, guid: 7ec263729bf306b4fa7f5a0e65e50e2a, type: 3}
+  - {fileID: 5525513028256590456, guid: 2bb0bc984bb2a6e4593889403762be80, type: 3}
+  - {fileID: 3799567736657210036, guid: ffe3b7ddc7262494f8555bfbb867a072, type: 3}
+  Probability: 020000000200000002000000020000000200000002000000020000000100000002000000
+  Bullet:
+  - {fileID: 1000011023395326, guid: 372f041aae37e8c449a035040606df5b, type: 3}
+  - {fileID: 1000013972658500, guid: 7ec263729bf306b4fa7f5a0e65e50e2a, type: 3}
+  - {fileID: 1000011866055842, guid: b0a8874f005fdf54ebda57a71f5db361, type: 3}
+  - {fileID: 5525513028256590456, guid: 2bb0bc984bb2a6e4593889403762be80, type: 3}
   Copy: []
   Number: 
   point: []

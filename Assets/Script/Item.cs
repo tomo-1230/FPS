@@ -15,6 +15,7 @@ public class Item : MonoBehaviour
     }
     public ItemType ThisType;
     public int CloneObjectNumber;
+    public bool ShowCanvas;
     [Space(10)]
     [Header("--------------------")]
     [Header("ItemType == Gun ‚Ì‚Ý")]
@@ -24,6 +25,7 @@ public class Item : MonoBehaviour
     [Space(1)]
     public Vector3 HavePosition; 
     public Sprite GumImage;
+    public Sprite BulletImage;
     public Sprite Have_cross_hair;
     public Sprite Set_cross_hair;
     public int ZoomValue;
@@ -64,6 +66,17 @@ public class Item : MonoBehaviour
     public GameObject Firing_Bullet;
     [HideInInspector]
     public GameObject CLoneObject;
+    [Space(10)]
+    [Header("--------------------")]
+    [Header("•K—v‚É‰ž‚¶‚Ä")]
+    [Header("--------------------")]
+    [Space(5)]
+    [Header("UI")]
+    [Space(1)]
+    public GameObject ItemCanvas;
+    public Text TextName;
+    public Image ImageGun;
+    public Image ImageBullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +90,18 @@ public class Item : MonoBehaviour
         if(CloneObjectNumber == 5)
         {
             RocketBullet.SetActive(SetBullet != 0);
+        }
+    }
+    public void ShowDescription(bool a)
+    {
+        if (!ShowCanvas)
+        {
+            return;
+        }
+        ItemCanvas.SetActive(a);
+        if (a)
+        {
+            TextName.text = ItemName;
         }
     }
 }
