@@ -11,6 +11,7 @@ public class Gun :MonoBehaviour
     public GameObject HavePosition;  
     public GameObject Reticle_Object;
     public GameObject HitObj;
+    public GameObject FiringEffect;
 
     public Image pointer;
     public float Reticle_u;
@@ -106,6 +107,8 @@ public class Gun :MonoBehaviour
         {
             player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
             pointer.sprite = cross_hair;
+            player.CameraSpeed = player.CameraSpeedNormal;
+
             Reticle_Object.GetComponent<RectTransform>().localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
            // Debug.Log("a");
             return;
@@ -120,6 +123,19 @@ public class Gun :MonoBehaviour
             }
             player.CameraObject.GetComponent<Camera>().fieldOfView = Prefab_HaveGun.GetComponent<Item>().ZoomValue;
             pointer.sprite = Prefab_HaveGun.GetComponent<Item>().Set_cross_hair;
+            int a = Prefab_HaveGun.GetComponent<Item>().CloneObjectNumber;
+            if (a == 0 || a == 1 || a == 2 || a == 3)
+            {
+               player.CameraSpeed = player.CameraSpeedZoom_Short;
+            }
+            else if(a == 5)
+            {
+                player.CameraSpeed = player.CameraSpeedZoom_Moderate;
+            }
+            else if(a == 4)
+            {
+                player.CameraSpeed = player.CameraSpeedZoom_Long;
+            }
             if (Prefab_HaveGun.GetComponent<Item>().CloneObjectNumber == 4)
             {
                 Reticle_Object.GetComponent<RectTransform>().localScale = new Vector3(Reticle_b, Reticle_b, Reticle_b);
@@ -132,7 +148,8 @@ public class Gun :MonoBehaviour
         else
         {
             player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
-            if(Prefab_HaveGun != null)
+            player.CameraSpeed = player.CameraSpeedNormal;
+            if (Prefab_HaveGun != null)
             {
                 pointer.sprite = Prefab_HaveGun.GetComponent<Item>().Have_cross_hair;
             }
@@ -199,6 +216,10 @@ public class Gun :MonoBehaviour
             //vector.y += 90;
             CloneObject.transform.localEulerAngles = vector;
             CloneObject.AddComponent<Bullet>().item = item;
+            CloneObject.GetComponent<Bullet>().FiringPosition = Clone_HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
+            CloneObject = Instantiate(FiringEffect);
+            CloneObject.transform.position = Clone_HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
+            CloneObject.transform.parent = Clone_HaveGun.transform;
             item.SetBullet--;
             inventory.RoadItem();
             await Task.Delay(item.FiringInterval);

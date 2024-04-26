@@ -75,13 +75,14 @@ public class Item : MonoBehaviour
     [Space(1)]
     public GameObject ItemCanvas;
     public Text TextName;
-    public Image ImageGun;
+    public Text TextBullet;
     public Image ImageBullet;
+    public GameObject effect;
     // Start is called before the first frame update
     void Start()
     {
        
-        CLoneObject = Player._itemData.ItemObject[CloneObjectNumber];
+        CLoneObject = Player._itemData.ItemObject[CloneObjectNumber]; ShowDescription(false);
     }
 
     // Update is called once per frame
@@ -91,6 +92,7 @@ public class Item : MonoBehaviour
         {
             RocketBullet.SetActive(SetBullet != 0);
         }
+       
     }
     public void ShowDescription(bool a)
     {
@@ -102,6 +104,24 @@ public class Item : MonoBehaviour
         if (a)
         {
             TextName.text = ItemName;
+            int set = SetBullet;
+            int max = MaxBullet;
+            if(set < 10) 
+            {
+                TextBullet.text = "0"+set + "/";
+            }
+            else
+            {
+                TextBullet.text =  set + "/";
+            }
+            if(max < 10)
+            {
+                TextBullet.text = TextBullet.text +"0"+ max;
+            }
+            else
+            {
+                TextBullet.text = TextBullet.text + max;
+            }
         }
     }
 }

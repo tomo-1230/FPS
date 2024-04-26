@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour
     public Text BulletSet;
     public Text BulletHave;
     public Image ImageGun;
+    public Image ImageBullet;
     public List<GameObject> search;
     public Gun gun;
     // Start is called before the first frame update
@@ -91,6 +92,7 @@ public class Inventory : MonoBehaviour
             panel2.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             panel3.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             ImageGun.sprite = search[0].GetComponent<Item>().GumImage;
+            ImageBullet.sprite = search[0].GetComponent<Item>().BulletImage;
         }
         if (select == 2)
         {
@@ -98,6 +100,7 @@ public class Inventory : MonoBehaviour
             panel2.GetComponent<Image>().color = new Color32(0, 0, 0, 101);
             panel3.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             ImageGun.sprite = search[1].GetComponent<Item>().GumImage;
+            ImageBullet.sprite = search[1].GetComponent<Item>().BulletImage;
         }
         if (select == 3)
         {
@@ -105,6 +108,7 @@ public class Inventory : MonoBehaviour
             panel2.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
             panel3.GetComponent<Image>().color = new Color32(0, 0, 0, 101);
             ImageGun.sprite = search[2].GetComponent<Item>().GumImage;
+            ImageBullet.sprite = search[1].GetComponent<Item>().BulletImage;
         }
 
         //’e‚ÌŽc—Ê•\Ž¦

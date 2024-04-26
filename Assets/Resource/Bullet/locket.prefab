@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9085890408469650429}
-  - component: {fileID: 4633637410184608821}
   - component: {fileID: -6432177067993995326}
+  - component: {fileID: 2739924752763230484}
   m_Layer: 0
   m_Name: locket
   m_TagString: Untagged
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4633637410184608821
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3837087437798369869}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.38, y: 0.38, z: 1.48}
-  m_Center: {x: 0, y: 0, z: 0.77}
 --- !u!96 &-6432177067993995326
 TrailRenderer:
   serializedVersion: 2
@@ -146,6 +133,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!136 &2739924752763230484
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3837087437798369869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 1.83
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.81}
 --- !u!1 &6322984237300176430
 GameObject:
   m_ObjectHideFlags: 0
