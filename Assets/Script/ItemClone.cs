@@ -15,6 +15,7 @@ public class ItemClone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CloneItem = PlayerPrefs.GetInt("CloneItem");
         if(CloneItem == 0)
         {
             return;

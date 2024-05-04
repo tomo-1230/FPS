@@ -15,6 +15,7 @@ public class Clone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EnemyAmount = PlayerPrefs.GetInt("EnemyAmount");
        foreach(int i in UsePoint)
        {
             copy.Add(i);

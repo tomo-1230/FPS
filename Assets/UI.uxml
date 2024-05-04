@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="justify-content: space-around; align-items: center; height: 373px;">
+        <ui:Button text="Button&#10;" display-tooltip-when-elided="true" name="Button" style="opacity: 1; display: flex; visibility: visible; overflow: hidden; flex-direction: column; align-items: stretch; -unity-text-align: upper-center; color: rgba(255, 255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-background-image-tint-color: rgba(255, 255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); transform-origin: center; height: 33px; width: 126px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -9,13 +9,15 @@ public class HP : MonoBehaviour
     public Text HPvaule;
     public Image Fill;
 
+    public int MaxHP;
+
     public float duration = 0.5f;
     public float strength = 20f;
     public int vibrate = 100;
     // Start is called before the first frame update
     void Start()
     {
-        
+        MaxHP = PlayerPrefs.GetInt("PlayerHP");
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class HP : MonoBehaviour
     }
     public void PlayerHP(float value)
     {
-        if(value < 1 || value > 100)
+        if(value < 1 || value > MaxHP)
         {
             return;
         }
@@ -38,15 +40,18 @@ public class HP : MonoBehaviour
             HPvaule.text = value.ToString();
         }
 
+        float green = float.Parse((MaxHP/2).ToString("f0"));
+        float yellow = float.Parse((MaxHP / 4).ToString("f0"));
+
         float R = 255;
         float G = 255;
-        if (value > 51)//緑
+        if (value > green)//緑
         {
             // Debug.Log("A");
             R = 0;
             G = 255;
         }
-        else if (value > 26 && value <= 51)//緑　黄  51=255  26=0 
+        else if (value > yellow && value <= green)//緑　黄  51=255  26=0 
         {
 
             float x = value - 26;
@@ -55,7 +60,7 @@ public class HP : MonoBehaviour
             G = 255;
             //Debug.Log("B" + x);
         }
-        else if (value <= 26)//黄　赤
+        else if (value <= yellow)//黄　赤
         {
 
             float x = value;
@@ -81,6 +86,7 @@ public class HP : MonoBehaviour
   
     public int Decrease(int HP,int damage) 
     {
+        //damage = damage * (SettingUI.SettingDataCopy[7] / 5);
         HP -= damage;
         //float time = 0; 
         //while (time >= 1f)

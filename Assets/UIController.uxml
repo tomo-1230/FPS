@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Base" style="height: 443px;">
+        <ui:Button text="Button" display-tooltip-when-elided="true" name="Button1" style="background-color: rgba(89, 89, 89, 255);" />
+        <ui:Label text="ああああ" display-tooltip-when-elided="true" name="Labe1" />
+    </ui:VisualElement>
+</ui:UXML>

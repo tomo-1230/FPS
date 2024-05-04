@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public List<GameObject> ItemObject;
     public Inventory _Inventory;
     public HP _hp;
-    public int PlayerHP = 100;
+    public int PlayerHP;
     public Gun _gun;
     private bool OpenInventory;
     public static bool HaveGun;
@@ -40,7 +40,10 @@ public class Player : MonoBehaviour
     void Awake()    {
         _itemData = ItemData;
     }
-
+     void Start()
+    {
+        PlayerHP = PlayerPrefs.GetInt("PlayerHP");
+    }
     // Update is called once per frame
     void Update()
     {

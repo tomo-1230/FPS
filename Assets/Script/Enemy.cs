@@ -43,7 +43,15 @@ public class Enemy : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
 
     }
-
+    void Start()
+    {
+        WalkSpeed = PlayerPrefs.GetInt("WalkSpeed");
+        RunSpeed = PlayerPrefs.GetInt("WalkSpeed") *2;
+        RayDistance = RayDistance * PlayerPrefs.GetInt("Ray");
+        //PlayerDistance = RayDistance * ( PlayerPrefs.GetInt("WalkSpeed")/ 5) - PlayerDistance;
+        aim = aim * (PlayerPrefs.GetInt("aim")/ 5) ;
+        HP = PlayerPrefs.GetInt("EnemyHP");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -102,7 +110,7 @@ public class Enemy : MonoBehaviour
             {
                 time = 0;
             }
-            else if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < PlayerDistance)
+            else if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < PlayerDistance && PlayerView)
             {
                 Situation = Action.attack;
             }
