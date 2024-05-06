@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using DG.Tweening;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {    
@@ -22,9 +23,11 @@ public class Enemy : MonoBehaviour
     public GameObject PlayerObject;
     public GameObject RayPosition;
     public GameObject DamageCanvas;
+    public GameObject CloneText;
     public GameObject HaveGun;
     public GameObject Target;
     public GameObject Head;
+    public GameObject HPCampus;
     public Text text;
     public Animator anim;
     public Player player;
@@ -47,9 +50,8 @@ public class Enemy : MonoBehaviour
     {
         WalkSpeed = PlayerPrefs.GetInt("WalkSpeed");
         RunSpeed = PlayerPrefs.GetInt("WalkSpeed") *2;
-        RayDistance = RayDistance * PlayerPrefs.GetInt("Ray");
-        //PlayerDistance = RayDistance * ( PlayerPrefs.GetInt("WalkSpeed")/ 5) - PlayerDistance;
-        aim = aim * (PlayerPrefs.GetInt("aim")/ 5) ;
+        RayDistance = PlayerPrefs.GetInt("Ray");
+        aim = PlayerPrefs.GetInt("aim")/ 100 ;
         HP = PlayerPrefs.GetInt("EnemyHP");
     }
     // Update is called once per frame
@@ -58,6 +60,7 @@ public class Enemy : MonoBehaviour
         action();
         animation_();
         conditions();
+        DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
     }
     public void conditions()
     {
@@ -186,7 +189,7 @@ public class Enemy : MonoBehaviour
             this.transform.localEulerAngles = vector;
             Firing();
         }
-        DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
+        //DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
     }
     public void animation_()
     {
@@ -365,8 +368,21 @@ public class Enemy : MonoBehaviour
 
     public async void damage(int value)
     {
+        GameObject cloneObj = Instantiate(CloneText);
+        HPAnimation hP = cloneObj.GetComponent<HPAnimation>();
+        hP.Player = PlayerObject;
+        hP.WaitTime = 1000;
+        hP.transform.parent = DamageCanvas.gameObject.transform;
+        RectTransform rect = cloneObj.GetComponent<RectTransform>();
+        rect.position = new Vector3(0, 0, 0);
+        rect.rotation = new Quaternion(0, 180, 0, 0);
+        rect.sizeDelta = new Vector2(900,500);
+        cloneObj.transform.localPosition = new Vector3(0, 0, 0);
+        cloneObj.transform.localScale = new Vector3(1, 1, 1);
+       // hP.transform.localPosition = new Vector3(0, 2, 0);
+        hP.Damagae(value);
         HP -= value;
-        text.text = value.ToString();
+        //text.text = value.ToString();
         if(HP <= 0)
         {
             Destroy(this.gameObject);
@@ -385,6 +401,6 @@ public class Enemy : MonoBehaviour
             }
          
         }
-        
+       
     }
 }

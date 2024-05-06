@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         this.transform.position += this.gameObject.transform.forward * 50 * Time.deltaTime;
         if (Vector3.Distance(FiringPosition, this.transform.position) >= item.distance)
         {
-            Debug.Log("destroy2");
+           // Debug.Log("destroy2");
             Destroy(this.gameObject);
         }
     }
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Enemy>() != null)
             {
-                Debug.Log("Damage");
+               // Debug.Log("Damage");
                 collision.gameObject.GetComponent<Enemy>().damage(item.Damage);
                 if(item.BulletType == 4)
                 {

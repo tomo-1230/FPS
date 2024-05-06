@@ -48,8 +48,18 @@ public class SliderData : MonoBehaviour
             }
             else
             {
-                settingUI.DisplayText(slider.value, text);
-                settingUI.Slider((int)slider.value, Data);
+                if(Data == 9)
+                {
+                    settingUI.DisplayText(slider.value, text);
+                    settingUI.Slider((int)(slider.value*100), Data);
+                }
+                else
+                { 
+                    settingUI.DisplayText(slider.value, text);
+                    settingUI.Slider((int)slider.value, Data);
+
+                }
+               
             }
         }
        
