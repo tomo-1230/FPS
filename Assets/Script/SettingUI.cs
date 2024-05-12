@@ -132,6 +132,13 @@ public class SettingUI : MonoBehaviour
         PlayerPrefs.SetInt("Ray", SettingData[5]);
         PlayerPrefs.SetInt("aim", SettingData[9]);
         PlayerPrefs.SetInt("EnemyHP", SettingData[6]);
+        PlayerPrefs.SetInt("0", SettingData[11]);
+        PlayerPrefs.SetInt("1", SettingData[12]);
+        PlayerPrefs.SetInt("2", SettingData[13]);
+        PlayerPrefs.SetInt("3", SettingData[14]);
+        PlayerPrefs.SetInt("4", SettingData[15]);
+        PlayerPrefs.SetInt("5", SettingData[16]);
+
         PlayerPrefs.Save();
     }
    

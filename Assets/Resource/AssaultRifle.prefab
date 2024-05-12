@@ -301,17 +301,17 @@ MonoBehaviour:
   Have_cross_hair: {fileID: 21300000, guid: 375ecc2893ca2e44ab9bbf2473c22c42, type: 3}
   Set_cross_hair: {fileID: 21300000, guid: 3fbe6957a68fc6549999117fb71cf30e, type: 3}
   ZoomValue: 30
-  SetBullet: 10
-  MaxBullet: 25
-  ReRoadTiem: 1000
-  TimeTweak: 1
+  SetBullet: 30
+  MaxBullet: 30
+  ReRoadTiem: 3500
+  TimeTweak: 0.075
   BulletObj: {fileID: 1000011023395326, guid: 2ce15a1900ef14a459f78260cd05a3dc, type: 3}
   MuzzleObj: {fileID: 737486830564659535}
   BulletType: 1
-  distance: 50
-  Damage: 30
-  HeadDamage: 0
-  FiringInterval: 50
+  distance: 100
+  Damage: 25
+  HeadDamage: 40
+  FiringInterval: 10
   RapidFire: 1
   ShotAim: 0
   ShotAmount: 0
@@ -324,6 +324,7 @@ MonoBehaviour:
   TextName: {fileID: 7254506746988240394}
   TextBullet: {fileID: 5516836226540678045}
   ImageBullet: {fileID: 3095303730520185177}
+  effect: {fileID: 0}
 --- !u!65 &1292254881629433167
 BoxCollider:
   m_ObjectHideFlags: 0

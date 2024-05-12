@@ -15,6 +15,12 @@ public class ItemClone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Probability[0] = PlayerPrefs.GetInt("0");
+        Probability[1] = PlayerPrefs.GetInt("1");
+        Probability[2] = PlayerPrefs.GetInt("2");
+        Probability[3] = PlayerPrefs.GetInt("3");
+        Probability[4] = PlayerPrefs.GetInt("4");
+        Probability[5] = PlayerPrefs.GetInt("5");
         CloneItem = PlayerPrefs.GetInt("CloneItem");
         if(CloneItem == 0)
         {
@@ -23,13 +29,19 @@ public class ItemClone : MonoBehaviour
         int i = 0;
         foreach(GameObject a in _Item)
         {
-            for(int b = 0; b < Probability[i]-1; b++)
+            if (Probability[i] != 0)
             {
-                Copy.Add(a);
+                for (int b = 0; b < Probability[i] - 1; b++)
+                {
+
+                    Copy.Add(a);
+                }
             }
+         
             i++;
         }
         i = 0;
+        _Item.Clear();
         foreach(GameObject a in Copy)
         {
             _Item.Add(a);

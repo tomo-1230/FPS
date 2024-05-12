@@ -15244,7 +15244,7 @@ MonoBehaviour:
   CloneEnemy: {fileID: 8118470644888124028, guid: 507d46e87933ac14087b12acf0364783, type: 3}
   PlayerObject: {fileID: 1717243027}
   target: {fileID: 1717240211}
-  EnemyAmount: 0
+  EnemyAmount: 1
   PointObj:
   - {fileID: 717169071}
   - {fileID: 1018777848}
@@ -15287,15 +15287,12 @@ MonoBehaviour:
   ItemPoint: {fileID: 1944766122}
   _Item:
   - {fileID: 4767851719230098083, guid: 00a90bf27c06a1c46a03be2a07a5c133, type: 3}
-  - {fileID: 1000011023395326, guid: 372f041aae37e8c449a035040606df5b, type: 3}
-  - {fileID: 3697902821735249754, guid: 4724ab8646b3e5648be68cc8ad5aee4d, type: 3}
-  - {fileID: 8434079860282063045, guid: 2d2d9f0f807b15c49941bee270ac0cfb, type: 3}
-  - {fileID: 8016165969816216463, guid: c8af8c75de3a4ee4e8ffa1e0aec4c562, type: 3}
   - {fileID: 259546062692518345, guid: ab3e9cba786625a4ba4661905136f065, type: 3}
-  - {fileID: 1000013972658500, guid: 7ec263729bf306b4fa7f5a0e65e50e2a, type: 3}
-  - {fileID: 5525513028256590456, guid: 2bb0bc984bb2a6e4593889403762be80, type: 3}
+  - {fileID: 8016165969816216463, guid: c8af8c75de3a4ee4e8ffa1e0aec4c562, type: 3}
+  - {fileID: 3697902821735249754, guid: 4724ab8646b3e5648be68cc8ad5aee4d, type: 3}
   - {fileID: 3799567736657210036, guid: ffe3b7ddc7262494f8555bfbb867a072, type: 3}
-  Probability: 1e00000002000000020000001e000000020000000200000002000000010000001e000000
+  - {fileID: 8434079860282063045, guid: 2d2d9f0f807b15c49941bee270ac0cfb, type: 3}
+  Probability: 010000000000000000000000000000000000000000000000
   Bullet:
   - {fileID: 1000011023395326, guid: 372f041aae37e8c449a035040606df5b, type: 3}
   - {fileID: 1000013972658500, guid: 7ec263729bf306b4fa7f5a0e65e50e2a, type: 3}
@@ -17845,6 +17842,7 @@ MonoBehaviour:
   DecreaseSlider: {fileID: 727615457}
   HPvaule: {fileID: 1019747925}
   Fill: {fileID: 75055559}
+  MaxHP: 0
   duration: 0.5
   strength: 20
   vibrate: 100
@@ -19453,6 +19451,7 @@ MonoBehaviour:
   RunDistance: 5
   WaitTime: 5
   aim: 0.1
+  HedShotYPosi: 0
   TargetPosition: {x: 0, y: 0, z: 0}
   Situation: 0
   PlayerView: 0
@@ -19469,12 +19468,16 @@ MonoBehaviour:
   PlayerObject: {fileID: 1717243027}
   RayPosition: {fileID: 1356851814}
   DamageCanvas: {fileID: 775413358}
+  CloneText: {fileID: 0}
   HaveGun: {fileID: 1992959924}
   Target: {fileID: 1717240211}
   Head: {fileID: 1350243019}
+  HPCampus: {fileID: 0}
   text: {fileID: 2119516439}
   anim: {fileID: 2030598425}
   player: {fileID: 1724546796}
+  HitColor: {r: 0, g: 0, b: 0, a: 0}
+  HedColor: {r: 0, g: 0, b: 0, a: 0}
   nav: {fileID: 0}
 --- !u!195 &2030598428
 NavMeshAgent:

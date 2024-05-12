@@ -8,7 +8,6 @@ public class HP : MonoBehaviour
     public Slider DecreaseSlider;
     public Text HPvaule;
     public Image Fill;
-
     public int MaxHP;
 
     public float duration = 0.5f;

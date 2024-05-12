@@ -11,6 +11,7 @@ public class Clone : MonoBehaviour
     public List<GameObject> PointObj;
     public List<int> UsePoint;
     public List<int> copy;
+    public static List<GameObject> ClonedEnemyObj = new List<GameObject>();
     private bool addition = false;
     // Start is called before the first frame update
     void Start()
@@ -64,6 +65,7 @@ public class Clone : MonoBehaviour
             }
            
             enemy.Situation = Enemy.Action.patrol;
+            ClonedEnemyObj.Add(CloneObject);
             a++;
         } while (a <= EnemyAmount-1);
     }

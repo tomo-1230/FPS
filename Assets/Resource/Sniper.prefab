@@ -320,16 +320,16 @@ MonoBehaviour:
   ZoomValue: 8
   SetBullet: 3
   MaxBullet: 3
-  ReRoadTiem: 3000
-  TimeTweak: 0.1
+  ReRoadTiem: 3500
+  TimeTweak: 0.083
   BulletObj: {fileID: 1000011866055842, guid: 3b79e6f8a415f7841a8a55733c4683cd, type: 3}
   MuzzleObj: {fileID: 3861406394535016208}
   BulletType: 1
   distance: 100
-  Damage: 50
+  Damage: 70
   HeadDamage: 100
-  FiringInterval: 1500
-  RapidFire: 0
+  FiringInterval: 2000
+  RapidFire: 1
   ShotAim: 0
   ShotAmount: 0
   RocketBullet: {fileID: 0}

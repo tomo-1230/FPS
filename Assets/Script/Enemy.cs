@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float RunDistance;//‘–‚èŽn‚ß‚é‹——£
     public float WaitTime;
     public float aim;
+    public float HedShotYPosi;
     public Vector3 TargetPosition;
     public Action Situation;
     public bool PlayerView;
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
     public Text text;
     public Animator anim;
     public Player player;
+    public Color HitColor;
+    public Color HedColor;
     public enum Action
     {
         Wait, patrol, chase, attack
@@ -366,7 +369,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public async void damage(int value)
+    public async void damage(int value,bool HedShot)
     {
         GameObject cloneObj = Instantiate(CloneText);
         HPAnimation hP = cloneObj.GetComponent<HPAnimation>();
@@ -379,8 +382,16 @@ public class Enemy : MonoBehaviour
         rect.sizeDelta = new Vector2(900,500);
         cloneObj.transform.localPosition = new Vector3(0, 0, 0);
         cloneObj.transform.localScale = new Vector3(1, 1, 1);
-       // hP.transform.localPosition = new Vector3(0, 2, 0);
-        hP.Damagae(value);
+        // hP.transform.localPosition = new Vector3(0, 2, 0);
+        if (HedShot)
+        {
+            hP.Damagae(value, HedColor);
+        }
+        else
+        {
+            hP.Damagae(value, HitColor);
+
+        }
         HP -= value;
         //text.text = value.ToString();
         if(HP <= 0)

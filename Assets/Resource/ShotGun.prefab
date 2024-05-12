@@ -587,14 +587,14 @@ MonoBehaviour:
   ZoomValue: 25
   SetBullet: 5
   MaxBullet: 10
-  ReRoadTiem: 1000
-  TimeTweak: 1
+  ReRoadTiem: 4000
+  TimeTweak: 0.063
   BulletObj: {fileID: 1000011866055842, guid: 3b79e6f8a415f7841a8a55733c4683cd, type: 3}
   MuzzleObj: {fileID: 7720942791333606924}
   BulletType: 3
-  distance: 50
-  Damage: 25
-  HeadDamage: 0
+  distance: 100
+  Damage: 30
+  HeadDamage: 90
   FiringInterval: 1000
   RapidFire: 1
   ShotAim: 1
@@ -608,6 +608,7 @@ MonoBehaviour:
   TextName: {fileID: 1622714765090352218}
   TextBullet: {fileID: 4514744663724513741}
   ImageBullet: {fileID: 6403168003060247305}
+  effect: {fileID: 0}
 --- !u!54 &6753852646324579753
 Rigidbody:
   m_ObjectHideFlags: 0

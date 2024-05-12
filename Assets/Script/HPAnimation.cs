@@ -27,9 +27,9 @@ public class HPAnimation : MonoBehaviour
         }
 
     }
-    public async  void Damagae(int DamageValue)
+    public async  void Damagae(int DamageValue,Color TextColor)
     {
-        Debug.Log("A");
+        text.color = TextColor;
         text.text = DamageValue.ToString();
         //anim.SetBool("move", true);
         await Task.Delay(WaitTime);
