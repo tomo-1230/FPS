@@ -73,6 +73,9 @@ public class Clone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(ClonedEnemyObj.Count == 0)
+        {
+            StartScene.back(true);
+        }
     }
 }

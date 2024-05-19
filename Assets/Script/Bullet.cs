@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
                 {
                     HedShot = true;
                 }
-                collision.gameObject.GetComponent<Enemy>().damage(item.Damage,HedShot);
+                collision.gameObject.GetComponent<Enemy>().Damage_(item.Damage,HedShot);
                 if(item.BulletType == 4)
                 {
                     Instantiate(item.effect, this.transform.position,Quaternion.identity);

@@ -26,7 +26,13 @@ public class HP : MonoBehaviour
     }
     public void PlayerHP(float value)
     {
-        if(value < 1 || value > MaxHP)
+        if(value < 1)
+        {
+            Debug.Log("Gameover");
+            value = 0;
+            StartScene.back(false);
+        }
+        if(value > MaxHP)
         {
             return;
         }

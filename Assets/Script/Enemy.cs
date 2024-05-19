@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public float PlayerDistance;//çUåÇÇ™énÇ‹ÇÈãóó£
     public float RunDistance;//ëñÇËénÇﬂÇÈãóó£
     public float WaitTime;
-    public float aim;
+    public float Aim;
     public float HedShotYPosi;
     public Vector3 TargetPosition;
     public Action Situation;
@@ -34,6 +34,10 @@ public class Enemy : MonoBehaviour
     public Player player;
     public Color HitColor;
     public Color HedColor;
+    public Color Transparency;
+    public Material Enemy_anim;
+    public SkinnedMeshRenderer skinned;
+    public GameObject ThisObj;
     public enum Action
     {
         Wait, patrol, chase, attack
@@ -47,14 +51,13 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
-
     }
     void Start()
     {
         WalkSpeed = PlayerPrefs.GetInt("WalkSpeed");
         RunSpeed = PlayerPrefs.GetInt("WalkSpeed") *2;
         RayDistance = PlayerPrefs.GetInt("Ray");
-        aim = PlayerPrefs.GetInt("aim")/ 100 ;
+        Aim = PlayerPrefs.GetInt("aim")/ 100 ;
         HP = PlayerPrefs.GetInt("EnemyHP");
     }
     // Update is called once per frame
@@ -64,6 +67,7 @@ public class Enemy : MonoBehaviour
         animation_();
         conditions();
         DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
+        skinned.material.color = Transparency;
     }
     public void conditions()
     {
@@ -262,7 +266,6 @@ public class Enemy : MonoBehaviour
     }
     async void Firing()
     {
-       
         if (firng)
         {
             return;
@@ -278,7 +281,7 @@ public class Enemy : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.black);
         GameObject CloneObject = Instantiate(item.BulletObj);
-        CloneObject.transform.position = HaveGun.GetComponent<Item>().MuzzleObj.transform.position;
+        CloneObject.transform.position = item.MuzzleObj.transform.position;
         Vector3 HitPoint = new Vector3(0,0,0);
         if (Physics.Raycast(ray, out hit, item.distance))
         {
@@ -293,27 +296,27 @@ public class Enemy : MonoBehaviour
         }
         if (Random.Range(0, 1) == 1)//ÉâÉìÉ_ÉÄ
         {
-            HitPoint.x += Random.Range(0, aim);
+            HitPoint.x += Random.Range(0, Aim);
         }
         else
         {
-            HitPoint.x -= Random.Range(0, aim);
+            HitPoint.x -= Random.Range(0, Aim);
         }
         if (Random.Range(0, 1) == 1)
         {
-            HitPoint.y += Random.Range(0, aim);
+            HitPoint.y += Random.Range(0, Aim);
         }
         else
         {
-            HitPoint.y -= Random.Range(0, aim);
+            HitPoint.y -= Random.Range(0, Aim);
         }
         if (Random.Range(0, 1) == 1)
         {
-            HitPoint.z += Random.Range(0, aim);
+            HitPoint.z += Random.Range(0, Aim);
         }
         else
         {
-            HitPoint.z -= Random.Range(0, aim);
+            HitPoint.z -= Random.Range(0, Aim);
         }
         CloneObject.transform.LookAt(HitPoint);
         CloneObject.AddComponent<Bullet>().item = item;
@@ -369,7 +372,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public async void damage(int value,bool HedShot)
+    public async void Damage_(int value,bool HedShot)
     {
         GameObject cloneObj = Instantiate(CloneText);
         HPAnimation hP = cloneObj.GetComponent<HPAnimation>();
@@ -382,7 +385,6 @@ public class Enemy : MonoBehaviour
         rect.sizeDelta = new Vector2(900,500);
         cloneObj.transform.localPosition = new Vector3(0, 0, 0);
         cloneObj.transform.localScale = new Vector3(1, 1, 1);
-        // hP.transform.localPosition = new Vector3(0, 2, 0);
         if (HedShot)
         {
             hP.Damagae(value, HedColor);
@@ -393,25 +395,29 @@ public class Enemy : MonoBehaviour
 
         }
         HP -= value;
-        //text.text = value.ToString();
         if(HP <= 0)
         {
-            Destroy(this.gameObject);
+            erase();
         }
-        else
-        {
-            await Task.Delay(1000);
-            
-            try
-            {
-               text.text = "";
-            }
-            catch
-            {
-
-            }
-         
-        }
-       
+    }
+    public void erase()
+    {
+        Destroy(ThisObj);
+        //// Destroy(this.gameObject.GetComponent<CapsuleCollider>());
+        // Situation = Action.Wait;
+        // skinned.material = Enemy_anim;
+        // anim.SetBool("move", false);
+        // anim.SetLayerWeight(2, 0f);
+        // anim.SetBool("Have", false);
+        // anim.SetBool("WS", false);
+        // anim.SetBool("AD", false);
+        // anim.SetFloat("Blend", 0f);
+        // anim.SetBool("disappear", true);
+        // await Task.Delay(1000);
+        // ThisDestroy();
+    }
+    public void ThisDestroy()
+    {
+      
     }
 }

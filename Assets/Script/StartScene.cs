@@ -7,17 +7,7 @@ public class StartScene : MonoBehaviour
     public GameObject start;
     public GameObject setting;
     public SettingUI settingUI;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
     public void OnClick(int a)
     {
         switch (a)
@@ -35,5 +25,9 @@ public class StartScene : MonoBehaviour
                 SceneManager.LoadScene("Game");
                 break;
         }
+    }
+    public static void back(bool clear)
+    {
+        SceneManager.LoadScene("Start");
     }
 }
