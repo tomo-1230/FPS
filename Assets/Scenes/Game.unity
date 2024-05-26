@@ -15256,6 +15256,8 @@ MonoBehaviour:
   - {fileID: 44023880}
   UsePoint: 0000000001000000020000000300000004000000050000000600000007000000
   copy: 
+  ClonedEnemyObj: []
+  clone: {fileID: 0}
 --- !u!4 &1668456115
 Transform:
   m_ObjectHideFlags: 0
@@ -16325,6 +16327,7 @@ MonoBehaviour:
   _hp: {fileID: 1845085027}
   PlayerHP: 100
   _gun: {fileID: 1724546800}
+  clone: {fileID: 0}
 --- !u!136 &1724546797
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16370,8 +16373,11 @@ MonoBehaviour:
   player: {fileID: 1724546796}
   CloneButton: {fileID: 1274031337}
   content: {fileID: 1675303922}
+  CameraObject: {fileID: 683023773}
+  RayDistance: 10
   select: 0
-  bur: []
+  itemdata: {fileID: 11400000, guid: 5f632bacfa935254d8518a902d1e9347, type: 2}
+  InventoryObject: {fileID: 808142297}
   panel: {fileID: 977312153}
   panel1: {fileID: 478824770}
   panel2: {fileID: 1616568507}
@@ -19450,7 +19456,7 @@ MonoBehaviour:
   PlayerDistance: 3
   RunDistance: 5
   WaitTime: 5
-  aim: 0.1
+  Aim: 0
   HedShotYPosi: 0
   TargetPosition: {x: 0, y: 0, z: 0}
   Situation: 0
@@ -19478,6 +19484,12 @@ MonoBehaviour:
   player: {fileID: 1724546796}
   HitColor: {r: 0, g: 0, b: 0, a: 0}
   HedColor: {r: 0, g: 0, b: 0, a: 0}
+  Transparency: {r: 0, g: 0, b: 0, a: 0}
+  Enemy_anim: {fileID: 0}
+  skinned: {fileID: 0}
+  ThisObj: {fileID: 0}
+  ListNumber: 0
+  clone: {fileID: 0}
   nav: {fileID: 0}
 --- !u!195 &2030598428
 NavMeshAgent:

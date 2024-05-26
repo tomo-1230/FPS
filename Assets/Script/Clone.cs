@@ -11,8 +11,9 @@ public class Clone : MonoBehaviour
     public List<GameObject> PointObj;
     public List<int> UsePoint;
     public List<int> copy;
-    public static List<GameObject> ClonedEnemyObj = new List<GameObject>();
+    public  List<GameObject> ClonedEnemyObj= new List<GameObject>();
     private bool addition = false;
+    public Clone clone;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +42,9 @@ public class Clone : MonoBehaviour
             int random;
             int random2;
             random = Random.Range(0, UsePoint.Count);
-           // Debug.Log(random);
             random2 = UsePoint[random];
             UsePoint.RemoveAt(random);
             Transform[] chilleds = new Transform[PointObj[random2].transform.childCount];
-            //enemy.nav.Warp(chilleds[1].position);
             for (int i = 0; i < PointObj[random2].transform.childCount; i++)
             {
                 chilleds[i] = PointObj[random2].transform.GetChild(i);
@@ -66,8 +65,11 @@ public class Clone : MonoBehaviour
            
             enemy.Situation = Enemy.Action.patrol;
             ClonedEnemyObj.Add(CloneObject);
+            enemy.ListNumber = ClonedEnemyObj.Count - 1;
             a++;
         } while (a <= EnemyAmount-1);
+
+       
     }
 
     // Update is called once per frame
@@ -77,5 +79,24 @@ public class Clone : MonoBehaviour
         {
             StartScene.back(true);
         }
+    }
+    public void Removed(int value)
+    {
+
+        ClonedEnemyObj.RemoveAt(value);
+        if (ClonedEnemyObj.Count == 0)
+        {
+            return;
+        }
+        int i = 0;
+        foreach (GameObject a in ClonedEnemyObj)
+        {
+            a.GetComponent<Enemy>().ListNumber = i;
+        }
+    }
+    public static void GetList(ref List<GameObject> a)
+    {
+        
+       /// a = new List<GameObject>(clone.ClonedEnemyObj);
     }
 }

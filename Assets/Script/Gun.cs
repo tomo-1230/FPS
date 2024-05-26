@@ -189,7 +189,8 @@ public class Gun :MonoBehaviour
             CloneObject.transform.localEulerAngles = vector;
             Bullet bullet = CloneObject.AddComponent<Bullet>();
             bullet.item = item;
-           
+            bullet.clone = player.clone;
+
             bullet.FiringPosition = item.MuzzleObj.transform.position;
             CloneObject = Instantiate(FiringEffect);
             CloneObject.transform.position = item.MuzzleObj.transform.position;
@@ -252,7 +253,9 @@ public class Gun :MonoBehaviour
                 Vector3 vector = CloneObject.transform.localEulerAngles;
                 //vector.y += 90;
                 CloneObject.transform.localEulerAngles = vector;
-                CloneObject.AddComponent<Bullet>().item = item;
+                Bullet bullet = CloneObject.AddComponent<Bullet>();
+                bullet.item = item;
+                bullet.clone = player.clone;
                 Debug.Log("A");
                 Amount++;
             } while (Amount <= Clone_HaveGun.GetComponent<Item>().ShotAmount);

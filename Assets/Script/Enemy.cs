@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
     public Material Enemy_anim;
     public SkinnedMeshRenderer skinned;
     public GameObject ThisObj;
+    [SerializeField]
+    public int ListNumber;
+    public Clone clone;
     public enum Action
     {
         Wait, patrol, chase, attack
@@ -319,7 +322,9 @@ public class Enemy : MonoBehaviour
             HitPoint.z -= Random.Range(0, Aim);
         }
         CloneObject.transform.LookAt(HitPoint);
-        CloneObject.AddComponent<Bullet>().item = item;
+        Bullet bullet = CloneObject.AddComponent<Bullet>();
+        bullet.item = item;
+        bullet.clone = player.clone;
         item.SetBullet--;
         await Task.Delay(item.FiringInterval);
         firng = false;
@@ -372,7 +377,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public async void Damage_(int value,bool HedShot)
+    public void Damage_(int value,bool HedShot)
     {
         GameObject cloneObj = Instantiate(CloneText);
         HPAnimation hP = cloneObj.GetComponent<HPAnimation>();
@@ -402,6 +407,7 @@ public class Enemy : MonoBehaviour
     }
     public void erase()
     {
+        player.clone.Removed(ListNumber);
         Destroy(ThisObj);
         //// Destroy(this.gameObject.GetComponent<CapsuleCollider>());
         // Situation = Action.Wait;

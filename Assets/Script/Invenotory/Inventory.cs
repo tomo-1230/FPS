@@ -8,9 +8,12 @@ public class Inventory : MonoBehaviour
     public Player player;
     public GameObject CloneButton;
     public GameObject content;
+    public GameObject CameraObject;
+    public float RayDistance;
     public int select;
-    [HideInInspector]
-    public List<GameObject> bur;
+    public ItemData itemdata;
+    private bool OpenInventory = false;
+    public GameObject InventoryObject;
     [Header("UI")]
     public GameObject panel;
     public GameObject panel1;
@@ -22,17 +25,55 @@ public class Inventory : MonoBehaviour
     public Image ImageBullet;
     public List<GameObject> search;
     public Gun gun;
+
+    private InventoryView inventoryView;
+    private InventoryData inventoryData;
+    private TakeItem takeItem;
     // Start is called before the first frame update
     void Start()
     {
         select = 0;
         RoadItem();
+      
+        
+        inventoryView = this.gameObject.AddComponent<InventoryView>();
+        inventoryData = this.gameObject.AddComponent<InventoryData>();
+        takeItem = this.gameObject.AddComponent<TakeItem>();
+        inventoryView.Settings(CloneButton, content, InventoryObject) ;
+        inventoryData.setting(itemdata);
+        takeItem.Settings(CameraObject, RayDistance,this.gameObject.GetComponent<Inventory>());
     }
 
     // Update is called once per frame
     void Update()
     {
+        TakeItem();
+    }
+    public void TakeItem()
+    {
+        takeItem.Take();
+        InventoryView();
 
+    }
+    public void AddItem(GameObject hit)
+    {
+        inventoryData.AddItem(hit, true);
+    }
+    public void InventoryView()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (OpenInventory)
+            {
+                OpenInventory = false;
+                inventoryView.InventoryDestroy();
+            }
+            else
+            {
+                OpenInventory = true;
+                inventoryView.InventoryCreate(inventoryData.GetObjectList());
+            }
+        }
     }
     public void RoadItem()
     {
@@ -175,108 +216,18 @@ public class Inventory : MonoBehaviour
         {
             BulletHave.text = HaveBullet.ToString();
         }
-        //if(select != 0 && gun.Clone_HaveGun != null)
-        //{
-        //    panel.SetActive(true);
-        //}
-        //else
-        //{
-        //    return;
-        //}
-
-        //if (gun.Clone_HaveGun.GetComponent<Item>().SetBullet < 10)
-        //{
-        //    BulletSet.text = "0" + gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
-        //}
-        //else
-        //{
-        //    BulletSet.text = gun.Clone_HaveGun.GetComponent<Item>().SetBullet.ToString();
-        //}
-
-
-        //int value = -1;
-        //int index = 0;
-        //foreach (GameObject a in player.ItemObject)
-        //{
-        //    Item item = a.GetComponent<Item>();
-        //    if (item != null && gun.Clone_HaveGun.GetComponent<Item>().BulletType == item.ThisBulletType)
-        //    {
-        //        value = index;
-        //    }
-        //    else
-        //    {
-        //        index++;
-        //    }
-        //}
-
-        //if(value != -1)
-        //{
-        //    if (player.ItemCount[value] < 10)
-        //    {
-        //        BulletHave.text = "0"+player.ItemCount[value].ToString();
-        //    }
-        //    else
-        //    {
-        //        BulletHave.text = player.ItemCount[value].ToString();
-        //    }
-        //}
-        //else
-        //{
-        //    BulletHave.text = "00";
-        //}
-
+       
 
     }
 
     public void CreateInventory()
     {
 
-        Item.ItemType  Type = Item.ItemType.Gun;
-        //Debug.Log(Type);
-
-        while (Type != Item.ItemType.recovery)
-        {
-           // Debug.Log(Type);
-            int i = 0;
-            foreach (GameObject a in player.ItemObject)
-            {
-                if(a.GetComponent<Item>() == null)
-                {
-                    Debug.Log("CreateInventoryError");
-                    return;
-                }
-
-                if (a.GetComponent<Item>().ThisType == Type)
-                {
-                    GameObject clonebutton = Instantiate(CloneButton);
-                    clonebutton.GetComponent<RectTransform>().anchoredPosition = new Vector2(400, 250 - (10 * i));
-                    clonebutton.transform.parent = content.transform;
-
-                    GameObject CloneText = clonebutton.transform.Find("CloneText").gameObject;
-                    CloneText.GetComponent<Text>().text = a.GetComponent<Item>().ItemName;
-                    clonebutton.SetActive(true);
-                    // Debug.Log(clonebutton);
-                    bur.Add(clonebutton);
-                }
-                i++;
-            }
-            if (Type == Item.ItemType.Gun)
-            {
-                Type = Item.ItemType.bullet;
-            }
-            else if (Type == Item.ItemType.bullet)
-            {
-                Type = Item.ItemType.recovery;
-            }
-        }
+        
        
     }
     public void DestroyButton()
     {
-        foreach(GameObject a in bur)
-        {
-            Destroy(a);
-        }
-        bur.Clear();
+        
     }
 }

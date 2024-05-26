@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public Item item;
     public bool blast;
     public int blastDistance;
+    public Clone clone;
     private void Start()
     {
         FiringPosition = this.transform.position;
@@ -20,33 +21,47 @@ public class Bullet : MonoBehaviour
            // Debug.Log("destroy2");
             Destroy(this.gameObject);
         }
+        Ray();
     }
-    public void OnCollisionStay(Collision collision)
+    public void Ray()
     {
-        if (collision.gameObject != null)
+        GameObject RayPosition = this.gameObject;
+        int RayDistance = 1;
+        Ray ray = new Ray(RayPosition.transform.position, RayPosition.transform.forward);
+        RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction * RayDistance, Color.yellow);
+        bool angle = ((RayPosition.transform.localEulerAngles.x >= 0 && RayPosition.transform.localEulerAngles.x <= 90) || (RayPosition.transform.localEulerAngles.x >= 270 && RayPosition.transform.localEulerAngles.x <= 360));
+        if (Physics.Raycast(ray, out hit, RayDistance))
         {
-            if (collision.gameObject.GetComponent<Enemy>() != null)
+            Hit(hit.collider.gameObject);
+        }
+    }
+    public void Hit(GameObject HitObj)
+    {
+        if (HitObj != null)
+        {
+            if (HitObj.GetComponent<Enemy>() != null)
             {
                 // Debug.Log("Damage");
                 bool HedShot = false;
-                this.gameObject.transform.parent = collision.gameObject.transform;
-                Debug.Log(this.gameObject.transform.localPosition.y);
-                if (this.gameObject.transform.localPosition.y >= collision.gameObject.GetComponent<Enemy>().HedShotYPosi)
+                this.gameObject.transform.parent = HitObj.transform;
+                //Debug.Log(this.gameObject.transform.localPosition.y);
+                if (this.gameObject.transform.localPosition.y >= HitObj.GetComponent<Enemy>().HedShotYPosi)
                 {
                     HedShot = true;
                 }
-                collision.gameObject.GetComponent<Enemy>().Damage_(item.Damage,HedShot);
-                if(item.BulletType == 4)
+                HitObj.GetComponent<Enemy>().Damage_(item.Damage, HedShot);
+                if (item.BulletType == 4)
                 {
-                    Instantiate(item.effect, this.transform.position,Quaternion.identity);
+                    Instantiate(item.effect, this.transform.position, Quaternion.identity);
                 }
             }
-            else if (collision.gameObject.GetComponent<Player>() != null)
+            else if (HitObj.GetComponent<Player>() != null)
             {
-                Player player = collision.gameObject.GetComponent<Player>();
+                Player player = HitObj.GetComponent<Player>();
                 player.PlayerHP = player._hp.Decrease(player.PlayerHP, item.Damage);
             }
-            if(collision.gameObject.tag != "gun" && collision.gameObject.tag != "bullet")
+            if (HitObj.tag != "gun" && HitObj.tag != "bullet")
             {
                 Debug.Log("destroy");
                 if (item.ThisBulletType == 4)
@@ -61,9 +76,10 @@ public class Bullet : MonoBehaviour
             }
             if (blast)
             {
-                foreach (GameObject Enemy in Clone.ClonedEnemyObj)
+                
+                foreach (GameObject Enemy in clone.ClonedEnemyObj)
                 {
-                    if(Vector3.Distance(Enemy.transform.position,this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
+                    if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
                     {
                         int Damage;
                         float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
@@ -72,5 +88,9 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
+    }
+    public void OnCollisionStay(Collision collision)
+    {
+       
     }
 }
