@@ -6,6 +6,7 @@ public class InventoryData : MonoBehaviour
     private List<string> ItemName = new List<string>();
     private List<int> ItemCount = new List<int>();
     private List<GameObject> ItemObject = new List<GameObject>();
+    private List<Item> ItemData = new List<Item>();
     private ItemData itemdata;
     public void setting(ItemData _itemdata)
     {
@@ -13,7 +14,7 @@ public class InventoryData : MonoBehaviour
     }
     public void AddItem(GameObject hit, bool delete)
     {
-        if(hit == null)
+        if (hit == null)
         {
             return;
         }
@@ -26,7 +27,10 @@ public class InventoryData : MonoBehaviour
             int ListNumber = ItemName.IndexOf(HitItem.ItemName);
             if (HitItem.ThisType == Item.ItemType.Gun)
             {
-                ItemCount[ListNumber] += 1;
+                ItemName.Add(HitItem.ItemName);
+                ItemCount.Add(1);
+                ItemObject.Add(CloneObject);
+                ItemData.Add(HitItem.GetComponent<Item>());
             }
             if (HitItem.ThisType == Item.ItemType.bullet)
             {
@@ -39,6 +43,7 @@ public class InventoryData : MonoBehaviour
             ItemName.Add(HitItem.ItemName);
             ItemCount.Add(1);
             ItemObject.Add(CloneObject);
+            ItemData.Add(HitItem.GetComponent<Item>());
 
         }
         if (delete)
@@ -54,6 +59,7 @@ public class InventoryData : MonoBehaviour
             ItemName.RemoveAt(index);
             ItemCount.RemoveAt(index);
             ItemObject.RemoveAt(index);
+            ItemData.RemoveAt(index);
         }
     }
     public List<string> GetNameList()
@@ -67,5 +73,9 @@ public class InventoryData : MonoBehaviour
     public List<GameObject> GetObjectList()
     {
         return ItemObject;
+    }
+    public List<Item> GetItemComponentList()
+    {
+        return ItemData;
     }
 }

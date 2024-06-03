@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class LevelData : ScriptableObject
 {
-    public List<int> Data = new List<int> { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    public List<int> Data = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 }

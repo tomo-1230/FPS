@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoveAnimation : MonoBehaviour
 {
-   public Animator MoveAnimationControl(MoveDate TargetData,Animator animator)
-   {
+    public Animator MoveAnimationControl(MoveDate TargetData, Animator animator)
+    {
         MoveDate data = TargetData;
         Animator anim = animator;
         if (data.Right)
@@ -41,7 +41,7 @@ public class MoveAnimation : MonoBehaviour
         {
             anim.SetInteger("Forward", 0);
         }
-        
+
         return anim;
-   }
+    }
 }

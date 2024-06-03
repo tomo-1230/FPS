@@ -14,7 +14,7 @@ public class SettingUI : MonoBehaviour
     public Toggle auto;
     public Slider sDifficulty;
     public Text tDifficulty;
-    public  List<int> SettingData;
+    public List<int> SettingData;
     //public static List<int> SettingDataCopy;
     public Color color;
     [Space(3)]
@@ -55,11 +55,11 @@ public class SettingUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Level = (int)sDifficulty.value-1;
+        Level = (int)sDifficulty.value - 1;
         if (auto.isOn)
         {
             sDifficulty.GetComponent<SliderData>().enabled = true;
-           // DisplayText(S_difficulty, T_difficulty);
+            // DisplayText(S_difficulty, T_difficulty);
         }
         else
         {
@@ -78,7 +78,7 @@ public class SettingUI : MonoBehaviour
             SettingData[9] = EnemyAIM.Data[Level];
             SettingData[10] = ItemAmount.Data[Level];
         }
-       
+
         //if(SettingDataCopy.Count != 0)
         //{
         //    SettingDataCopy.Clear();
@@ -90,16 +90,16 @@ public class SettingUI : MonoBehaviour
     }
     public void DisplayText(float sli, Text text)
     {
-     
-       
-            text.text =sli.ToString();
-      
+
+
+        text.text = sli.ToString();
+
     }
-   public  void ButtonClick(int number)
+    public void ButtonClick(int number)
     {
         GameObject ClickButton = Button[number];
         GameObject IndicationObj = Obj[number];
-        if(ShowButton == ClickButton)
+        if (ShowButton == ClickButton)
         {
             return;
         }
@@ -119,9 +119,9 @@ public class SettingUI : MonoBehaviour
         ShowButton = ClickButton;
         ShowObj = IndicationObj;
     }
-    public void Slider(int sliderdData,int Data)
+    public void Slider(int sliderdData, int Data)
     {
-      SettingData[Data] = sliderdData;
+        SettingData[Data] = sliderdData;
     }
     public void DataSeve()
     {
@@ -141,5 +141,5 @@ public class SettingUI : MonoBehaviour
 
         PlayerPrefs.Save();
     }
-   
+
 }

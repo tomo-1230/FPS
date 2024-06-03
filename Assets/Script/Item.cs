@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
     [Space(5)]
     [Header("UI・レティクル系")]
     [Space(1)]
-    public Vector3 HavePosition; 
+    public Vector3 HavePosition;
     public Sprite GumImage;
     public Sprite BulletImage;
     public Sprite Have_cross_hair;
@@ -81,18 +81,18 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
         CLoneObject = Player._itemData.ItemObject[CloneObjectNumber]; ShowDescription(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(CloneObjectNumber == 5)
+        if (CloneObjectNumber == 5)
         {
             RocketBullet.SetActive(SetBullet != 0);
         }
-       
+
     }
     public void ShowDescription(bool a)
     {
@@ -106,17 +106,17 @@ public class Item : MonoBehaviour
             TextName.text = ItemName;
             int set = SetBullet;
             int max = MaxBullet;
-            if(set < 10) 
+            if (set < 10)
             {
-                TextBullet.text = "0"+set + "/";
+                TextBullet.text = "0" + set + "/";
             }
             else
             {
-                TextBullet.text =  set + "/";
+                TextBullet.text = set + "/";
             }
-            if(max < 10)
+            if (max < 10)
             {
-                TextBullet.text = TextBullet.text +"0"+ max;
+                TextBullet.text = TextBullet.text + "0" + max;
             }
             else
             {

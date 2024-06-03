@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    
+
     private float CameraSpeed;
-    public void  ChangeSpeed(float speed)
+    public void ChangeSpeed(float speed)
     {
         CameraSpeed = speed;
     }
@@ -32,7 +32,7 @@ public class PlayerCamera : MonoBehaviour
         result.transform.localEulerAngles = vector;
         return result;
     }
-    public GameObject PlayerCameraMove(GameObject Player,GameObject Player_Mesh)
+    public GameObject PlayerCameraMove(GameObject Player, GameObject Player_Mesh)
     {
         float x_Rotation = Input.GetAxis("Mouse X");
         GameObject result = Player;

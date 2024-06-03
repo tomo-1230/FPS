@@ -9,7 +9,7 @@ public class InventoryView : MonoBehaviour
     private GameObject content;
     private GameObject InventoryObject;
     private List<GameObject> bur = new List<GameObject>();
-    public void Settings(GameObject Button,GameObject Countent, GameObject InvenObj)
+    public void Settings(GameObject Button, GameObject Countent, GameObject InvenObj)
     {
         CloneButton = Button;
         content = Countent;
@@ -17,7 +17,7 @@ public class InventoryView : MonoBehaviour
     }
     public void InventoryCreate(List<GameObject> ItemObject)
     {
-        if(CloneButton == null || content == null)
+        if (CloneButton == null || content == null)
         {
             Debug.Log("CreateInventoryError");
             return;
@@ -60,14 +60,16 @@ public class InventoryView : MonoBehaviour
                 Type = Item.ItemType.recovery;
             }
         }
+        InventoryObject.SetActive(true);
     }
     public void InventoryDestroy()
     {
-        if(InventoryObject == null)
+        if (InventoryObject == null)
         {
             return;
         }
-        if(bur.Count == 0)
+        InventoryObject.SetActive(false);
+        if (bur.Count == 0)
         {
             return;
         }

@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         this.transform.position += this.gameObject.transform.forward * 50 * Time.deltaTime;
         if (Vector3.Distance(FiringPosition, this.transform.position) >= item.distance)
         {
-           // Debug.Log("destroy2");
+            // Debug.Log("destroy2");
             Destroy(this.gameObject);
         }
         Ray();
@@ -76,12 +76,11 @@ public class Bullet : MonoBehaviour
             }
             if (blast)
             {
-                
+
                 foreach (GameObject Enemy in clone.ClonedEnemyObj)
                 {
                     if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
                     {
-                        int Damage;
                         float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
 
                     }
@@ -91,6 +90,6 @@ public class Bullet : MonoBehaviour
     }
     public void OnCollisionStay(Collision collision)
     {
-       
+
     }
 }

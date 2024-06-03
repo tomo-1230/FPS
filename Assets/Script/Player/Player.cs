@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
     public int PlayerHP;
     public Gun _gun;
     public static bool HaveGun;
-    private Item a;
     public Clone clone;
 
     private PlayerMove playerMove;
@@ -42,22 +41,23 @@ public class Player : MonoBehaviour
     private PlayerCamera playerCamera;
     private PlayerJump playerJump;
     private MoveDate moveData;
-    
+
     // Start is called before the first frame update
-    void Awake()    {
+    void Awake()
+    {
         _itemData = ItemData;
     }
-     void Start()
+    void Start()
     {
         PlayerHP = PlayerPrefs.GetInt("PlayerHP");
-        
+
         playerJump = this.gameObject.AddComponent<PlayerJump>();
         playerMove = this.gameObject.AddComponent<PlayerMove>();
         moveAnimation = this.gameObject.AddComponent<MoveAnimation>();
         playerCamera = this.gameObject.AddComponent<PlayerCamera>();
-        moveData = playerMove.Assignment(this.transform) ;
+        moveData = playerMove.Assignment(this.transform);
         playerJump.Acquisition(JumpPower);
-       
+
         playerCamera.ChangeSpeed(CameraSpeedNormal);
     }
     // Update is called once per frame
@@ -70,16 +70,16 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Y))
         {
-            _Inventory.RoadItem();
+            _Inventory.ReRoad();
         }
-        
+
 
     }
     public void Animation()
     {
-        PlayerAnim = moveAnimation.MoveAnimationControl(moveData,PlayerAnim);
+        PlayerAnim = moveAnimation.MoveAnimationControl(moveData, PlayerAnim);
     }
-   
+
     public void Move()
     {
         moveData = playerMove.Assignment(this.transform, moveData);
@@ -98,17 +98,10 @@ public class Player : MonoBehaviour
         CameraObject = playerCamera.CameraMove(CameraObject);
         PlayerObject = playerCamera.PlayerCameraMove(PlayerObject, Player_Mesh);
     }
-  
-   
-    
-    public void AddInventory(GameObject hit,int CloneObjectNumber, bool delete)
-    {
-       
-    }
     public void ReMoveItem(int index, int count)
     {
-        
+
 
     }
-  
+
 }

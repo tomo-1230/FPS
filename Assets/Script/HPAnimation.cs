@@ -13,7 +13,7 @@ public class HPAnimation : MonoBehaviour
     void Start()
     {
         anim = this.gameObject.GetComponent<Animator>();
-       // anim.SetBool("move", false);
+        // anim.SetBool("move", false);
         text = this.gameObject.GetComponent<Text>();
 
     }
@@ -21,18 +21,18 @@ public class HPAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Player != null)
+        if (Player != null)
         {
-           // this.transform.LookAt(Player.transform.position);
+            // this.transform.LookAt(Player.transform.position);
         }
 
     }
-    public async  void Damagae(int DamageValue,Color TextColor)
+    public async void Damagae(int DamageValue, Color TextColor)
     {
         text.color = TextColor;
         text.text = DamageValue.ToString();
         //anim.SetBool("move", true);
         await Task.Delay(WaitTime);
-       // anim.SetBool("move", false);
+        // anim.SetBool("move", false);
     }
 }

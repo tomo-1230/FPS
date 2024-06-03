@@ -11,18 +11,18 @@ public class Clone : MonoBehaviour
     public List<GameObject> PointObj;
     public List<int> UsePoint;
     public List<int> copy;
-    public  List<GameObject> ClonedEnemyObj= new List<GameObject>();
+    public List<GameObject> ClonedEnemyObj = new List<GameObject>();
     private bool addition = false;
     public Clone clone;
     // Start is called before the first frame update
     void Start()
     {
         EnemyAmount = PlayerPrefs.GetInt("EnemyAmount");
-       foreach(int i in UsePoint)
-       {
+        foreach (int i in UsePoint)
+        {
             copy.Add(i);
-       }
-        
+        }
+
         int a = 0;
         do
         {
@@ -56,26 +56,26 @@ public class Clone : MonoBehaviour
             }
             if (addition)
             {
-                enemy.nav.Warp(chilleds[Random.Range(0,chilleds.Length)].position);
+                enemy.nav.Warp(chilleds[Random.Range(0, chilleds.Length)].position);
             }
             else
             {
                 enemy.nav.Warp(chilleds[0].position);
             }
-           
+
             enemy.Situation = Enemy.Action.patrol;
             ClonedEnemyObj.Add(CloneObject);
             enemy.ListNumber = ClonedEnemyObj.Count - 1;
             a++;
-        } while (a <= EnemyAmount-1);
+        } while (a <= EnemyAmount - 1);
 
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(ClonedEnemyObj.Count == 0)
+        if (ClonedEnemyObj.Count == 0)
         {
             StartScene.back(true);
         }
@@ -96,7 +96,7 @@ public class Clone : MonoBehaviour
     }
     public static void GetList(ref List<GameObject> a)
     {
-        
-       /// a = new List<GameObject>(clone.ClonedEnemyObj);
+
+        /// a = new List<GameObject>(clone.ClonedEnemyObj);
     }
 }

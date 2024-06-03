@@ -10,9 +10,9 @@ public class PlayerJump : MonoBehaviour
     public bool IsGround;
     public void Acquisition(float jp = 0)
     {
-        PlayerRigidbody = this.gameObject.GetComponent<Rigidbody>() ;
+        PlayerRigidbody = this.gameObject.GetComponent<Rigidbody>();
         PlayerTransform = this.gameObject.transform;
-        if(jp != 0)
+        if (jp != 0)
         {
             JumpPower = jp;
         }
@@ -20,7 +20,7 @@ public class PlayerJump : MonoBehaviour
     public void Jump()
     {
         Acquisition();
-        if(PlayerRigidbody == null || PlayerTransform == null)
+        if (PlayerRigidbody == null || PlayerTransform == null)
         {
             Debug.LogError("No initial settings have been made");
             return;

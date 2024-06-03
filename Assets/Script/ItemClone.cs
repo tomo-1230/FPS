@@ -22,12 +22,12 @@ public class ItemClone : MonoBehaviour
         Probability[4] = PlayerPrefs.GetInt("4");
         Probability[5] = PlayerPrefs.GetInt("5");
         CloneItem = PlayerPrefs.GetInt("CloneItem");
-        if(CloneItem == 0)
+        if (CloneItem == 0)
         {
             return;
         }
         int i = 0;
-        foreach(GameObject a in _Item)
+        foreach (GameObject a in _Item)
         {
             if (Probability[i] != 0)
             {
@@ -37,12 +37,12 @@ public class ItemClone : MonoBehaviour
                     Copy.Add(a);
                 }
             }
-         
+
             i++;
         }
         i = 0;
         _Item.Clear();
-        foreach(GameObject a in Copy)
+        foreach (GameObject a in Copy)
         {
             _Item.Add(a);
             Number.Add(i);
@@ -54,7 +54,7 @@ public class ItemClone : MonoBehaviour
         {
             chilleds[i] = ItemPoint.transform.GetChild(i);
         }
-        foreach(Transform a in chilleds)
+        foreach (Transform a in chilleds)
         {
             point.Add(a);
         }
@@ -68,9 +68,9 @@ public class ItemClone : MonoBehaviour
             point.RemoveAt(PositionNumber);
 
             Item item = CloneObject.GetComponent<Item>();
-            if(item.ThisType == Item.ItemType.Gun)
+            if (item.ThisType == Item.ItemType.Gun)
             {
-                GameObject CloneBulletObj = Instantiate(Bullet[item.BulletType-1]);
+                GameObject CloneBulletObj = Instantiate(Bullet[item.BulletType - 1]);
                 Vector3 position = CloneObject.transform.position;
                 position.x += Random.Range(-1f, 1f);
                 position.z += Random.Range(-1f, 1f);
@@ -79,8 +79,8 @@ public class ItemClone : MonoBehaviour
 
             i++;
         } while (i < CloneItem && point.Count > 0);
-       
-        
+
+
 
 
     }
@@ -91,6 +91,6 @@ public class ItemClone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

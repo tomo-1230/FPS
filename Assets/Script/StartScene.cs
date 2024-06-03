@@ -7,7 +7,7 @@ public class StartScene : MonoBehaviour
     public GameObject start;
     public GameObject setting;
     public SettingUI settingUI;
-   
+
     public void OnClick(int a)
     {
         switch (a)

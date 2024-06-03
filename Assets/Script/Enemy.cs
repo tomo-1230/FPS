@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
-{    
+{
     public int HP;
     public float WalkSpeed;
     public float RunSpeed;
@@ -58,9 +58,9 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         WalkSpeed = PlayerPrefs.GetInt("WalkSpeed");
-        RunSpeed = PlayerPrefs.GetInt("WalkSpeed") *2;
+        RunSpeed = PlayerPrefs.GetInt("WalkSpeed") * 2;
         RayDistance = PlayerPrefs.GetInt("Ray");
-        Aim = PlayerPrefs.GetInt("aim")/ 100 ;
+        Aim = PlayerPrefs.GetInt("aim") / 100;
         HP = PlayerPrefs.GetInt("EnemyHP");
     }
     // Update is called once per frame
@@ -112,12 +112,12 @@ public class Enemy : MonoBehaviour
             {
                 Situation = Action.attack;
             }
-            if(Vector3.Distance(this.gameObject.transform.position, TargetPosition) > PlayerDistance)
+            if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) > PlayerDistance)
             {
                 Situation = Action.chase;
             }
         }
-        else if(Situation == Action.attack)
+        else if (Situation == Action.attack)
         {
             if (!PlayerView)
             {
@@ -139,18 +139,18 @@ public class Enemy : MonoBehaviour
         {
             nav.stoppingDistance = 100;
             time += Time.deltaTime;
-         
+
         }
         else if (Situation == Action.patrol)
         {
             nav.stoppingDistance = 0;
             nav.speed = WalkSpeed;
             nav.SetDestination(PatrolPoint[Point]);
-            if(Vector3.Distance(PatrolPoint[Point],this.transform.position) < 1)
+            if (Vector3.Distance(PatrolPoint[Point], this.transform.position) < 1)
             {
-                if(PatrolPoint.Count-1 <= Point)
+                if (PatrolPoint.Count - 1 <= Point)
                 {
-                    
+
                     Point = 0;
                     return;
                 }
@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour
             Ray();
             if (PlayerView)
             {
-                if(Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
+                if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
                 {//run
                     nav.speed = RunSpeed;
                     if (player.IsGround)
@@ -182,7 +182,7 @@ public class Enemy : MonoBehaviour
                     nav.stoppingDistance = PlayerDistance;
                     nav.SetDestination(TargetPosition);
                 }
-               
+
             }
             else
             {
@@ -190,7 +190,7 @@ public class Enemy : MonoBehaviour
                 nav.SetDestination(TargetPosition);
             }
         }
-        else if(Situation == Action.attack)
+        else if (Situation == Action.attack)
         {
             Ray();
             this.transform.LookAt(PlayerObject.transform.position);
@@ -220,7 +220,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool("WS", true);
             anim.SetBool("AD", false);
             anim.SetFloat("Blend", 0.5f);
-            
+
         }
         else if (Situation == Action.chase)
         {
@@ -264,7 +264,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool("WS", false);
             anim.SetBool("AD", false);
             anim.SetFloat("Blend", 0f);
-          
+
         }
     }
     async void Firing()
@@ -285,7 +285,7 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.black);
         GameObject CloneObject = Instantiate(item.BulletObj);
         CloneObject.transform.position = item.MuzzleObj.transform.position;
-        Vector3 HitPoint = new Vector3(0,0,0);
+        Vector3 HitPoint = new Vector3(0, 0, 0);
         if (Physics.Raycast(ray, out hit, item.distance))
         {
             if (hit.point != new Vector3(0, 0, 0) && hit.collider.gameObject.tag == "player")
@@ -341,10 +341,10 @@ public class Enemy : MonoBehaviour
         await Task.Delay(item.ReRoadTiem);
         item.SetBullet = item.MaxBullet;
         anim.SetBool("reload", false);
-        
+
         reloading = false;
     }
-   public void Ray()
+    public void Ray()
     {
 
         RayPosition.transform.LookAt(PlayerObject.transform);
@@ -362,14 +362,14 @@ public class Enemy : MonoBehaviour
     {
         int i = 0;
         Point = 0;
-        foreach(Vector3 a in PatrolPoint)
+        foreach (Vector3 a in PatrolPoint)
         {
-            if(Point == 0)
+            if (Point == 0)
             {
                 i++;
                 return;
             }
-            if (Vector3.Distance(PatrolPoint[Point],this.transform.position) > Vector3.Distance(PatrolPoint[i], this.transform.position))
+            if (Vector3.Distance(PatrolPoint[Point], this.transform.position) > Vector3.Distance(PatrolPoint[i], this.transform.position))
             {
                 Point = i;
             }
@@ -377,7 +377,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Damage_(int value,bool HedShot)
+    public void Damage_(int value, bool HedShot)
     {
         GameObject cloneObj = Instantiate(CloneText);
         HPAnimation hP = cloneObj.GetComponent<HPAnimation>();
@@ -387,7 +387,7 @@ public class Enemy : MonoBehaviour
         RectTransform rect = cloneObj.GetComponent<RectTransform>();
         rect.position = new Vector3(0, 0, 0);
         rect.rotation = new Quaternion(0, 180, 0, 0);
-        rect.sizeDelta = new Vector2(900,500);
+        rect.sizeDelta = new Vector2(900, 500);
         cloneObj.transform.localPosition = new Vector3(0, 0, 0);
         cloneObj.transform.localScale = new Vector3(1, 1, 1);
         if (HedShot)
@@ -400,7 +400,7 @@ public class Enemy : MonoBehaviour
 
         }
         HP -= value;
-        if(HP <= 0)
+        if (HP <= 0)
         {
             erase();
         }
@@ -424,6 +424,6 @@ public class Enemy : MonoBehaviour
     }
     public void ThisDestroy()
     {
-      
+
     }
 }

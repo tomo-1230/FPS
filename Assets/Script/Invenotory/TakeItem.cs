@@ -9,19 +9,19 @@ public class TakeItem : MonoBehaviour
     private float maxDistance;
     private Inventory inventory;
     private GameObject History = null;
-    public void Settings(GameObject camera, float max,Inventory inven)
+    public void Settings(GameObject camera, float max, Inventory inven)
     {
         CameraObject = camera;
         maxDistance = max;
         inventory = inven;
     }
-   private GameObject Ray()
+    private GameObject Ray()
     {
-        
+
         Ray ray = new Ray(CameraObject.transform.position, CameraObject.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.blue);
-        if(Physics.Raycast(ray, out hit, maxDistance))
+        if (Physics.Raycast(ray, out hit, maxDistance))
         {
             return hit.collider.gameObject;
         }
@@ -34,7 +34,7 @@ public class TakeItem : MonoBehaviour
     {
 
         GameObject TakeItem = Ray();
-        
+
         if (TakeItem == null || TakeItem.GetComponent<Item>() == null)
         {
             ShowCanvas();
@@ -43,23 +43,23 @@ public class TakeItem : MonoBehaviour
         ShowCanvas(TakeItem);
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(TakeItem == null)
+            if (TakeItem == null)
             {
                 Debug.Log("TakeItemError");
                 return;
             }
             inventory.AddItem(TakeItem);
         }
-        return ;
+        return;
     }
     public void ShowCanvas(GameObject obj = null)
     {
-        
-        if(History != null)
+
+        if (History != null)
         {
             History.GetComponent<Item>().ShowDescription(false);
         }
-        if(obj == null || obj.GetComponent<Item>() == null)
+        if (obj == null || obj.GetComponent<Item>() == null)
         {
             return;
         }

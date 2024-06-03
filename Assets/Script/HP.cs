@@ -22,21 +22,21 @@ public class HP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void PlayerHP(float value)
     {
-        if(value < 1)
+        if (value < 1)
         {
             Debug.Log("Gameover");
             value = 0;
             StartScene.back(false);
         }
-        if(value > MaxHP)
+        if (value > MaxHP)
         {
             return;
         }
-        if(value < 10)
+        if (value < 10)
         {
             HPvaule.text = "0" + value.ToString();
         }
@@ -45,7 +45,7 @@ public class HP : MonoBehaviour
             HPvaule.text = value.ToString();
         }
 
-        float green = float.Parse((MaxHP/2).ToString("f0"));
+        float green = float.Parse((MaxHP / 2).ToString("f0"));
         float yellow = float.Parse((MaxHP / 4).ToString("f0"));
 
         float R = 255;
@@ -77,19 +77,19 @@ public class HP : MonoBehaviour
         {
             Debug.Log("HPColorError");
         }
-       // Debug.Log(float.Parse(R.ToString("f0")) + " " + float.Parse(G.ToString("f0")));
-        Color fillColor = new Color(0f,0f,0f);
-        fillColor.r = float.Parse(R.ToString("f0"))/ 255f;
-        fillColor.g = float.Parse(G.ToString("f0"))/ 255f;
-        fillColor.b = 0f/ 255f;
+        // Debug.Log(float.Parse(R.ToString("f0")) + " " + float.Parse(G.ToString("f0")));
+        Color fillColor = new Color(0f, 0f, 0f);
+        fillColor.r = float.Parse(R.ToString("f0")) / 255f;
+        fillColor.g = float.Parse(G.ToString("f0")) / 255f;
+        fillColor.b = 0f / 255f;
         Fill.color = fillColor;
 
         HPSlider.value = value;
 
     }
 
-  
-    public int Decrease(int HP,int damage) 
+
+    public int Decrease(int HP, int damage)
     {
         //damage = damage * (SettingUI.SettingDataCopy[7] / 5);
         HP -= damage;

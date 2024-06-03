@@ -10,12 +10,12 @@ public class PlayerMove : MonoBehaviour
         Transform ResultTransform = date.TargetTransform;
 
         Result.Forward = Input.GetKey(KeyCode.W);
-        Result.Back    = Input.GetKey(KeyCode.S);
-        Result.Right   = Input.GetKey(KeyCode.D);
-        Result.Left    = Input.GetKey(KeyCode.A);
-        Result.Run     = Input.GetKey(KeyCode.LeftShift);
+        Result.Back = Input.GetKey(KeyCode.S);
+        Result.Right = Input.GetKey(KeyCode.D);
+        Result.Left = Input.GetKey(KeyCode.A);
+        Result.Run = Input.GetKey(KeyCode.LeftShift);
 
-        if(Result.Forward)
+        if (Result.Forward)
         {
             if (Result.Run)
             {
@@ -38,14 +38,14 @@ public class PlayerMove : MonoBehaviour
         {
             ResultTransform.position -= ResultTransform.right * WalkSpeed * Time.deltaTime;
         }
-        
+
         Result.Stop = (!Result.Forward && !Result.Back && !Result.Right && !Result.Left && !Result.Run);
         Result.TargetTransform = ResultTransform;
         return Result;
     }
-    public MoveDate Assignment(Transform tras,MoveDate move = null)
+    public MoveDate Assignment(Transform tras, MoveDate move = null)
     {
-        MoveDate Result =  move;
+        MoveDate Result = move;
         if (move == null)
         {
             Result = new MoveDate();

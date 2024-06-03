@@ -15764,6 +15764,7 @@ GameObject:
   - component: {fileID: 1724546795}
   - component: {fileID: 1724546798}
   - component: {fileID: 1724546797}
+  - component: {fileID: 1724546801}
   m_Layer: 0
   m_Name: player
   m_TagString: player
@@ -16388,6 +16389,7 @@ MonoBehaviour:
   ImageBullet: {fileID: 1457101452}
   search: []
   gun: {fileID: 1724546800}
+  gunUIObj: {fileID: 1724546801}
 --- !u!114 &1724546800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16415,6 +16417,26 @@ MonoBehaviour:
   firing: 0
   Prefab_HaveGun: {fileID: 0}
   Clone_HaveGun: {fileID: 0}
+--- !u!114 &1724546801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717243027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1118612c2f7154e9f7b06a80ffea29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 977312153}
+  panel1: {fileID: 478824770}
+  panel2: {fileID: 1616568507}
+  panel3: {fileID: 626711419}
+  ImageGun: {fileID: 2230255}
+  ImageBullet: {fileID: 1457101452}
+  BulletSet: {fileID: 1311543028}
+  BulletHave: {fileID: 692396784}
 --- !u!1 &1725990833
 GameObject:
   m_ObjectHideFlags: 0
