@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     public GameObject PrefabGun;
     public GameObject CloneGun;
 
+    public List<int> SetBullet;
     public HaveGun haveGun;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,11 @@ public class Gun : MonoBehaviour
 
         haveGun = this.gameObject.AddComponent<HaveGun>();
         haveGun.settings(HavePosition,inventory, pointer);
+        SetBullet.Clear();
+        SetBullet.Add(-1);
+        SetBullet.Add(-1);
+        SetBullet.Add(-1);
+        SetBullet.Add(-1);
     }
 
     // Update is called once per frame
@@ -53,31 +59,37 @@ public class Gun : MonoBehaviour
         Reload(Input.GetKeyDown(KeyCode.R));
     }
    
-    public void GanHave()
+    public void GanHave(List<GameObject> search,bool IsClone)
     {
         player.PlayerAnim.SetBool("Have", true);
         player.PlayerAnim.SetLayerWeight(2, 1f);
         Player.HaveGun = true;
         GameObject CloneObj = null;
         int select = inventory.select;
-        if (select == 1) { CloneObj = inventory.search[0]; }
-        if (select == 2) { CloneObj = inventory.search[1]; }
-        if (select == 3) { CloneObj = inventory.search[2]; }
-        PrefabGun = CloneGun;
-        CloneGun =  haveGun.CloneGun(CloneObj);
-        //if (Prefab_HaveGun != null)
-        //{
-        //    CloneObject = Instantiate(Prefab_HaveGun);
-        //    Clone_HaveGun = CloneObject;
-        //}
-        //CloneObject.transform.parent = HavePosition.transform;
-        //CloneObject.transform.localPosition = new Vector3(0, 0, 0);
-        //HavePosition.transform.localPosition = Prefab_HaveGun.GetComponent<Item>().HavePosition;
-        //CloneObject.transform.localEulerAngles = new Vector3(0, 0, 0);
-        //Destroy(CloneObject.GetComponent<BoxCollider>());
-        //Destroy(CloneObject.GetComponent<Rigidbody>());
-        //pointer.sprite = Prefab_HaveGun.GetComponent<Item>().Have_cross_hair;
-        //inventory.ReRoad();
+        if (select == 1) { CloneObj = search[0]; }
+        if (select == 2) { CloneObj = search[1]; }
+        if (select == 3) { CloneObj = search[2]; }
+       
+        PrefabGun = CloneObj;
+        if (CloneObj == null)
+        {
+            Debug.Log("GunHaveErrer");
+            return;
+        }
+        if (!IsClone)
+        {
+            CloneGun =  haveGun.CloneGun(CloneObj);
+        }
+        
+        if(SetBullet[select] == -1)//–¢“ü—Í‚¾‚Á‚½‚ç
+        {
+            SetBullet[select] = CloneGun.GetComponent<Item>().SetBullet;
+        }
+        else
+        {
+            CloneGun.GetComponent<Item>().SetBullet = SetBullet[select];
+        }
+        
     }
     public void zoom(bool button)
     {

@@ -20,12 +20,12 @@ public class HaveGun : MonoBehaviour
    public GameObject CloneGun(GameObject CloneObj)
     {
         DestroyGun();
-        if(CloneObj!= null)
+        if(CloneObj == null)
         {
             Debug.Log("HaveGun.CloneGun:Error");
             return null;
         }
-        if(CloneObj.GetComponent<Item>() != null || CloneObj.GetComponent<Item>().ThisType == Item.ItemType.Gun)
+        if(CloneObj.GetComponent<Item>() == null || CloneObj.GetComponent<Item>().ThisType != Item.ItemType.Gun)
         {
             Debug.Log("HaveGun.CloneGun:Error");
             return null;

@@ -155,22 +155,34 @@ public class ItemView : MonoBehaviour
     }
     public void select()//èÌéû
     {
+        bool IsClone;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            IsClone = SelectGun == 1;
             SelectGun = 1;
-            inventory.ReRoad();
+            inventory.ReRoad(true,IsClone);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            IsClone = SelectGun == 2;
             SelectGun = 2;
-            inventory.ReRoad();
+            inventory.ReRoad(true, IsClone);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            IsClone = SelectGun == 3;
             SelectGun = 3;
-            inventory.ReRoad();
+            inventory.ReRoad(true, IsClone);
         }
-        inventory.select = SelectGun;
+       
+    }
+    public int GetSelect()
+    {
+        return SelectGun;
+    }
+    public List<GameObject> GetList()
+    {
+        return search;
     }
    
 }

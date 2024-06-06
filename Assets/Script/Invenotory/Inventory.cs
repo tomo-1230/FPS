@@ -58,14 +58,20 @@ public class Inventory : MonoBehaviour
         itemView.select();
 
     }
-    public void ReRoad()
+    public void ReRoad(bool a = false,bool IsClone = false)
     {
+        if (!a)
+        {
+            return;
+        }
+       
         if(itemView == null || inventoryData == null)
         {
             return;
         }
+        select = itemView.GetSelect();
         itemView.ReRoad(inventoryData);
-        gun.GanHave();
+        gun.GanHave(itemView.GetList(),IsClone);
     }
     public void TakeItem()
     {
