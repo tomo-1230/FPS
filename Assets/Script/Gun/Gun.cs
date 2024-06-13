@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     public GameObject HitObj;
     public GameObject FiringEffect;
 
+    public GameObject pointerObj;
     public Image pointer;
     public float Reticle_u;
     public float Reticle_b;
@@ -25,9 +26,11 @@ public class Gun : MonoBehaviour
     private bool reloading;
     public GameObject PrefabGun;
     public GameObject CloneGun;
+    public int CloneGunSelect;
 
-    public List<int> SetBullet;
     public HaveGun haveGun;
+    public SetBulletData setBulletData;
+    public GunZoom gunZoom;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,19 +39,18 @@ public class Gun : MonoBehaviour
         player.PlayerAnim.SetLayerWeight(1, 1f);
 
         haveGun = this.gameObject.AddComponent<HaveGun>();
+        setBulletData = this.gameObject.AddComponent<SetBulletData>();
+        gunZoom = this.gameObject.AddComponent<GunZoom>();
         haveGun.settings(HavePosition,inventory, pointer);
-        SetBullet.Clear();
-        SetBullet.Add(-1);
-        SetBullet.Add(-1);
-        SetBullet.Add(-1);
-        SetBullet.Add(-1);
+        gunZoom.settings(player,ZoomValue,pointerObj,Reticle_u,Reticle_b);
+        setBulletData.Clear();
     }
 
     // Update is called once per frame
     void Update()
     {
         //GunSelect();
-        zoom(Input.GetMouseButton(1));
+        zoom();
         Firing(Input.GetMouseButtonDown(0), Input.GetMouseButton(0));
         if (CloneGun != null)
         {
@@ -76,22 +78,15 @@ public class Gun : MonoBehaviour
             Debug.Log("GunHaveErrer");
             return;
         }
-        if (!IsClone)
+        if (IsClone)
         {
-            CloneGun =  haveGun.CloneGun(CloneObj);
+            return;
         }
-        
-        if(SetBullet[select] == -1)//–¢“ü—Í‚¾‚Á‚½‚ç
-        {
-            SetBullet[select] = CloneGun.GetComponent<Item>().SetBullet;
-        }
-        else
-        {
-            CloneGun.GetComponent<Item>().SetBullet = SetBullet[select];
-        }
-        
+        haveGun.DestroyGun(CloneGunSelect, setBulletData);
+        CloneGun = haveGun.CloneGun(CloneObj, select, setBulletData);
+        CloneGunSelect = select;
     }
-    public void zoom(bool button)
+    public void zoom()
     {
         RectTransform rect = Reticle_Object.GetComponent<RectTransform>();
         if (reloading)
@@ -102,48 +97,8 @@ public class Gun : MonoBehaviour
             rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
             return;
         }
-
-        if (button && PrefabGun != null)
-        {
-            if (CloneGun.GetComponent<Item>().SetBullet <= 0)
-            {
-                return;
-            }
-
-            player.CameraObject.GetComponent<Camera>().fieldOfView = PrefabGun.GetComponent<Item>().ZoomValue;
-            pointer.sprite = PrefabGun.GetComponent<Item>().Set_cross_hair;
-            int a = PrefabGun.GetComponent<Item>().CloneObjectNumber;
-            if (a == 0 || a == 1 || a == 2 || a == 3)
-            {
-                player.CameraSpeed = player.CameraSpeedZoom_Short;
-            }
-            else if (a == 5)
-            {
-                player.CameraSpeed = player.CameraSpeedZoom_Moderate;
-            }
-            else if (a == 4)
-            {
-                player.CameraSpeed = player.CameraSpeedZoom_Long;
-            }
-            if (PrefabGun.GetComponent<Item>().CloneObjectNumber == 4)
-            {
-                rect.localScale = new Vector3(Reticle_b, Reticle_b, Reticle_b);
-            }
-            else
-            {
-                rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
-            }
-        }
-        else
-        {
-            player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
-            player.CameraSpeed = player.CameraSpeedNormal;
-            if (PrefabGun != null)
-            {
-                pointer.sprite = PrefabGun.GetComponent<Item>().Have_cross_hair;
-            }
-            rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
-        }
+       // Debug.Log(gunZoom, PrefabGun);
+        gunZoom.Zoom(PrefabGun);
     }
     async void Firing(bool LeftButtonDown, bool LeftButton)
     {
@@ -252,12 +207,12 @@ public class Gun : MonoBehaviour
                 Bullet bullet = CloneObject.AddComponent<Bullet>();
                 bullet.item = item;
                 bullet.clone = player.clone;
-                Debug.Log("A");
+                //Debug.Log("A");
                 Amount++;
             } while (Amount <= CloneGun.GetComponent<Item>().ShotAmount);
 
             item.SetBullet--;
-            inventory.ReRoad();
+            //inventory.ReRoad();
             await Task.Delay(item.FiringInterval);
             firing = false;
         }

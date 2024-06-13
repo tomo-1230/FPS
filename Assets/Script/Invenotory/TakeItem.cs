@@ -30,7 +30,7 @@ public class TakeItem : MonoBehaviour
             return null;
         }
     }
-    public void Take()
+    public void Take(InventoryData inventoryData)
     {
 
         GameObject TakeItem = Ray();
@@ -48,7 +48,28 @@ public class TakeItem : MonoBehaviour
                 Debug.Log("TakeItemError");
                 return;
             }
+           //1ŒÂ–Ú‚¾‚Á‚½‚ç
+            bool HaveGun = false;
+            int i = 0;
+            foreach(GameObject a in inventoryData.GetObjectList())
+            {
+                if (a.GetComponent<Item>().ThisType == Item.ItemType.Gun)
+                {
+                    HaveGun = true;
+                    i++;
+                }
+            } 
             inventory.AddItem(TakeItem);
+            if (!HaveGun)
+            {
+                inventory.ReRoad(true, false);
+                return;
+            }
+            //2.3ŒÂ–Ú‚¾‚Á‚½‚ç
+            if(i == 1 || i == 2)
+            {
+                inventory.ReRoad(true, true);
+            }
         }
         return;
     }

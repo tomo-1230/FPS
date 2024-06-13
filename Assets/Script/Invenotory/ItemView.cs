@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class ItemView : MonoBehaviour
 {
-    private int SelectGun = 0;
+    private int SelectGun = 1;
     public List<GameObject> search = new List<GameObject>();
-    public List<int> SetBulletList = new List<int>();
     private GunUIObj GunUIObj;
     private Inventory inventory;
     public void setting(GunUIObj gunUIObj,Inventory inve)
@@ -15,44 +14,19 @@ public class ItemView : MonoBehaviour
         GunUIObj = gunUIObj;
         inventory = inve;
     }
-    public void ReRoad(InventoryData inventoryData)
+    public void ReRoad(InventoryData inventoryData,SetBulletData setBulletData,GameObject CloneObj)
     {
-        
-        search.Clear();
-        search.Add(null);
-        search.Add(null);
-        search.Add(null);
-        if(inventoryData.GetNameList().Count == 0)
+        ItemSearch(inventoryData);
+        if (search[0] == null)
         {
             return;
         }
-        int i = 0;
-        foreach (GameObject a in inventoryData.GetObjectList())
-        {
-            if (a.GetComponent<Item>().ThisType == Item.ItemType.Gun)
-            {
-                search[i] = a;
-                SetBulletList.Add(a.GetComponent<Item>().SetBullet);
-                i++;
-            }
-            if(i >= 3)
-            {
-                break;
-            }
-        }
-        if (search[0] != null)
-        {
-            GunUIObj.panel.SetActive(true);
-        }
-        else
-        {
-            return;
-        }
+        GunUIObj.panel.SetActive(true);
         UnderGunDisplay();
         UnderPanelColor();
-        TextView(SelectGun-1, inventoryData);
+        TextView(SelectGun-1, inventoryData,setBulletData,CloneObj);
     }
-    public void  UnderGunDisplay()
+    private void  UnderGunDisplay()
     {
         if (search[0] == null)
         {
@@ -79,7 +53,7 @@ public class ItemView : MonoBehaviour
         Text panel3Text = GunUIObj.panel3.transform.Find("GunName").gameObject.GetComponent<Text>();
         panel3Text.text = search[2].GetComponent<Item>().ItemName.ToString();
     }
-    public void UnderPanelColor()
+    private void UnderPanelColor()
     {
         GunUIObj.panel1.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
         GunUIObj.panel2.GetComponent<Image>().color = new Color32(255, 255, 255, 101);
@@ -113,10 +87,10 @@ public class ItemView : MonoBehaviour
         SelectGun --;
         UnderPanelColor();
     }
-    public void TextView(int index,InventoryData inventoryData)
+    private void TextView(int index,InventoryData inventoryData,SetBulletData setBulletData,GameObject CloneObj)
     {
         //Žæ“¾
-        int setBulletValue = SetBulletList[index];
+        int setBulletValue = CloneObj.GetComponent<Item>().SetBullet;
         Item ItemData = search[index].GetComponent<Item>();
         int HaveBulletvalue = 0;
         string HaveBulletText;
@@ -184,5 +158,29 @@ public class ItemView : MonoBehaviour
     {
         return search;
     }
-   
+   public void ItemSearch(InventoryData inventoryData)
+    {
+
+        search.Clear();
+        search.Add(null);
+        search.Add(null);
+        search.Add(null);
+        if (inventoryData.GetNameList().Count == 0)
+        {
+            return;
+        }
+        int i = 0;
+        foreach (GameObject a in inventoryData.GetObjectList())
+        {
+            if (a.GetComponent<Item>().ThisType == Item.ItemType.Gun)
+            {
+                search[i] = a;
+                i++;
+            }
+            if (i >= 3)
+            {
+                break;
+            }
+        }
+    }
 }

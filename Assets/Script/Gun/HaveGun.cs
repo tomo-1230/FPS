@@ -17,9 +17,8 @@ public class HaveGun : MonoBehaviour
         inventory = inve;
         pointer = point;
     }
-   public GameObject CloneGun(GameObject CloneObj)
+   public GameObject CloneGun(GameObject CloneObj,int index, SetBulletData setBulletData)
     {
-        DestroyGun();
         if(CloneObj == null)
         {
             Debug.Log("HaveGun.CloneGun:Error");
@@ -39,14 +38,22 @@ public class HaveGun : MonoBehaviour
         Destroy(ClonedObject.GetComponent<BoxCollider>());
         Destroy(ClonedObject.GetComponent<Rigidbody>());
         GunUI(CloneObjItem.Have_cross_hair);
+
+        if (setBulletData.IsExistsData(index))
+        {
+            int setbullet = setBulletData.GetSetBulletValue(index);
+            ClonedObject.GetComponent<Item>().SetBullet = setbullet;
+        }
+
         inventory.ReRoad();
         CloneedHaveGun = ClonedObject;
         return ClonedObject;
     }
-    public void DestroyGun()
+    public void DestroyGun(int index,SetBulletData setBulletData)
     {
         if (CloneedHaveGun != null)
         {
+            setBulletData.NewCloneGun(index, CloneedHaveGun);
             Destroy(CloneedHaveGun);
         }
     }

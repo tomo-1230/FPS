@@ -9360,7 +9360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &977312154
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16408,6 +16408,7 @@ MonoBehaviour:
   Reticle_Object: {fileID: 1578393557}
   HitObj: {fileID: 1367996585}
   FiringEffect: {fileID: 1903225097311773632, guid: 13953c7f141bd6d458a8adcedba0a63a, type: 3}
+  pointerObj: {fileID: 1578393557}
   pointer: {fileID: 1578393559}
   Reticle_u: 0.683633
   Reticle_b: 4
@@ -16415,8 +16416,12 @@ MonoBehaviour:
   CircleGauge: {fileID: 414552439}
   ZoomValue: 60
   firing: 0
-  Prefab_HaveGun: {fileID: 0}
-  Clone_HaveGun: {fileID: 0}
+  PrefabGun: {fileID: 0}
+  CloneGun: {fileID: 0}
+  CloneGunSelect: 0
+  haveGun: {fileID: 0}
+  setBulletData: {fileID: 0}
+  gunZoom: {fileID: 0}
 --- !u!114 &1724546801
 MonoBehaviour:
   m_ObjectHideFlags: 0

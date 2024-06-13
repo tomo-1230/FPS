@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
             }
             if (HitObj.tag != "gun" && HitObj.tag != "bullet")
             {
-                Debug.Log("destroy");
+               // Debug.Log("destroy");
                 if (item.ThisBulletType == 4)
                 {
                     this.transform.GetChild(0).gameObject.SetActive(false);

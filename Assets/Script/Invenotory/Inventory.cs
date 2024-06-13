@@ -70,12 +70,13 @@ public class Inventory : MonoBehaviour
             return;
         }
         select = itemView.GetSelect();
-        itemView.ReRoad(inventoryData);
+        itemView.ItemSearch(inventoryData);
         gun.GanHave(itemView.GetList(),IsClone);
+        itemView.ReRoad(inventoryData,gun.setBulletData,gun.CloneGun);
     }
     public void TakeItem()
     {
-        takeItem.Take();
+        takeItem.Take(inventoryData);
         InventoryView();
 
     }
@@ -99,7 +100,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    
+   
 
     public void CreateInventory()
     {
