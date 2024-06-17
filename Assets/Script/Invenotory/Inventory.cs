@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
     public Gun gun;
     public GunUIObj gunUIObj;
     private InventoryView inventoryView;
-    private InventoryData inventoryData;
+    public InventoryData inventoryData;
     private TakeItem takeItem;
     private ItemView itemView;
     // Start is called before the first frame update
@@ -84,6 +84,10 @@ public class Inventory : MonoBehaviour
     {
         inventoryData.AddItem(hit, true);
     }
+    public void RemoveItem(int index,int count)
+    {
+        inventoryData.RemoveItem(index, count);
+    }
     public void InventoryView()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -99,17 +103,5 @@ public class Inventory : MonoBehaviour
                 inventoryView.InventoryCreate(inventoryData.GetObjectList());
             }
         }
-    }
-   
-
-    public void CreateInventory()
-    {
-
-
-
-    }
-    public void DestroyButton()
-    {
-
     }
 }

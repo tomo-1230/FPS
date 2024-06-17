@@ -39,9 +39,15 @@ public class InventoryData : MonoBehaviour
         }
         else
         {
-
+            if (HitItem.ThisType == Item.ItemType.Gun)
+            {
+                ItemCount.Add(1);
+            }
+            if (HitItem.ThisType == Item.ItemType.bullet)
+            {
+                ItemCount.Add(HitItem.count);
+            }
             ItemName.Add(HitItem.ItemName);
-            ItemCount.Add(1);
             ItemObject.Add(CloneObject);
             ItemData.Add(HitItem.GetComponent<Item>());
 
