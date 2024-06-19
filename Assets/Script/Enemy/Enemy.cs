@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     public float Aim;
     public float HedShotYPosi;
     public Vector3 TargetPosition;
-    public Action Situation;
+    public Action Status;
     public bool PlayerView;
     public List<Vector3> PatrolPoint;
     public int PointObject;
@@ -50,6 +50,10 @@ public class Enemy : MonoBehaviour
     private int Point;
     private bool firng = false;
     private bool reloading = false;
+
+    public EnemyData enemyData;
+    public EnemyChangeState enemyChangeState;
+    public EnemyAction enemyAction;
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,6 +66,14 @@ public class Enemy : MonoBehaviour
         RayDistance = PlayerPrefs.GetInt("Ray");
         Aim = PlayerPrefs.GetInt("aim") / 100;
         HP = PlayerPrefs.GetInt("EnemyHP");
+
+        enemyData = this.gameObject.AddComponent<EnemyData>();
+        enemyData.Initialization(nav, anim,PlayerObject,this.gameObject,PatrolPoint);
+        enemyData.SettingValue(RunDistance, PlayerDistance, WalkSpeed, RunSpeed);
+        enemyChangeState = this.gameObject.AddComponent<EnemyChangeState>();
+        enemyChangeState.settings(new List<int>(), PlayerDistance, WaitTime);
+        enemyAction = this.gameObject.AddComponent<EnemyAction>();
+
     }
     // Update is called once per frame
     void Update()
@@ -74,136 +86,81 @@ public class Enemy : MonoBehaviour
     }
     public void conditions()
     {
-        if (Situation == Action.Wait)
-        {
-            Ray();
-            if (PlayerView)
-            {
-                Situation = Action.chase;
-            }
-            else if (time >= WaitTime)
-            {
-                ShortestPoint();
-                Situation = Action.patrol;
-            }
-
-        }
-        else if (Situation == Action.patrol)
-        {
-            Ray();
-            if (PlayerView)
-            {
-                Situation = Action.chase;
-            }
-            else
-            {
-                Situation = Action.patrol;
-            }
-        }
-        else if (Situation == Action.chase)
-        {
-            Ray();
-            if (!PlayerView && Vector3.Distance(this.gameObject.transform.position, TargetPosition) < 0.5f)//ƒvƒŒƒCƒ„[‚ªŒ©‚¦‚È‚­‚Ätargetposition‚É‹ß‚Ã‚¢‚½‚ç
-            {
-                time = 0;
-                Situation = Action.Wait;
-            }
-            if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) < PlayerDistance && PlayerView)
-            {
-                Situation = Action.attack;
-            }
-            if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) > PlayerDistance)
-            {
-                Situation = Action.chase;
-            }
-        }
-        else if (Situation == Action.attack)
-        {
-            if (!PlayerView)
-            {
-                time = 0;
-            }
-            else if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) < PlayerDistance && PlayerView)
-            {
-                Situation = Action.attack;
-            }
-            else
-            {
-                Situation = Action.chase;
-            }
-        }
+        enemyData = enemyChangeState.ChangeState(enemyData);
+      
     }
     public void action()
     {
-        if (Situation == Action.Wait)
-        {
-            nav.stoppingDistance = 100;
-            time += Time.deltaTime;
+        enemyAction.Action(enemyData);
+        //if (Status == Action.Wait)
+        //{
+        //    nav.stoppingDistance = 100;
+        //    time += Time.deltaTime;
 
-        }
-        else if (Situation == Action.patrol)
-        {
-            nav.stoppingDistance = 0;
-            nav.speed = WalkSpeed;
-            nav.SetDestination(PatrolPoint[Point]);
-            if (Vector3.Distance(PatrolPoint[Point], this.transform.position) < 1)
-            {
-                if (PatrolPoint.Count - 1 <= Point)
-                {
+        //}
+        //else if (Status == Action.patrol)
+        //{
+        //    nav.stoppingDistance = 0;
+        //    nav.speed = WalkSpeed;
+        //    nav.SetDestination(PatrolPoint[Point]);
+        //    if (Vector3.Distance(PatrolPoint[Point], this.transform.position) < 1)
+        //    {
+        //        if (PatrolPoint.Count - 1 <= Point)
+        //        {
 
-                    Point = 0;
-                    return;
-                }
-                Point++;
-            }
-        }
-        else if (Situation == Action.chase)
-        {
-            Ray();
-            if (PlayerView)
-            {
-                if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
-                {//run
-                    nav.speed = RunSpeed;
-                    if (player.IsGround)
-                    {
-                        TargetPosition = PlayerObject.transform.position;
-                    }
-                    nav.stoppingDistance = PlayerDistance;
-                    nav.SetDestination(TargetPosition);
-                }
-                else
-                {
-                    nav.speed = WalkSpeed;
-                    if (player.IsGround)
-                    {
-                        TargetPosition = PlayerObject.transform.position;
-                    }
-                    nav.stoppingDistance = PlayerDistance;
-                    nav.SetDestination(TargetPosition);
-                }
+        //            Point = 0;
+        //            return;
+        //        }
+        //        Point++;
+        //    }
+        //}
+        //else if (Status == Action.chase)
+        //{
+        //    Ray();
+        //    if (PlayerView)
+        //    {
+        //        if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
+        //        {//run
+        //            nav.speed = RunSpeed;
+        //            if (player.IsGround)
+        //            {
+        //                TargetPosition = PlayerObject.transform.position;
+        //            }
+        //            nav.stoppingDistance = PlayerDistance;
+        //            nav.SetDestination(TargetPosition);
+        //        }
+        //        else
+        //        {
+        //            nav.speed = WalkSpeed;
+        //            if (player.IsGround)
+        //            {
+        //                TargetPosition = PlayerObject.transform.position;
+        //            }
+        //            nav.stoppingDistance = PlayerDistance;
+        //            nav.SetDestination(TargetPosition);
+        //        }
 
-            }
-            else
-            {
-                nav.stoppingDistance = 0;
-                nav.SetDestination(TargetPosition);
-            }
-        }
-        else if (Situation == Action.attack)
-        {
-            Ray();
-            this.transform.LookAt(PlayerObject.transform.position);
-            Vector3 vector = this.transform.localEulerAngles;
-            vector.x = 0;
-            this.transform.localEulerAngles = vector;
-            Firing();
-        }
+        //    }
+        //    else
+        //    {
+        //        nav.stoppingDistance = 0;
+        //        nav.SetDestination(TargetPosition);
+        //    }
+        //}
+        //else if (Status == Action.attack)
+        //{
+        //    Ray();
+        //    this.transform.LookAt(PlayerObject.transform.position);
+        //    Vector3 vector = this.transform.localEulerAngles;
+        //    vector.x = 0;
+        //    this.transform.localEulerAngles = vector;
+        //    Firing();
+        //}
         //DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
     }
     public void animation_()
     {
-        if (Situation == Action.Wait)
+        if (Status == Action.Wait)
         {
             anim.SetBool("move", false);
             anim.SetLayerWeight(2, 0f);
@@ -212,7 +169,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool("AD", false);
             anim.SetFloat("Blend", 0f);
         }
-        else if (Situation == Action.patrol)
+        else if (Status == Action.patrol)
         {
             anim.SetBool("move", true);
             anim.SetBool("Have", false);
@@ -222,7 +179,7 @@ public class Enemy : MonoBehaviour
             anim.SetFloat("Blend", 0.5f);
 
         }
-        else if (Situation == Action.chase)
+        else if (Status == Action.chase)
         {
             if (PlayerView)
             {
@@ -256,7 +213,7 @@ public class Enemy : MonoBehaviour
                 anim.SetFloat("Blend", 0.5f);
             }
         }
-        else if (Situation == Action.attack)
+        else if (Status == Action.attack)
         {
             anim.SetBool("Have", true);
             anim.SetLayerWeight(2, 1f);

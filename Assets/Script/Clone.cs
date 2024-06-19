@@ -15,7 +15,7 @@ public class Clone : MonoBehaviour
     private bool addition = false;
     public Clone clone;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         EnemyAmount = PlayerPrefs.GetInt("EnemyAmount");
         foreach (int i in UsePoint)
@@ -63,7 +63,7 @@ public class Clone : MonoBehaviour
                 enemy.nav.Warp(chilleds[0].position);
             }
 
-            enemy.Situation = Enemy.Action.patrol;
+            enemy.Status = Enemy.Action.patrol;
             ClonedEnemyObj.Add(CloneObject);
             enemy.ListNumber = ClonedEnemyObj.Count - 1;
             a++;
