@@ -31,7 +31,12 @@ public class EnemyChangeState : MonoBehaviour
             return Data;
         }
         if(Data.Status == EnemyData.Action.chase)//Œ©Ž¸‚Á‚½
-        {
+        { 
+            if (Vector3.Distance(this.gameObject.transform.position, Data.TargetPosition) > Data.PlayerDistance)
+            {
+                Data.Status = EnemyData.Action.chase;
+                return Data;
+            }
             Data.Status = EnemyData.Action.Wait;
             return Data;
         }
@@ -42,8 +47,34 @@ public class EnemyChangeState : MonoBehaviour
         }
         return Data;
     }
-    private void ShortestPoint()
+    public MoveDate ConvertingToMoveData(MoveDate moveDate,EnemyData enemyData)
     {
+        MoveDate MData = moveDate;
+        EnemyData Edata = enemyData;
+        moveDate.Stop = false;
+        moveDate.Forward = false;
+        moveDate.Back = false;
+        moveDate.Left = false;
+        moveDate.Right = false;
+        moveDate.Right = false;
+        if (enemyData.Status == EnemyData.Action.Wait)
+        {
+            moveDate.Stop = true;
+        }
+        else if (enemyData.Status == EnemyData.Action.chase)
+        {
+                 moveDate.Forward = true;
+                if (Vector3.Distance(this.gameObject.transform.position, enemyData.TargetPosition) >= enemyData.RunDistance)
+                {//run
+                    moveDate.Run = true;
 
+                }
+            
+        }
+        else if (enemyData.Status == EnemyData.Action.patrol)
+        {
+            moveDate.Run = true;
+        }
+        return moveDate;
     }
 }
