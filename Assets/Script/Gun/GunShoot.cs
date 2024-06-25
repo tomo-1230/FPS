@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class GunShoot : MonoBehaviour
 {
-    public bool firing;
-    public GameObject RayPositonObject;
-    public Player player;
-    public Inventory inventory;
-    public GameObject FiringEffect;
-    public Ray ray;
-    public float AIM;
+    private bool firing;
+    private GameObject RayPositonObject;
+    private Player player;
+    private Inventory inventory;
+    private GameObject FiringEffect;
+    private Ray ray;
+    private float AIM;
     public void settings(GameObject rpo, Player pl, Inventory inve, GameObject eff, float aim = 0)
     {
         RayPositonObject = rpo;

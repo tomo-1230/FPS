@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyRay : MonoBehaviour
 {
-    public GameObject RayPosition;
-    public GameObject PlayerObject;
-    public float RayDistance;
+    private GameObject RayPosition;
+    private GameObject PlayerObject;
+    private float RayDistance;
     public void settings(GameObject ray, GameObject Player, float dis)
     {
         RayPosition = ray;

@@ -50,6 +50,8 @@ public class Gun : MonoBehaviour
         gunShoot.settings(player.CameraObject, player, inventory, FiringEffect);
         gunReRoad.settings(CircleGauge, player.PlayerAnim, inventory);
         setBulletData.Clear();
+
+        haveGun.DestroyGun(0, null, player.PlayerAnim);
     }
 
     // Update is called once per frame
@@ -105,7 +107,10 @@ public class Gun : MonoBehaviour
             return;
         }
         // Debug.Log(gunZoom, PrefabGun);
-        gunZoom.Zoom(PrefabGun);
+        if(CloneGun != null)
+        {
+            gunZoom.Zoom(PrefabGun);
+        }
     }
     public void Firing()
     {

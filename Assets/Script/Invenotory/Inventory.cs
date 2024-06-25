@@ -67,6 +67,7 @@ public class Inventory : MonoBehaviour
 
         if (itemView == null || inventoryData == null)
         {
+            Debug.Log("a");
             return;
         }
         select = itemView.GetSelect();

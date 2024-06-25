@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class HaveGun : MonoBehaviour
 {
-    public GameObject HavePosition;
-    public Inventory inventory;
-    public Image pointer;
+    private GameObject HavePosition;
+    private Inventory inventory;
+    private Image pointer;
 
     private GameObject CloneedHaveGun;
 
@@ -56,12 +56,17 @@ public class HaveGun : MonoBehaviour
         CloneedHaveGun = ClonedObject;
         return ClonedObject;
     }
-    public void DestroyGun(int index, SetBulletData setBulletData)
+    public void DestroyGun(int index, SetBulletData setBulletData,Animator anim = null)
     {
-        if (CloneedHaveGun != null)
+        if (CloneedHaveGun != null && setBulletData != null)
         {
             setBulletData.NewCloneGun(index, CloneedHaveGun);
             Destroy(CloneedHaveGun);
+        }
+        if(anim != null)
+        {
+            anim.SetBool("Have", false);
+            anim.SetLayerWeight(2, 0f);
         }
     }
     public void GunUI(Sprite Reticle)

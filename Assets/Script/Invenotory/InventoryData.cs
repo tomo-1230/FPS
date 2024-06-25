@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class InventoryData : MonoBehaviour
 {
-    private List<string> ItemName = new List<string>();
+    public List<string> ItemName = new List<string>();
     private List<int> ItemCount = new List<int>();
     private List<GameObject> ItemObject = new List<GameObject>();
     private List<Item> ItemData = new List<Item>();
