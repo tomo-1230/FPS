@@ -39,7 +39,7 @@ public class PlayerJump : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.green);
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            IsGround = (hit.collider.gameObject.tag == "Ground");
+            IsGround = hit.collider.gameObject.tag == "Ground";
         }
         else
         {

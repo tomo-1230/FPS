@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         Ray ray = new Ray(RayPosition.transform.position, RayPosition.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * RayDistance, Color.yellow);
-        bool angle = ((RayPosition.transform.localEulerAngles.x >= 0 && RayPosition.transform.localEulerAngles.x <= 90) || (RayPosition.transform.localEulerAngles.x >= 270 && RayPosition.transform.localEulerAngles.x <= 360));
+        bool angle = (RayPosition.transform.localEulerAngles.x >= 0 && RayPosition.transform.localEulerAngles.x <= 90) || (RayPosition.transform.localEulerAngles.x >= 270 && RayPosition.transform.localEulerAngles.x <= 360);
         if (Physics.Raycast(ray, out hit, RayDistance))
         {
             Hit(hit.collider.gameObject);
@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
             }
             if (HitObj.tag != "gun" && HitObj.tag != "bullet")
             {
-               // Debug.Log("destroy");
+                // Debug.Log("destroy");
                 if (item.ThisBulletType == 4)
                 {
                     this.transform.GetChild(0).gameObject.SetActive(false);
@@ -76,15 +76,18 @@ public class Bullet : MonoBehaviour
             }
             if (blast)
             {
-
-                foreach (GameObject Enemy in clone.ClonedEnemyObj)
+                if(clone != null)
                 {
-                    if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
+                    foreach (GameObject Enemy in clone.ClonedEnemyObj)
                     {
-                        float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
+                        if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
+                        {
+                            float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
 
+                        }
                     }
                 }
+               
             }
         }
     }

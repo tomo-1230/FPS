@@ -22,10 +22,10 @@ public class Enemy : MonoBehaviour
     public List<Vector3> PatrolPoint;
     public int PointObject;
     public GameObject PlayerObject;
-    public GameObject RayPosition;
+    public GameObject ViewRayPosition;
     public GameObject DamageCanvas;
     public GameObject CloneText;
-    public GameObject HaveGun;
+    
     public GameObject Target;
     public GameObject Head;
     public GameObject HPCampus;
@@ -51,12 +51,21 @@ public class Enemy : MonoBehaviour
     private bool firng = false;
     private bool reloading = false;
 
+    public GameObject HavePosition;
+    public GameObject PrefabGun;
+    public GameObject CloneGun;
+    public GameObject ShotEffect;
+    public GameObject GunRayPositon;
+
     public EnemyData enemyData;
     public EnemyChangeState enemyChangeState;
     public EnemyAction enemyAction;
     public EnemyRay enemyRay;
     public MoveDate enemyMoveData;
     public MoveAnimation moveAnimation;
+    public HaveGun haveGun;
+    public SetBulletData setBulletData;
+    public GunShoot gunShoot;
     // Start is called before the first frame update
     void Awake()
     {
@@ -71,19 +80,26 @@ public class Enemy : MonoBehaviour
         HP = PlayerPrefs.GetInt("EnemyHP");
 
         enemyData = this.gameObject.AddComponent<EnemyData>();
-        enemyData.Initialization(nav, anim,PlayerObject,this.gameObject,PatrolPoint);
+        enemyData.Initialization(nav, anim, PlayerObject, this.gameObject, PatrolPoint);
         enemyData.SettingValue(RunDistance, PlayerDistance, WalkSpeed, RunSpeed);
         enemyChangeState = this.gameObject.AddComponent<EnemyChangeState>();
         enemyChangeState.settings(new List<int>(), PlayerDistance, WaitTime);
         enemyAction = this.gameObject.AddComponent<EnemyAction>();
         enemyRay = this.gameObject.AddComponent<EnemyRay>();
-        enemyRay.settings(RayPosition, PlayerObject, RayDistance);
+        enemyRay.settings(ViewRayPosition, PlayerObject, RayDistance);
         enemyMoveData = new MoveDate();
         moveAnimation = this.gameObject.AddComponent<MoveAnimation>();
+        haveGun = this.gameObject.AddComponent<HaveGun>();
+        haveGun.settings(HavePosition, null, null);
+        setBulletData = this.gameObject.AddComponent<SetBulletData>();
+        setBulletData.Clear();
+        gunShoot = this.gameObject.AddComponent<GunShoot>();
+        gunShoot.settings(GunRayPositon, null, null, ShotEffect,Aim);
 
+       CloneGun =  haveGun.CloneGun(PrefabGun, 1, setBulletData);
     }
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         action();
         animation_();
@@ -91,12 +107,25 @@ public class Enemy : MonoBehaviour
         Ray();
         DamageCanvas.transform.LookAt(player.CameraObject.transform.position);
         skinned.material.color = Transparency;
+        if(enemyData.Status == EnemyData.Action.attack)
+        {
+            anim.SetBool("Have", true);
+            anim.SetLayerWeight(2, 1f);
+            await Task.Delay(1300);
+            Firing();
+        }
+        else
+        {
+            anim.SetBool("Have", false);
+            anim.SetLayerWeight(2, 0f);
+        }
+
     }
     public void conditions()
     {
         enemyData = enemyChangeState.ChangeState(enemyData);
         enemyMoveData = enemyChangeState.ConvertingToMoveData(enemyMoveData, enemyData);
-      
+
     }
     public void action()
     {
@@ -105,131 +134,10 @@ public class Enemy : MonoBehaviour
     public void animation_()
     {
         moveAnimation.MoveAnimationControl(enemyMoveData, anim);
-        //if (Status == Action.Wait)
-        //{
-        //    anim.SetBool("move", false);
-        //    anim.SetLayerWeight(2, 0f);
-        //    anim.SetBool("Have", false);
-        //    anim.SetBool("WS", false);
-        //    anim.SetBool("AD", false);
-        //    anim.SetFloat("Blend", 0f);
-        //}
-        //else if (Status == Action.patrol)
-        //{
-        //    anim.SetBool("move", true);
-        //    anim.SetBool("Have", false);
-        //    anim.SetLayerWeight(2, 0f);
-        //    anim.SetBool("WS", true);
-        //    anim.SetBool("AD", false);
-        //    anim.SetFloat("Blend", 0.5f);
-
-        //}
-        //else if (Status == Action.chase)
-        //{
-        //    if (PlayerView)
-        //    {
-        //        if (Vector3.Distance(this.gameObject.transform.position, TargetPosition) >= RunDistance)
-        //        {//run
-        //            anim.SetBool("move", true);
-        //            anim.SetLayerWeight(2, 0f);
-        //            anim.SetBool("Have", false);
-        //            anim.SetBool("WS", true);
-        //            anim.SetBool("AD", false);
-        //            anim.SetFloat("Blend", 1);
-        //        }
-        //        else
-        //        {
-        //            anim.SetBool("move", true);
-        //            anim.SetLayerWeight(2, 0f);
-        //            anim.SetBool("Have", false);
-        //            anim.SetBool("WS", true);
-        //            anim.SetBool("AD", false);
-        //            anim.SetFloat("Blend", 0.5f);
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        anim.SetBool("Have", false);
-        //        anim.SetLayerWeight(2, 0f);
-        //        anim.SetBool("move", true);
-        //        anim.SetBool("WS", true);
-        //        anim.SetBool("AD", false);
-        //        anim.SetFloat("Blend", 0.5f);
-        //    }
-        //}
-        //else if (Status == Action.attack)
-        //{
-        //    anim.SetBool("Have", true);
-        //    anim.SetLayerWeight(2, 1f);
-        //    anim.SetBool("move", false);
-        //    anim.SetBool("WS", false);
-        //    anim.SetBool("AD", false);
-        //    anim.SetFloat("Blend", 0f);
-
-        //}
     }
-    async void Firing()
+    public void Firing()
     {
-        if (firng)
-        {
-            return;
-        }
-        Item item = HaveGun.GetComponent<Item>();
-        if (item.SetBullet <= 0)
-        {
-            reload(item);
-            return;
-        }
-        firng = true;
-        Ray ray = new Ray(Head.transform.position, Head.transform.forward);
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * item.distance, Color.black);
-        GameObject CloneObject = Instantiate(item.BulletObj);
-        CloneObject.transform.position = item.MuzzleObj.transform.position;
-        Vector3 HitPoint = new Vector3(0, 0, 0);
-        if (Physics.Raycast(ray, out hit, item.distance))
-        {
-            if (hit.point != new Vector3(0, 0, 0) && hit.collider.gameObject.tag == "player")
-            {
-                HitPoint = hit.point;
-            }
-            else
-            {
-                HitPoint = ray.GetPoint(item.distance);
-            }
-        }
-        if (Random.Range(0, 1) == 1)//ƒ‰ƒ“ƒ_ƒ€
-        {
-            HitPoint.x += Random.Range(0, Aim);
-        }
-        else
-        {
-            HitPoint.x -= Random.Range(0, Aim);
-        }
-        if (Random.Range(0, 1) == 1)
-        {
-            HitPoint.y += Random.Range(0, Aim);
-        }
-        else
-        {
-            HitPoint.y -= Random.Range(0, Aim);
-        }
-        if (Random.Range(0, 1) == 1)
-        {
-            HitPoint.z += Random.Range(0, Aim);
-        }
-        else
-        {
-            HitPoint.z -= Random.Range(0, Aim);
-        }
-        CloneObject.transform.LookAt(HitPoint);
-        Bullet bullet = CloneObject.AddComponent<Bullet>();
-        bullet.item = item;
-        bullet.clone = player.clone;
-        item.SetBullet--;
-        await Task.Delay(item.FiringInterval);
-        firng = false;
+        gunShoot.Shooting(CloneGun);
     }
     async void reload(Item item)
     {
@@ -239,7 +147,7 @@ public class Enemy : MonoBehaviour
         }
         reloading = true;
         anim.SetBool("reload", true);
-        anim.SetFloat("speed", (item.ReRoadTiem / 100) * item.TimeTweak);
+        anim.SetFloat("speed", item.ReRoadTiem / 100 * item.TimeTweak);
         await Task.Delay(item.ReRoadTiem);
         item.SetBullet = item.MaxBullet;
         anim.SetBool("reload", false);

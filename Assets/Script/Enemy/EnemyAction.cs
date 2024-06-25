@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyAction : MonoBehaviour
 {
-   public void Action(EnemyData enemyData)
+    public void Action(EnemyData enemyData)
     {
-        if(enemyData.Status == EnemyData.Action.Wait)
+        if (enemyData.Status == EnemyData.Action.Wait)
         {
             enemyData.nav.stoppingDistance = 100;
-           enemyData.WaitTime -= Time.deltaTime;
+            enemyData.WaitTime -= Time.deltaTime;
             return;
-           
+
         }
         else if (enemyData.Status == EnemyData.Action.chase)
         {
@@ -36,11 +36,15 @@ public class EnemyAction : MonoBehaviour
             enemyData.nav.SetDestination(enemyData.TargetPosition);
             return;
         }
-        else  if(enemyData.Status == EnemyData.Action.attack)
+        else if (enemyData.Status == EnemyData.Action.attack)
         {
+            enemyData.ThisEnemeyObj.transform.LookAt(enemyData.PlayerObj.transform.position);
+            Vector3 vector = enemyData.ThisEnemeyObj.transform.localEulerAngles;
+            vector.x = 0;
+            enemyData.ThisEnemeyObj.transform.localEulerAngles = vector;
             return;
         }
-        else if(enemyData.Status == EnemyData.Action.patrol)
+        else if (enemyData.Status == EnemyData.Action.patrol)
         {
             enemyData.nav.stoppingDistance = 0;
             enemyData.nav.speed = enemyData.WalkSpeed;

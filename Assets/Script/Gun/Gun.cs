@@ -45,9 +45,9 @@ public class Gun : MonoBehaviour
         gunZoom = this.gameObject.AddComponent<GunZoom>();
         gunShoot = this.gameObject.AddComponent<GunShoot>();
         gunReRoad = this.gameObject.AddComponent<GunReRoad>();
-        haveGun.settings(HavePosition,inventory, pointer);
-        gunZoom.settings(player,ZoomValue,pointerObj,Reticle_u,Reticle_b);
-        gunShoot.settings(player.CameraObject,player, inventory, FiringEffect);
+        haveGun.settings(HavePosition, inventory, pointer);
+        gunZoom.settings(player, ZoomValue, pointerObj, Reticle_u, Reticle_b);
+        gunShoot.settings(player.CameraObject, player, inventory, FiringEffect);
         gunReRoad.settings(CircleGauge, player.PlayerAnim, inventory);
         setBulletData.Clear();
     }
@@ -66,9 +66,9 @@ public class Gun : MonoBehaviour
         }
         Reload();
     }
-   
-    public void GanHave(List<GameObject> search,bool IsClone)
-    {   
+
+    public void GanHave(List<GameObject> search, bool IsClone)
+    {
         if (IsClone)
         {
             return;
@@ -81,14 +81,14 @@ public class Gun : MonoBehaviour
         if (select == 1) { CloneObj = search[0]; }
         if (select == 2) { CloneObj = search[1]; }
         if (select == 3) { CloneObj = search[2]; }
-       
+
         PrefabGun = CloneObj;
         if (CloneObj == null)
         {
             Debug.Log("GunHaveErrer");
             return;
         }
-       
+
         haveGun.DestroyGun(CloneGunSelect, setBulletData);
         CloneGun = haveGun.CloneGun(CloneObj, select, setBulletData);
         CloneGunSelect = select;
@@ -104,12 +104,29 @@ public class Gun : MonoBehaviour
             rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
             return;
         }
-       // Debug.Log(gunZoom, PrefabGun);
+        // Debug.Log(gunZoom, PrefabGun);
         gunZoom.Zoom(PrefabGun);
     }
     public void Firing()
     {
-        gunShoot.Shooting(CloneGun);
+        if(CloneGun == null)
+        {
+            return;
+        }
+        bool OnButton;
+        if (CloneGun.GetComponent<Item>().RapidFire)
+        {
+            OnButton = Input.GetMouseButton(0);
+        }
+        else
+        {
+            OnButton = Input.GetMouseButtonDown(0);
+        }
+        if (OnButton)
+        {
+            gunShoot.Shooting(CloneGun);
+        }
+       
     }
     public void Reload()
     {

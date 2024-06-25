@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
         inventoryView.Settings(CloneButton, content, InventoryObject);
         inventoryData.setting(itemdata);
         takeItem.Settings(CameraObject, RayDistance, this.gameObject.GetComponent<Inventory>());
-        itemView.setting(gunUIObj,this.gameObject.GetComponent<Inventory>());
+        itemView.setting(gunUIObj, this.gameObject.GetComponent<Inventory>());
     }
 
     // Update is called once per frame
@@ -58,21 +58,21 @@ public class Inventory : MonoBehaviour
         itemView.select();
 
     }
-    public void ReRoad(bool a = false,bool IsClone = false)
+    public void ReRoad(bool a = false, bool IsClone = false)
     {
         if (!a)
         {
             return;
         }
-       
-        if(itemView == null || inventoryData == null)
+
+        if (itemView == null || inventoryData == null)
         {
             return;
         }
         select = itemView.GetSelect();
         itemView.ItemSearch(inventoryData);
-        gun.GanHave(itemView.GetList(),IsClone);
-        itemView.ReRoad(inventoryData,gun.setBulletData,gun.CloneGun);
+        gun.GanHave(itemView.GetList(), IsClone);
+        itemView.ReRoad(inventoryData, gun.setBulletData, gun.CloneGun);
     }
     public void TakeItem()
     {
@@ -84,7 +84,7 @@ public class Inventory : MonoBehaviour
     {
         inventoryData.AddItem(hit, true);
     }
-    public void RemoveItem(int index,int count)
+    public void RemoveItem(int index, int count)
     {
         inventoryData.RemoveItem(index, count);
     }

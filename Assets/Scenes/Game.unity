@@ -16390,6 +16390,7 @@ MonoBehaviour:
   search: []
   gun: {fileID: 1724546800}
   gunUIObj: {fileID: 1724546801}
+  inventoryData: {fileID: 0}
 --- !u!114 &1724546800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16422,6 +16423,8 @@ MonoBehaviour:
   haveGun: {fileID: 0}
   setBulletData: {fileID: 0}
   gunZoom: {fileID: 0}
+  gunShoot: {fileID: 0}
+  gunReRoad: {fileID: 0}
 --- !u!114 &1724546801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19170,11 +19173,6 @@ Transform:
   m_Father: {fileID: 1884877340}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1992959924 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4767851719230098083, guid: 00a90bf27c06a1c46a03be2a07a5c133, type: 3}
-  m_PrefabInstance: {fileID: 2053328264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1992959930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5287541849739907097, guid: 00a90bf27c06a1c46a03be2a07a5c133, type: 3}
@@ -19486,7 +19484,7 @@ MonoBehaviour:
   Aim: 0
   HedShotYPosi: 0
   TargetPosition: {x: 0, y: 0, z: 0}
-  Situation: 0
+  Status: 0
   PlayerView: 0
   PatrolPoint:
   - {x: 0, y: -32, z: 50}
@@ -19499,10 +19497,9 @@ MonoBehaviour:
   - {x: 0, y: -32, z: 70}
   PointObject: 0
   PlayerObject: {fileID: 1717243027}
-  RayPosition: {fileID: 1356851814}
+  ViewRayPosition: {fileID: 0}
   DamageCanvas: {fileID: 775413358}
   CloneText: {fileID: 0}
-  HaveGun: {fileID: 1992959924}
   Target: {fileID: 1717240211}
   Head: {fileID: 1350243019}
   HPCampus: {fileID: 0}
@@ -19518,6 +19515,19 @@ MonoBehaviour:
   ListNumber: 0
   clone: {fileID: 0}
   nav: {fileID: 0}
+  HavePosition: {fileID: 0}
+  PrefabGun: {fileID: 0}
+  CloneGun: {fileID: 0}
+  ShotEffect: {fileID: 0}
+  GunRayPositon: {fileID: 0}
+  enemyData: {fileID: 0}
+  enemyChangeState: {fileID: 0}
+  enemyAction: {fileID: 0}
+  enemyRay: {fileID: 0}
+  moveAnimation: {fileID: 0}
+  haveGun: {fileID: 0}
+  setBulletData: {fileID: 0}
+  gunShoot: {fileID: 0}
 --- !u!195 &2030598428
 NavMeshAgent:
   m_ObjectHideFlags: 0

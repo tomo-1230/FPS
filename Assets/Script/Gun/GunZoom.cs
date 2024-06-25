@@ -10,7 +10,7 @@ public class GunZoom : MonoBehaviour
     public GameObject ReticulePointer;
     public float NormalReticleScale;
     public float BigReticleScale;
-    public void settings(Player play,int Noraml,GameObject Reticule,float NR,float BR)
+    public void settings(Player play, int Noraml, GameObject Reticule, float NR, float BR)
     {
         player = play;
         NormalFieldOfView = Noraml;
@@ -20,7 +20,7 @@ public class GunZoom : MonoBehaviour
     }
     public void Zoom(GameObject GunObject)
     {
-        if(GunObject == null || GunObject.GetComponent<Item>() == null)
+        if (GunObject == null || GunObject.GetComponent<Item>() == null)
         {
             Debug.Log("GunZoom.Zoom Error A");
             return;

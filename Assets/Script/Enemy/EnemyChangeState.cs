@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyChangeState : MonoBehaviour
 {
-   private List<int> PatrolPoint;
+    private List<int> PatrolPoint;
     private float AttackDistance;
     private float MaxWaitTime;
 
-    public void settings(List<int> PatrolPointList,float attackDistance,float Time)
+    public void settings(List<int> PatrolPointList, float attackDistance, float Time)
     {
         PatrolPoint = PatrolPointList;
         AttackDistance = attackDistance;
@@ -21,7 +21,7 @@ public class EnemyChangeState : MonoBehaviour
         float Range = Vector3.Distance(enemyData.PlayerObj.transform.position, enemyData.ThisEnemeyObj.transform.position);
         if (Data.PlayerView)//Ž‹ŠE‚É“ü‚Á‚Ä‚¢‚é
         {
-            if(Range <= AttackDistance)//UŒ‚‰Â”\‹——£
+            if (Range <= AttackDistance)//UŒ‚‰Â”\‹——£
             {
                 Data.Status = EnemyData.Action.attack;
                 return Data;
@@ -30,8 +30,8 @@ public class EnemyChangeState : MonoBehaviour
             Data.Status = EnemyData.Action.chase;
             return Data;
         }
-        if(Data.Status == EnemyData.Action.chase)//Œ©Ž¸‚Á‚½
-        { 
+        if (Data.Status == EnemyData.Action.chase)//Œ©Ž¸‚Á‚½
+        {
             if (Vector3.Distance(this.gameObject.transform.position, Data.TargetPosition) > Data.PlayerDistance)
             {
                 Data.Status = EnemyData.Action.chase;
@@ -40,14 +40,14 @@ public class EnemyChangeState : MonoBehaviour
             Data.Status = EnemyData.Action.Wait;
             return Data;
         }
-        if(Data.WaitTime <= 0)//‘Ò‹@I—¹
+        if (Data.WaitTime <= 0)//‘Ò‹@I—¹
         {
             Data.Status = EnemyData.Action.patrol;
             return Data;
         }
         return Data;
     }
-    public MoveDate ConvertingToMoveData(MoveDate moveDate,EnemyData enemyData)
+    public MoveDate ConvertingToMoveData(MoveDate moveDate, EnemyData enemyData)
     {
         MoveDate MData = moveDate;
         EnemyData Edata = enemyData;
@@ -63,17 +63,18 @@ public class EnemyChangeState : MonoBehaviour
         }
         else if (enemyData.Status == EnemyData.Action.chase)
         {
-                 moveDate.Forward = true;
-                if (Vector3.Distance(this.gameObject.transform.position, enemyData.TargetPosition) >= enemyData.RunDistance)
-                {//run
-                    moveDate.Run = true;
+            moveDate.Forward = true;
+            if (Vector3.Distance(this.gameObject.transform.position, enemyData.TargetPosition) >= enemyData.RunDistance)
+            {//run
+                moveDate.Run = true;
 
-                }
-            
+            }
+
         }
         else if (enemyData.Status == EnemyData.Action.patrol)
         {
-            moveDate.Run = true;
+            moveDate.Forward = true;
+            moveDate.Run = false;
         }
         return moveDate;
     }

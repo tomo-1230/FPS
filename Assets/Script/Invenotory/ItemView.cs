@@ -9,12 +9,12 @@ public class ItemView : MonoBehaviour
     public List<GameObject> search = new List<GameObject>();
     private GunUIObj GunUIObj;
     private Inventory inventory;
-    public void setting(GunUIObj gunUIObj,Inventory inve)
+    public void setting(GunUIObj gunUIObj, Inventory inve)
     {
         GunUIObj = gunUIObj;
         inventory = inve;
     }
-    public void ReRoad(InventoryData inventoryData,SetBulletData setBulletData,GameObject CloneObj)
+    public void ReRoad(InventoryData inventoryData, SetBulletData setBulletData, GameObject CloneObj)
     {
         ItemSearch(inventoryData);
         if (search[0] == null)
@@ -24,9 +24,9 @@ public class ItemView : MonoBehaviour
         GunUIObj.panel.SetActive(true);
         UnderGunDisplay();
         UnderPanelColor();
-        TextView(SelectGun-1, inventoryData,setBulletData,CloneObj);
+        TextView(SelectGun - 1, inventoryData, setBulletData, CloneObj);
     }
-    private void  UnderGunDisplay()
+    private void UnderGunDisplay()
     {
         if (search[0] == null)
         {
@@ -65,7 +65,7 @@ public class ItemView : MonoBehaviour
         }
         if (SelectGun == 1 && search[0] != null)
         {
-            GunUIObj. panel1.GetComponent<Image>().color = new Color32(0, 0, 0, 101);
+            GunUIObj.panel1.GetComponent<Image>().color = new Color32(0, 0, 0, 101);
             GunUIObj.ImageGun.sprite = search[0].GetComponent<Item>().GumImage;
             GunUIObj.ImageBullet.sprite = search[0].GetComponent<Item>().BulletImage;
             return;
@@ -84,10 +84,10 @@ public class ItemView : MonoBehaviour
             GunUIObj.ImageBullet.sprite = search[1].GetComponent<Item>().BulletImage;
             return;
         }
-        SelectGun --;
+        SelectGun--;
         UnderPanelColor();
     }
-    private void TextView(int index,InventoryData inventoryData,SetBulletData setBulletData,GameObject CloneObj)
+    private void TextView(int index, InventoryData inventoryData, SetBulletData setBulletData, GameObject CloneObj)
     {
         //éÊìæ
         int setBulletValue = CloneObj.GetComponent<Item>().SetBullet;
@@ -96,18 +96,18 @@ public class ItemView : MonoBehaviour
         string HaveBulletText;
         string SetBulletText;
         int i = 0;
-        foreach(GameObject a in inventoryData.GetObjectList())
+        foreach (GameObject a in inventoryData.GetObjectList())
         {
-            if(a.GetComponent<Item>().ThisBulletType == ItemData.BulletType)
+            if (a.GetComponent<Item>().ThisBulletType == ItemData.BulletType)
             {
                 List<int> count = inventoryData.GetCountList();
                 HaveBulletvalue = count[i];
             }
             i++;
         }
-        
+
         //ï“èW
-        if(setBulletValue <10)
+        if (setBulletValue < 10)
         {
             SetBulletText = "0" + setBulletValue.ToString();
         }
@@ -134,7 +134,7 @@ public class ItemView : MonoBehaviour
         {
             IsClone = SelectGun == 1;
             SelectGun = 1;
-            inventory.ReRoad(true,IsClone);
+            inventory.ReRoad(true, IsClone);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -148,7 +148,7 @@ public class ItemView : MonoBehaviour
             SelectGun = 3;
             inventory.ReRoad(true, IsClone);
         }
-       
+
     }
     public int GetSelect()
     {
@@ -158,7 +158,7 @@ public class ItemView : MonoBehaviour
     {
         return search;
     }
-   public void ItemSearch(InventoryData inventoryData)
+    public void ItemSearch(InventoryData inventoryData)
     {
 
         search.Clear();

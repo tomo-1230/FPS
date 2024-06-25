@@ -23,7 +23,7 @@ public class EnemyData : MonoBehaviour
     public float RunSpeed;
     public List<Vector3> PatrolPoint;
     public int Point;
-    public void Initialization(NavMeshAgent n, Animator ani, GameObject player, GameObject enemy,List<Vector3> list)
+    public void Initialization(NavMeshAgent n, Animator ani, GameObject player, GameObject enemy, List<Vector3> list)
     {
         Status = Action.Wait;
         nav = n;
@@ -34,7 +34,7 @@ public class EnemyData : MonoBehaviour
         PatrolPoint = list;
         Point = 0;
     }
-    public void SettingValue(float run,float player,float walk,float runsp)
+    public void SettingValue(float run, float player, float walk, float runsp)
     {
         RunDistance = run;
         PlayerDistance = player;

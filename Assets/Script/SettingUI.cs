@@ -64,7 +64,7 @@ public class SettingUI : MonoBehaviour
         else
         {
             sDifficulty.GetComponent<SliderData>().enabled = false;
-            tDifficulty.text = ("カスタム");
+            tDifficulty.text = "カスタム";
         }
         //All
         if (auto.isOn)

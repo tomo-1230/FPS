@@ -13,14 +13,14 @@ public class SetBulletData : MonoBehaviour
         SetBulletList.Add(-1);
         SetBulletList.Add(-1);
     }
-    public void NewCloneGun(int index,GameObject gameObject)
+    public void NewCloneGun(int index, GameObject gameObject)
     {
-        if(gameObject.GetComponent<Item>() == null)
+        if (gameObject.GetComponent<Item>() == null)
         {
             Debug.Log("SetBulletData.NewCloneGun Error");
             return;
         }
-        
+
         Item item = gameObject.GetComponent<Item>();
         SetBulletList[index] = item.SetBullet;
     }
@@ -41,8 +41,8 @@ public class SetBulletData : MonoBehaviour
     {
         SetBulletList[index] = -1;
     }
-    public bool IsExistsData(int index) 
+    public bool IsExistsData(int index)
     {
-        return (SetBulletList[index] != -1);
+        return SetBulletList[index] != -1;
     }
 }

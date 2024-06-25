@@ -48,17 +48,17 @@ public class TakeItem : MonoBehaviour
                 Debug.Log("TakeItemError");
                 return;
             }
-           //1ŒÂ–Ú‚¾‚Á‚½‚ç
+            //1ŒÂ–Ú‚¾‚Á‚½‚ç
             bool HaveGun = false;
             int i = 0;
-            foreach(GameObject a in inventoryData.GetObjectList())
+            foreach (GameObject a in inventoryData.GetObjectList())
             {
                 if (a.GetComponent<Item>().ThisType == Item.ItemType.Gun)
                 {
                     HaveGun = true;
                     i++;
                 }
-            } 
+            }
             inventory.AddItem(TakeItem);
             if (!HaveGun)
             {
@@ -66,7 +66,7 @@ public class TakeItem : MonoBehaviour
                 return;
             }
             //2.3ŒÂ–Ú‚¾‚Á‚½‚ç
-            if(i == 1 || i == 2)
+            if (i == 1 || i == 2)
             {
                 inventory.ReRoad(true, true);
             }

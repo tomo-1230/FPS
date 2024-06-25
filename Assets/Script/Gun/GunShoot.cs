@@ -11,16 +11,24 @@ public class GunShoot : MonoBehaviour
     public Inventory inventory;
     public GameObject FiringEffect;
     public Ray ray;
-    public void settings(GameObject rpo,Player pl,Inventory inve,GameObject eff)
+    public float AIM;
+    public void settings(GameObject rpo, Player pl, Inventory inve, GameObject eff, float aim = 0)
     {
         RayPositonObject = rpo;
+        if(player == null)
+        {
+            FiringEffect = eff;
+            return;
+        }
+        
         player = pl;
         inventory = inve;
         FiringEffect = eff;
+        AIM = aim;
     }
     public async void Shooting(GameObject CloneGun)
     {
-        
+
         if (CloneGun == null)
         {
             return;
@@ -31,29 +39,25 @@ public class GunShoot : MonoBehaviour
         {
             return;
         }
-        bool OnButton;
-        if (item.RapidFire)
-        { 
-            OnButton = Input.GetMouseButton(0);
-        }
-        else 
-        {
-            OnButton = Input.GetMouseButtonDown(0); 
-        }
-        if (firing || OnButton == false)
+     
+        if (firing)
         {
             return;
         }
         firing = true;
-       
+
         if (item.CloneObjectNumber != 2)
         {
             RaycastHit hit = Ray(CloneGun.GetComponent<Item>().distance);
             GameObject CloneBulletObj = CloneBullet(CloneGun, CloneGun.GetComponent<Item>());
             NormalProcess(hit, CloneBulletObj, CloneGun);
+            if(player == null)
+            {
+                ShrapnelProcess(hit, CloneBulletObj, CloneGun);
+            }
             CommonProcessing(CloneBulletObj, CloneGun);
         }
-        else if (OnButton && !firing && CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
+        else if (!firing && CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
         {
             int Amount = 0;
             do
@@ -66,17 +70,25 @@ public class GunShoot : MonoBehaviour
             } while (Amount <= CloneGun.GetComponent<Item>().ShotAmount);
         }
         item.SetBullet--;
-        inventory.ReRoad(true,true);
+        if(inventory != null)
+        {
+           inventory.ReRoad(true, true);
+        }
+        
         await Task.Delay(item.FiringInterval);
         firing = false;
     }
-    public void CommonProcessing(GameObject CloneObject,GameObject CloneGun)
+    public void CommonProcessing(GameObject CloneObject, GameObject CloneGun)
     {
         Bullet bullet = CloneObject.AddComponent<Bullet>();
         bullet.item = CloneGun.GetComponent<Item>();
+        if (player == null)
+        {
+            return;
+        }
         bullet.clone = player.clone;
     }
-    public void NormalProcess(RaycastHit hit,GameObject CloneObject,GameObject CloneGun)
+    public void NormalProcess(RaycastHit hit, GameObject CloneObject, GameObject CloneGun)
     {
         Item item = CloneGun.GetComponent<Item>();
         if (hit.point != new Vector3(0, 0, 0))
@@ -92,7 +104,7 @@ public class GunShoot : MonoBehaviour
         CloneObject.transform.position = item.MuzzleObj.transform.position;
         CloneObject.transform.parent = CloneGun.transform;
     }
-    public void ShrapnelProcess(RaycastHit hit,GameObject CloneObject,GameObject CloneGun)
+    public void ShrapnelProcess(RaycastHit hit, GameObject CloneObject, GameObject CloneGun)
     {
         Item item = CloneGun.GetComponent<Item>();
         Vector3 HitPoint = new Vector3(0, 0, 0);
@@ -103,8 +115,18 @@ public class GunShoot : MonoBehaviour
         else
         {
             HitPoint = ray.GetPoint(item.distance);
+
         }
-        float aim = CloneGun.GetComponent<Item>().ShotAim;
+        float aim;
+        if (player == null || CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
+        {
+             aim = CloneGun.GetComponent<Item>().ShotAim;
+        }
+        else
+        {
+            aim = AIM;
+        }
+        
         if (Random.Range(0, 1) == 1)//ƒ‰ƒ“ƒ_ƒ€
         {
             HitPoint.x += Random.Range(0, aim);
@@ -131,7 +153,7 @@ public class GunShoot : MonoBehaviour
         }
         CloneObject.transform.LookAt(HitPoint);
     }
-    public GameObject CloneBullet(GameObject CloneGun,Item item)
+    public GameObject CloneBullet(GameObject CloneGun, Item item)
     {
         GameObject CloneObject = Instantiate(item.BulletObj);
         CloneObject.SetActive(false);

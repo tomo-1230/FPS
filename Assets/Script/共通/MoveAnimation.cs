@@ -26,11 +26,11 @@ public class MoveAnimation : MonoBehaviour
             if (data.Run)
             {
                 anim.SetFloat("Blend", 1f);
-                anim.SetInteger("Right", 0);
+                // anim.SetInteger("Right", 0);
             }
             else
             {
-                anim.SetFloat("Blend", 0.1f);
+                anim.SetFloat("Blend", 0.5f);
             }
         }
         else if (data.Back)

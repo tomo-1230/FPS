@@ -11,26 +11,30 @@ public class HaveGun : MonoBehaviour
 
     private GameObject CloneedHaveGun;
 
-    public void settings(GameObject Haveposi,Inventory inve, Image point)
+    public void settings(GameObject Haveposi, Inventory inve, Image point)
     {
         HavePosition = Haveposi;
+        if(inventory == null)
+        {
+            return;
+        }
         inventory = inve;
         pointer = point;
     }
-   public GameObject CloneGun(GameObject CloneObj,int index, SetBulletData setBulletData)
+    public GameObject CloneGun(GameObject CloneObj, int index, SetBulletData setBulletData)
     {
-        if(CloneObj == null)
+        if (CloneObj == null)
         {
             Debug.Log("HaveGun.CloneGun:Error");
             return null;
         }
-        if(CloneObj.GetComponent<Item>() == null || CloneObj.GetComponent<Item>().ThisType != Item.ItemType.Gun)
+        if (CloneObj.GetComponent<Item>() == null || CloneObj.GetComponent<Item>().ThisType != Item.ItemType.Gun)
         {
             Debug.Log("HaveGun.CloneGun:Error");
             return null;
         }
         Item CloneObjItem = CloneObj.GetComponent<Item>();
-        GameObject ClonedObject = Instantiate(CloneObj) ;
+        GameObject ClonedObject = Instantiate(CloneObj);
         ClonedObject.transform.parent = HavePosition.transform;
         ClonedObject.transform.localPosition = new Vector3(0, 0, 0);
         HavePosition.transform.localPosition = CloneObjItem.HavePosition;
@@ -44,12 +48,15 @@ public class HaveGun : MonoBehaviour
             int setbullet = setBulletData.GetSetBulletValue(index);
             ClonedObject.GetComponent<Item>().SetBullet = setbullet;
         }
-
-        inventory.ReRoad();
+        if(inventory != null)
+        {
+            inventory.ReRoad();
+        }
+        
         CloneedHaveGun = ClonedObject;
         return ClonedObject;
     }
-    public void DestroyGun(int index,SetBulletData setBulletData)
+    public void DestroyGun(int index, SetBulletData setBulletData)
     {
         if (CloneedHaveGun != null)
         {
@@ -59,6 +66,10 @@ public class HaveGun : MonoBehaviour
     }
     public void GunUI(Sprite Reticle)
     {
+        if(pointer == null)
+        {
+            return;
+        }
         pointer.sprite = Reticle;
     }
 }

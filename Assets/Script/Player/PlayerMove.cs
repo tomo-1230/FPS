@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
             ResultTransform.position -= ResultTransform.right * WalkSpeed * Time.deltaTime;
         }
 
-        Result.Stop = (!Result.Forward && !Result.Back && !Result.Right && !Result.Left && !Result.Run);
+        Result.Stop = !Result.Forward && !Result.Back && !Result.Right && !Result.Left && !Result.Run;
         Result.TargetTransform = ResultTransform;
         return Result;
     }

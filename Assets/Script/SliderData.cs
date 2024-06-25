@@ -14,7 +14,7 @@ public class SliderData : MonoBehaviour
         if (slider == null)
         {
             // this.gameObject.GetComponent<Dropdown>().value = int.Parse(settingUI.SettingData[Data]);
-            this.gameObject.GetComponent<Dropdown>().value = (int)settingUI.SettingData[Data];
+            this.gameObject.GetComponent<Dropdown>().value = settingUI.SettingData[Data];
         }
         else
         {
