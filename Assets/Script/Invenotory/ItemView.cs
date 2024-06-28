@@ -19,6 +19,7 @@ public class ItemView : MonoBehaviour
         ItemSearch(inventoryData);
         if (search[0] == null)
         {
+            GunUIObj.panel.SetActive(false);
             return;
         }
         GunUIObj.panel.SetActive(true);

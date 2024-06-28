@@ -26,7 +26,7 @@ public class EnemyChangeState : MonoBehaviour
                 Data.Status = EnemyData.Action.attack;
                 return Data;
             }
-            Debug.Log("B");
+            //Debug.Log("B");
             Data.Status = EnemyData.Action.chase;
             return Data;
         }

@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         select = 0;
-        ReRoad();
+        
 
 
         inventoryView = this.gameObject.AddComponent<InventoryView>();
@@ -45,6 +45,8 @@ public class Inventory : MonoBehaviour
         inventoryData.setting(itemdata);
         takeItem.Settings(CameraObject, RayDistance, this.gameObject.GetComponent<Inventory>());
         itemView.setting(gunUIObj, this.gameObject.GetComponent<Inventory>());
+
+        ReRoad(true,false);
     }
 
     // Update is called once per frame
@@ -72,7 +74,11 @@ public class Inventory : MonoBehaviour
         }
         select = itemView.GetSelect();
         itemView.ItemSearch(inventoryData);
-        gun.GanHave(itemView.GetList(), IsClone);
+        if (itemView.GetList()[0] != null)
+        {
+            gun.GanHave(itemView.GetList(), IsClone);
+        }
+        
         itemView.ReRoad(inventoryData, gun.setBulletData, gun.CloneGun);
     }
     public void TakeItem()
