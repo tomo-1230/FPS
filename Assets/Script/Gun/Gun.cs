@@ -50,8 +50,6 @@ public class Gun : MonoBehaviour
         gunShoot.settings(player.CameraObject, player, inventory, FiringEffect);
         gunReRoad.settings(CircleGauge, player.PlayerAnim, inventory);
         setBulletData.Clear();
-
-        haveGun.DestroyGun(0, null, player.PlayerAnim);
     }
 
     // Update is called once per frame
@@ -75,9 +73,6 @@ public class Gun : MonoBehaviour
         {
             return;
         }
-        player.PlayerAnim.SetBool("Have", true);
-        player.PlayerAnim.SetLayerWeight(2, 1f);
-        Player.HaveGun = true;
         GameObject CloneObj = null;
         int select = inventory.select;
         if (select == 1) { CloneObj = search[0]; }
@@ -102,7 +97,7 @@ public class Gun : MonoBehaviour
         {
             player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
             pointer.sprite = cross_hair;
-            player.CameraSpeed = player.CameraSpeedNormal;
+            player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
             rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
             return;
         }
@@ -136,5 +131,11 @@ public class Gun : MonoBehaviour
     public void Reload()
     {
         gunReRoad.ReRoad(CloneGun, inventory.inventoryData);
+    }
+    public MoveDate PlayerAnim(MoveDate moveDate)
+    {
+        MoveDate  data = moveDate;
+        data.Shot = (CloneGun != null);
+        return data;
     }
 }

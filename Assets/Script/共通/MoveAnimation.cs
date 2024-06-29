@@ -41,6 +41,16 @@ public class MoveAnimation : MonoBehaviour
         {
             anim.SetInteger("Forward", 0);
         }
+        if (data.Shot)
+        {
+            anim.SetBool("Have", true);
+            anim.SetLayerWeight(2, 1f);
+        }
+        else
+        {
+            anim.SetBool("Have", false);
+            anim.SetLayerWeight(2, 0f);
+        }
 
         return anim;
     }

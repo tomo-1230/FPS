@@ -3,39 +3,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float WalkSpeed;
-    public float RunSpeed;
-    public float JumpPower;
-    public float CameraSpeed;
-    public float CameraSpeedNormal;
-    public float CameraSpeedZoom_Long;
-    public float CameraSpeedZoom_Short;
-    public float CameraSpeedZoom_Moderate;
-    public float IsGround_maxDistance;
-    public int TakeItem_maxDistance;
-    public GameObject PlayerObject;
-    public GameObject CameraObject;
-    public GameObject RayPosition;
-    public GameObject Player_Mesh;
+    public float WalkSpeed;//
+    public float RunSpeed;//
+    public float JumpPower;//
+    public float CameraSpeedNormal;//
+    public float Zoom_Long;//
+    public float Zoom_Short;//
+    public float Zoom_Moderate;//
+    public enum CameraSpeed
+    {
+        Normal,Long,Short, Moderate
+    }
+    public GameObject PlayerObject;//
+    public GameObject CameraObject;//
+    public GameObject Player_Mesh;//
     public Animator PlayerAnim;
     public Animator GageAnim;
     public ItemData ItemData;
     public static ItemData _itemData;
-    [SerializeField]
-    public bool IsGround;
-    [Header("UI")]
-    public GameObject inventory;
-    [Header("inventory")]
-    public List<string> ItemName;
-    public List<int> ItemCount;
-    public List<GameObject> ItemObject;
-    public Inventory _Inventory;
     public HP _hp;
     public int PlayerHP;
     public Gun _gun;
-    public static bool HaveGun;
     public Clone clone;
-
     private PlayerMove playerMove;
     private MoveAnimation moveAnimation;
     private PlayerCamera playerCamera;
@@ -57,7 +46,6 @@ public class Player : MonoBehaviour
         playerCamera = this.gameObject.AddComponent<PlayerCamera>();
         moveData = playerMove.Assignment(this.transform);
         playerJump.Acquisition(JumpPower);
-
         playerCamera.ChangeSpeed(CameraSpeedNormal);
     }
     // Update is called once per frame
@@ -67,41 +55,42 @@ public class Player : MonoBehaviour
         Animation();
         Camera();
         _hp.PlayerHP(PlayerHP);
-
-        if (Input.GetKey(KeyCode.Y))
-        {
-            _Inventory.ReRoad();
-        }
-
-
     }
     public void Animation()
     {
         PlayerAnim = moveAnimation.MoveAnimationControl(moveData, PlayerAnim);
     }
-
     public void Move()
     {
         moveData = playerMove.Assignment(this.transform, moveData);
         moveData = playerMove.Move(moveData, WalkSpeed, RunSpeed);
         this.transform.position = moveData.TargetTransform.position;
-
         playerJump.Jump();
-
-        if (HaveGun)
-        {
-            PlayerAnim.SetBool("Have", HaveGun);
-        }
+       moveData =  _gun.PlayerAnim(moveData);
     }
     public void Camera()
     {
         CameraObject = playerCamera.CameraMove(CameraObject);
         PlayerObject = playerCamera.PlayerCameraMove(PlayerObject, Player_Mesh);
     }
-    public void ReMoveItem(int index, int count)
+    public void ChangeCameraSpeed(CameraSpeed speed)
     {
-
-
+        if(speed == CameraSpeed.Normal)
+        {
+            playerCamera.ChangeSpeed(CameraSpeedNormal);
+        }
+        if (speed == CameraSpeed.Long)
+        {
+            playerCamera.ChangeSpeed(Zoom_Long);
+        }
+        if (speed == CameraSpeed.Short)
+        {
+            playerCamera.ChangeSpeed(Zoom_Short);
+        }
+        if (speed == CameraSpeed.Moderate)
+        {
+            playerCamera.ChangeSpeed(Zoom_Moderate);
+        }
     }
 
 }

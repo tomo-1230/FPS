@@ -56,7 +56,7 @@ public class GunZoom : MonoBehaviour
     private void Normal(GameObject GunObject)
     {
         player.CameraObject.GetComponent<Camera>().fieldOfView = NormalFieldOfView;
-        player.CameraSpeed = player.CameraSpeedNormal;
+        player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
         if (GunObject != null)
         {
             Image PointerImage = ReticulePointer.GetComponent<Image>();
@@ -70,7 +70,7 @@ public class GunZoom : MonoBehaviour
         player.CameraObject.GetComponent<Camera>().fieldOfView = GunObject.GetComponent<Item>().ZoomValue;
         Image PointerImage = ReticulePointer.GetComponent<Image>();
         PointerImage.sprite = GunObject.GetComponent<Item>().Set_cross_hair;
-        player.CameraSpeed = player.CameraSpeedZoom_Short;
+        player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
         RectTransform PointerRect = ReticulePointer.GetComponent<RectTransform>();
         PointerRect.localScale = new Vector3(NormalReticleScale, NormalReticleScale, NormalReticleScale);
 
@@ -83,11 +83,11 @@ public class GunZoom : MonoBehaviour
         int a = GunObject.GetComponent<Item>().CloneObjectNumber;
         if (a == 5)
         {
-            player.CameraSpeed = player.CameraSpeedZoom_Moderate;
+            player.ChangeCameraSpeed(Player.CameraSpeed.Moderate);
         }
         else if (a == 4)
         {
-            player.CameraSpeed = player.CameraSpeedZoom_Long;
+            player.ChangeCameraSpeed(Player.CameraSpeed.Long);
         }
         RectTransform PointerRect = ReticulePointer.GetComponent<RectTransform>();
         if (GunObject.GetComponent<Item>().CloneObjectNumber == 4)

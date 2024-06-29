@@ -119,7 +119,10 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Have", false);
             anim.SetLayerWeight(2, 0f);
         }
-
+        if (HP <= 0)
+        {
+            erase();
+        }
     }
     public void conditions()
     {
@@ -209,21 +212,5 @@ public class Enemy : MonoBehaviour
     {
         player.clone.Removed(ListNumber);
         Destroy(ThisObj);
-        //// Destroy(this.gameObject.GetComponent<CapsuleCollider>());
-        // Situation = Action.Wait;
-        // skinned.material = Enemy_anim;
-        // anim.SetBool("move", false);
-        // anim.SetLayerWeight(2, 0f);
-        // anim.SetBool("Have", false);
-        // anim.SetBool("WS", false);
-        // anim.SetBool("AD", false);
-        // anim.SetFloat("Blend", 0f);
-        // anim.SetBool("disappear", true);
-        // await Task.Delay(1000);
-        // ThisDestroy();
-    }
-    public void ThisDestroy()
-    {
-
     }
 }

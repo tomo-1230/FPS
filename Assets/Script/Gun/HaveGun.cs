@@ -56,17 +56,12 @@ public class HaveGun : MonoBehaviour
         CloneedHaveGun = ClonedObject;
         return ClonedObject;
     }
-    public void DestroyGun(int index, SetBulletData setBulletData,Animator anim = null)
+    public void DestroyGun(int index, SetBulletData setBulletData)
     {
         if (CloneedHaveGun != null && setBulletData != null)
         {
             setBulletData.NewCloneGun(index, CloneedHaveGun);
             Destroy(CloneedHaveGun);
-        }
-        if(anim != null)
-        {
-            anim.SetBool("Have", false);
-            anim.SetLayerWeight(2, 0f);
         }
     }
     public void GunUI(Sprite Reticle)

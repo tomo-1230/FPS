@@ -57,7 +57,7 @@ public class GunShoot : MonoBehaviour
             }
             CommonProcessing(CloneBulletObj, CloneGun);
         }
-        else if (!firing && CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
+        else if (CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
         {
             int Amount = 0;
             do

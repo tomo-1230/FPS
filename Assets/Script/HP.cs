@@ -77,7 +77,6 @@ public class HP : MonoBehaviour
         {
             Debug.Log("HPColorError");
         }
-        // Debug.Log(float.Parse(R.ToString("f0")) + " " + float.Parse(G.ToString("f0")));
         Color fillColor = new Color(0f, 0f, 0f);
         fillColor.r = float.Parse(R.ToString("f0")) / 255f;
         fillColor.g = float.Parse(G.ToString("f0")) / 255f;
@@ -91,18 +90,7 @@ public class HP : MonoBehaviour
 
     public int Decrease(int HP, int damage)
     {
-        //damage = damage * (SettingUI.SettingDataCopy[7] / 5);
         HP -= damage;
-        //float time = 0; 
-        //while (time >= 1f)
-        //{
-        //    time += Time.deltaTime;
-        //}
-
-        //do
-        //{
-        //    DecreaseSlider.value--;
-        //} while (DecreaseSlider.value == HP);
         transform.DOShakePosition(duration / 2f, strength, vibrate);
         return HP;
     }

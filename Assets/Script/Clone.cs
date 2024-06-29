@@ -92,6 +92,7 @@ public class Clone : MonoBehaviour
         foreach (GameObject a in ClonedEnemyObj)
         {
             a.GetComponent<Enemy>().ListNumber = i;
+            i++;
         }
     }
     public static void GetList(ref List<GameObject> a)
