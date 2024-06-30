@@ -10,7 +10,6 @@ public class Gun : MonoBehaviour
     public Player player;
     public GameObject HavePosition;
     public GameObject Reticle_Object;
-    public GameObject HitObj;
     public GameObject FiringEffect;
 
     public GameObject pointerObj;
@@ -20,10 +19,6 @@ public class Gun : MonoBehaviour
     public Sprite cross_hair;
     public GameObject CircleGauge;
     public int ZoomValue;
-    //public List<Transform> childrens;
-    private GameObject CloneObject;
-    public bool firing = false;
-    private bool reloading;
     public GameObject PrefabGun;
     public GameObject CloneGun;
     public int CloneGunSelect;
@@ -50,6 +45,9 @@ public class Gun : MonoBehaviour
         gunShoot.settings(player.CameraObject, player, inventory, FiringEffect);
         gunReRoad.settings(CircleGauge, player.PlayerAnim, inventory);
         setBulletData.Clear();
+        CloneGun = null;
+        PrefabGun = null;
+        CloneGunSelect = 0;
     }
 
     // Update is called once per frame
@@ -93,14 +91,14 @@ public class Gun : MonoBehaviour
     public void zoom()
     {
         RectTransform rect = Reticle_Object.GetComponent<RectTransform>();
-        if (reloading)
-        {
-            player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
-            pointer.sprite = cross_hair;
-            player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
-            rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
-            return;
-        }
+        //if (reloading)
+        //{
+        //    player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
+        //    pointer.sprite = cross_hair;
+        //    player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
+        //    rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
+        //    return;
+        //}
         // Debug.Log(gunZoom, PrefabGun);
         if(CloneGun != null)
         {

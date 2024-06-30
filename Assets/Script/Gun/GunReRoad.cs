@@ -47,7 +47,7 @@ public class GunReRoad : MonoBehaviour
         {
             return false;
         }
-        if (CloneGun == null && CloneGun.GetComponent<Item>() == null)
+        if (CloneGun == null || CloneGun.GetComponent<Item>() == null)
         {
             return false;
         }
@@ -85,11 +85,19 @@ public class GunReRoad : MonoBehaviour
     }
     public void Assignment(GameObject CloneGun, int consumableBullets)
     {
+        if(CloneGun == null)
+        {
+            return;
+        }
         Item item = CloneGun.GetComponent<Item>();
         item.SetBullet += consumableBullets;
     }
     public void Anim(GameObject CloneGun, Animator anim, bool a)
     {
+        if(CloneGun == null)
+        {
+            return;
+        }
         if (CircleGauge != null)
         {
             CircleGauge.SetActive(true);

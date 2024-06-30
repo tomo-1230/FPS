@@ -83,7 +83,15 @@ public class Clone : MonoBehaviour
     public void Removed(int value)
     {
 
-        ClonedEnemyObj.RemoveAt(value);
+        try
+        {
+            ClonedEnemyObj.RemoveAt(value);
+        }
+        catch
+        {
+            Debug.Log("Clone.RemovedÅ@error");
+        }
+       
         if (ClonedEnemyObj.Count == 0)
         {
             return;

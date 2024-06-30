@@ -16305,30 +16305,20 @@ MonoBehaviour:
   WalkSpeed: 3
   RunSpeed: 5
   JumpPower: 5
-  CameraSpeed: 2
   CameraSpeedNormal: 20
-  CameraSpeedZoom_Long: 3
-  CameraSpeedZoom_Short: 10
-  CameraSpeedZoom_Moderate: 7
-  IsGround_maxDistance: 0.5
-  TakeItem_maxDistance: 10
+  Zoom_Long: 3
+  Zoom_Short: 10
+  Zoom_Moderate: 7
   PlayerObject: {fileID: 1717243027}
   CameraObject: {fileID: 683023773}
-  RayPosition: {fileID: 1935052227}
-  Player_Mesh: {fileID: 1717240211}
+  PlayerMesh: {fileID: 1717240211}
   PlayerAnim: {fileID: 1724546795}
   GageAnim: {fileID: 1056506206}
   ItemData: {fileID: 11400000, guid: 5f632bacfa935254d8518a902d1e9347, type: 2}
-  IsGround: 0
-  inventory: {fileID: 808142297}
-  ItemName: []
-  ItemCount: 
-  ItemObject: []
-  _Inventory: {fileID: 1724546799}
   _hp: {fileID: 1845085027}
   PlayerHP: 100
   _gun: {fileID: 1724546800}
-  clone: {fileID: 0}
+  clone: {fileID: 1668456114}
 --- !u!136 &1724546797
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16371,7 +16361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f7da5011238ca46a6ab0c4a34a556d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1724546796}
   CloneButton: {fileID: 1274031337}
   content: {fileID: 1675303922}
   CameraObject: {fileID: 683023773}
@@ -16379,15 +16368,6 @@ MonoBehaviour:
   select: 0
   itemdata: {fileID: 11400000, guid: 5f632bacfa935254d8518a902d1e9347, type: 2}
   InventoryObject: {fileID: 808142297}
-  panel: {fileID: 977312153}
-  panel1: {fileID: 478824770}
-  panel2: {fileID: 1616568507}
-  panel3: {fileID: 626711419}
-  BulletSet: {fileID: 1311543028}
-  BulletHave: {fileID: 692396784}
-  ImageGun: {fileID: 2230255}
-  ImageBullet: {fileID: 1457101452}
-  search: []
   gun: {fileID: 1724546800}
   gunUIObj: {fileID: 1724546801}
   inventoryData: {fileID: 0}
@@ -16407,7 +16387,6 @@ MonoBehaviour:
   player: {fileID: 1724546796}
   HavePosition: {fileID: 1507812561}
   Reticle_Object: {fileID: 1578393557}
-  HitObj: {fileID: 1367996585}
   FiringEffect: {fileID: 1903225097311773632, guid: 13953c7f141bd6d458a8adcedba0a63a, type: 3}
   pointerObj: {fileID: 1578393557}
   pointer: {fileID: 1578393559}
@@ -16416,7 +16395,6 @@ MonoBehaviour:
   cross_hair: {fileID: 21300000, guid: 741d7c569788070498183994b0be5224, type: 3}
   CircleGauge: {fileID: 414552439}
   ZoomValue: 60
-  firing: 0
   PrefabGun: {fileID: 0}
   CloneGun: {fileID: 0}
   CloneGunSelect: 0

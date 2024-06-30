@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float WalkSpeed;//
-    public float RunSpeed;//
-    public float JumpPower;//
-    public float CameraSpeedNormal;//
-    public float Zoom_Long;//
-    public float Zoom_Short;//
-    public float Zoom_Moderate;//
+    public  float WalkSpeed;
+    public  float RunSpeed;
+    public  float JumpPower;
+    public  float CameraSpeedNormal;
+    public  float Zoom_Long;
+    public  float Zoom_Short;
+    public  float Zoom_Moderate;
     public enum CameraSpeed
     {
         Normal,Long,Short, Moderate
     }
-    public GameObject PlayerObject;//
-    public GameObject CameraObject;//
-    public GameObject Player_Mesh;//
+    public  GameObject PlayerObject;
+    public  GameObject CameraObject;
+    public  GameObject PlayerMesh;
     public Animator PlayerAnim;
     public Animator GageAnim;
     public ItemData ItemData;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public HP _hp;
     public int PlayerHP;
     public Gun _gun;
-    public Clone clone;
+    public  Clone clone;
     private PlayerMove playerMove;
     private MoveAnimation moveAnimation;
     private PlayerCamera playerCamera;
@@ -55,6 +55,10 @@ public class Player : MonoBehaviour
         Animation();
         Camera();
         _hp.PlayerHP(PlayerHP);
+        if(this.transform.position.y <= -100)
+        {
+            PlayerHP = 0;
+        }
     }
     public void Animation()
     {
@@ -71,7 +75,7 @@ public class Player : MonoBehaviour
     public void Camera()
     {
         CameraObject = playerCamera.CameraMove(CameraObject);
-        PlayerObject = playerCamera.PlayerCameraMove(PlayerObject, Player_Mesh);
+        PlayerObject = playerCamera.PlayerCameraMove(PlayerObject, PlayerMesh);
     }
     public void ChangeCameraSpeed(CameraSpeed speed)
     {

@@ -5,27 +5,16 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public Player player;
     public GameObject CloneButton;
     public GameObject content;
     public GameObject CameraObject;
-    public float RayDistance;
+    public  float RayDistance;
     public int select;
     public ItemData itemdata;
     private bool OpenInventory = false;
     public GameObject InventoryObject;
-    [Header("UI")]
-    public GameObject panel;
-    public GameObject panel1;
-    public GameObject panel2;
-    public GameObject panel3;
-    public Text BulletSet;
-    public Text BulletHave;
-    public Image ImageGun;
-    public Image ImageBullet;
-    public List<GameObject> search;
     public Gun gun;
-    public GunUIObj gunUIObj;
+    public  GunUIObj gunUIObj;
     private InventoryView inventoryView;
     public InventoryData inventoryData;
     private TakeItem takeItem;
@@ -34,9 +23,6 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         select = 0;
-        
-
-
         inventoryView = this.gameObject.AddComponent<InventoryView>();
         inventoryData = this.gameObject.AddComponent<InventoryData>();
         takeItem = this.gameObject.AddComponent<TakeItem>();
@@ -66,7 +52,6 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
-
         if (itemView == null || inventoryData == null)
         {
             Debug.Log("a");
