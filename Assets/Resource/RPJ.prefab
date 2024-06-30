@@ -673,7 +673,8 @@ MonoBehaviour:
   ThisBulletType: 0
   count: 0
   Firing_Bullet: {fileID: 0}
-  CLoneObject: {fileID: 0}
+  CloneObject: {fileID: 0}
+  BlastDistance: 50
   ItemCanvas: {fileID: 3354757987960691944}
   TextName: {fileID: 3314020978980429616}
   TextBullet: {fileID: 423152166770584231}

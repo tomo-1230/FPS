@@ -55,7 +55,7 @@ public class GunShoot : MonoBehaviour
             {
                 ShrapnelProcess(hit, CloneBulletObj, CloneGun);
             }
-            CommonProcessing(CloneBulletObj, CloneGun);
+            BulletComponent(CloneBulletObj, CloneGun);
         }
         else if (CloneGun.GetComponent<Item>().CloneObjectNumber == 2)
         {
@@ -65,7 +65,7 @@ public class GunShoot : MonoBehaviour
                 RaycastHit hit = Ray(CloneGun.GetComponent<Item>().distance);
                 GameObject CloneBulletObj = CloneBullet(CloneGun, CloneGun.GetComponent<Item>());
                 ShrapnelProcess(hit, CloneBulletObj, CloneGun);
-                CommonProcessing(CloneBulletObj, CloneGun);
+                BulletComponent(CloneBulletObj, CloneGun);
                 Amount++;
             } while (Amount <= CloneGun.GetComponent<Item>().ShotAmount);
         }
@@ -78,7 +78,7 @@ public class GunShoot : MonoBehaviour
         await Task.Delay(item.FiringInterval);
         firing = false;
     }
-    public void CommonProcessing(GameObject CloneObject, GameObject CloneGun)
+    public void BulletComponent(GameObject CloneObject, GameObject CloneGun)
     {
         Bullet bullet = CloneObject.AddComponent<Bullet>();
         bullet.item = CloneGun.GetComponent<Item>();
@@ -87,6 +87,11 @@ public class GunShoot : MonoBehaviour
             return;
         }
         bullet.clone = player.clone;
+        if(CloneGun.GetComponent<Item>().CloneObjectNumber == 5)
+        {
+            bullet.blast = true;
+            bullet.blastDistance = CloneGun.GetComponent<Item>().BlastDistance;
+        }
     }
     public void NormalProcess(RaycastHit hit, GameObject CloneObject, GameObject CloneGun)
     {

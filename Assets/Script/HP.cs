@@ -30,7 +30,15 @@ public class HP : MonoBehaviour
         {
             Debug.Log("Gameover");
             value = 0;
-            StartScene.back(false);
+
+            if (StartScene.startScene == null)
+            {
+                StartScene.Staticback(false);
+            }
+            else
+            {
+                StartScene.startScene.back(false);
+            }
         }
         if (value > MaxHP)
         {

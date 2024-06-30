@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public Vector3 FiringPosition;
     public Item item;
     public bool blast;
-    public int blastDistance;
+    public float blastDistance;
     public Clone clone;
     private void Start()
     {
@@ -56,6 +56,7 @@ public class Bullet : MonoBehaviour
 
         if(blast && clone != null)
         {
+            Debug.Log("blast");
             foreach (GameObject Enemy in clone.ClonedEnemyObj)
             {
                 if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
@@ -79,25 +80,5 @@ public class Bullet : MonoBehaviour
             HedShot = true;
         }
         return HedShot;
-    }
-    public void Hit2(GameObject HitObj)
-    {
-        if (HitObj != null)
-        {
-            
-            if (HitObj.tag != "gun" && HitObj.tag != "bullet")
-            {
-                if (item.ThisBulletType == 4)
-                {
-                    this.transform.GetChild(0).gameObject.SetActive(false);
-                    this.transform.GetChild(1).gameObject.SetActive(true);
-
-
-                }
-                else
-                    Destroy(this.gameObject);
-            }
-           
-        }
     }
 }

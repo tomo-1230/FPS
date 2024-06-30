@@ -77,7 +77,15 @@ public class Clone : MonoBehaviour
     {
         if (ClonedEnemyObj.Count == 0)
         {
-            StartScene.back(true);
+            
+            if(StartScene.startScene == null)
+            {
+                StartScene.Staticback(true);
+            }
+            else
+            {
+                StartScene.startScene.back(true);
+            }
         }
     }
     public void Removed(int value)

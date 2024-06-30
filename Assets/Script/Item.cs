@@ -65,11 +65,12 @@ public class Item : MonoBehaviour
     public int count;
     public GameObject Firing_Bullet;
     [HideInInspector]
-    public GameObject CLoneObject;
+    public GameObject CloneObject;
     [Space(10)]
     [Header("--------------------")]
     [Header("•K—v‚É‰ž‚¶‚Ä")]
     [Header("--------------------")]
+    public float BlastDistance;
     [Space(5)]
     [Header("UI")]
     [Space(1)]
@@ -82,7 +83,7 @@ public class Item : MonoBehaviour
     void Start()
     {
 
-        CLoneObject = Player._itemData.ItemObject[CloneObjectNumber]; ShowDescription(false);
+        CloneObject = Player._itemData.ItemObject[CloneObjectNumber]; ShowDescription(false);
     }
 
     // Update is called once per frame

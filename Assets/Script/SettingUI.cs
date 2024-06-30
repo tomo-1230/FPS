@@ -141,5 +141,21 @@ public class SettingUI : MonoBehaviour
 
         PlayerPrefs.Save();
     }
+    public void DataLoad()
+    {
+        SettingData[2] =  PlayerPrefs.GetInt("PlayerHP");
+        SettingData[10] =  PlayerPrefs.GetInt("CloneItem");
+        SettingData[3] =  PlayerPrefs.GetInt("EnemyAmount");
+        SettingData[4] =  PlayerPrefs.GetInt("WalkSpeed");
+        SettingData[5] =  PlayerPrefs.GetInt("Ray");
+        SettingData[9] =  PlayerPrefs.GetInt("aim");
+        SettingData[6] =  PlayerPrefs.GetInt("EnemyHP");
+        SettingData[11] =  PlayerPrefs.GetInt("0");
+        SettingData[12] =  PlayerPrefs.GetInt("1");
+        SettingData[13] =  PlayerPrefs.GetInt("2");
+        SettingData[14] =  PlayerPrefs.GetInt("3");
+        SettingData[15] =  PlayerPrefs.GetInt("4");
+        SettingData[16] =  PlayerPrefs.GetInt("5");
+    }
 
 }

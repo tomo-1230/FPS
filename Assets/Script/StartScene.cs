@@ -7,6 +7,12 @@ public class StartScene : MonoBehaviour
     public GameObject start;
     public GameObject setting;
     public SettingUI settingUI;
+    public static StartScene startScene;
+
+    public void Start()
+    {
+        startScene = this.gameObject.GetComponent<StartScene>();
+    }
 
     public void OnClick(int a)
     {
@@ -26,8 +32,14 @@ public class StartScene : MonoBehaviour
                 break;
         }
     }
-    public static void back(bool clear)
+    public static void Staticback(bool clear)
     {
         SceneManager.LoadScene("Start");
+        
+    }
+    public void back(bool clear)
+    {
+        SceneManager.LoadScene("Start");
+        settingUI.DataLoad();
     }
 }
