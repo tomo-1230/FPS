@@ -298,8 +298,8 @@ MonoBehaviour:
   MuzzleObj: {fileID: 3920225909456913828}
   BulletType: 2
   distance: 100
-  Damage: 25
-  HeadDamage: 50
+  Damage: 0
+  HeadDamage: 1
   FiringInterval: 15
   RapidFire: 1
   ShotAim: 0
@@ -308,7 +308,8 @@ MonoBehaviour:
   ThisBulletType: 0
   count: 0
   Firing_Bullet: {fileID: 0}
-  CLoneObject: {fileID: 0}
+  CloneObject: {fileID: 0}
+  BlastDistance: 0
   ItemCanvas: {fileID: 3850892508202210292}
   TextName: {fileID: 3891853680466726956}
   TextBullet: {fileID: 2170794873615689147}

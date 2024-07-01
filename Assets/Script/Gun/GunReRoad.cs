@@ -11,6 +11,11 @@ public class GunReRoad : MonoBehaviour
     public Inventory inventory;
     public void settings(GameObject circle, Animator ani, Inventory inve = null)
     {
+        if(circle == null)
+        {
+            anim = ani;
+            return;
+        }
         CircleGauge = circle;
         anim = ani;
         inventory = inve;
@@ -18,17 +23,25 @@ public class GunReRoad : MonoBehaviour
     }
     public async void ReRoad(GameObject CloneGun, InventoryData inventoryData)
     {
-        if (!Input.GetKeyDown(KeyCode.R))
+        if (Reloading)//ƒeƒXƒg‚©‚ç
         {
             return;
         }
         Reloading = true;
-        if (!Check(CloneGun, inventoryData))
+        if (inventoryData != null && !Check(CloneGun, inventoryData))
         {
             Reloading = false;
             return;
         }
-        int BulletValue = Calculation(CloneGun, inventoryData);
+        int BulletValue;
+        if (inventoryData == null)
+        {
+            BulletValue = CloneGun.GetComponent<Item>().MaxBullet;
+        }
+        else
+        {
+            BulletValue = Calculation(CloneGun, inventoryData);
+        }
         Anim(CloneGun, anim, true);
         await Task.Delay(CloneGun.GetComponent<Item>().ReRoadTiem);
         Anim(CloneGun, anim, false);
@@ -98,6 +111,7 @@ public class GunReRoad : MonoBehaviour
         {
             return;
         }
+        if (CircleGauge != null)
         if (CircleGauge != null)
         {
             CircleGauge.SetActive(true);

@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
     public HaveGun haveGun;
     public SetBulletData setBulletData;
     public GunShoot gunShoot;
+    public GunReRoad gunReRoad;
     // Start is called before the first frame update
     void Awake()
     {
@@ -95,7 +96,8 @@ public class Enemy : MonoBehaviour
         setBulletData.Clear();
         gunShoot = this.gameObject.AddComponent<GunShoot>();
         gunShoot.settings(GunRayPositon, null, null, ShotEffect,Aim);
-
+        gunReRoad = this.gameObject.AddComponent<GunReRoad>();
+        gunReRoad.settings(null, anim);
        CloneGun =  haveGun.CloneGun(PrefabGun, 1, setBulletData);
     }
     // Update is called once per frame
@@ -133,6 +135,10 @@ public class Enemy : MonoBehaviour
     public void action()
     {
         enemyAction.Action(enemyData);
+        if(CloneGun.GetComponent<Item>().SetBullet == 0)
+        {
+            gunReRoad.ReRoad(CloneGun, null);
+        }
     }
     public void animation_()
     {

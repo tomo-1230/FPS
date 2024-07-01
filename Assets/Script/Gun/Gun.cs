@@ -128,7 +128,11 @@ public class Gun : MonoBehaviour
     }
     public void Reload()
     {
-        gunReRoad.ReRoad(CloneGun, inventory.inventoryData);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gunReRoad.ReRoad(CloneGun, inventory.inventoryData);
+        }
+       
     }
     public MoveDate PlayerAnim(MoveDate moveDate)
     {
