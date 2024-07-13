@@ -73,7 +73,7 @@ public class GunReRoad : MonoBehaviour
 
         if (!existence)
         {
-            Debug.Log("Not existence");
+            //Debug.Log("Not existence");
             return false;
         }
 

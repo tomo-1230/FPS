@@ -670,11 +670,13 @@ MonoBehaviour:
   ShotAim: 0
   ShotAmount: 0
   RocketBullet: {fileID: 776519885537097698}
+  RayPositionObj: {fileID: 0}
   ThisBulletType: 0
   count: 0
   Firing_Bullet: {fileID: 0}
   CloneObject: {fileID: 0}
-  BlastDistance: 50
+  BlastDistance: 10
+  BlastDamage: 50
   ItemCanvas: {fileID: 3354757987960691944}
   TextName: {fileID: 3314020978980429616}
   TextBullet: {fileID: 423152166770584231}

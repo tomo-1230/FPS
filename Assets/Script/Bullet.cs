@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Bullet : MonoBehaviour
 {
     public Vector3 FiringPosition;
@@ -9,6 +8,7 @@ public class Bullet : MonoBehaviour
     public bool blast;
     public float blastDistance;
     public Clone clone;
+    private List<GameObject> HitObjList = new List<GameObject>();
     private void Start()
     {
         FiringPosition = this.transform.position;
@@ -24,7 +24,16 @@ public class Bullet : MonoBehaviour
     }
     public void Ray()
     {
-        GameObject RayPosition = this.gameObject;
+        GameObject RayPosition;
+        if (item.CloneObjectNumber == 5)
+        {
+            RayPosition = this.gameObject.transform.Find("RayPositionObj").gameObject;
+            Debug.Log(RayPosition);
+        }
+        else
+        {
+            RayPosition = this.gameObject;
+        }
         int RayDistance = 1;
         Ray ray = new Ray(RayPosition.transform.position, RayPosition.transform.forward);
         RaycastHit hit;
@@ -42,26 +51,18 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        if (HitObj.GetComponent<Enemy>() != null)
-        {
-            Enemy enemy = HitObj.GetComponent<Enemy>();
-            enemy.Damage_(item.Damage, IsHedShot(HitObj));
-            
-        }
-        else if (HitObj.GetComponent<Player>() != null) 
-        {
-            Player player = HitObj.GetComponent<Player>();
-            player.PlayerHP = player._hp.Decrease(player.PlayerHP, item.Damage);
-        }
 
-        if(blast && clone != null)
+        if (blast && clone != null)
         {
-            Debug.Log("blast");
-            foreach (GameObject Enemy in clone.ClonedEnemyObj)
+            List<GameObject> EnemyObj = new List<GameObject>(clone.ClonedEnemyObj);
+            foreach (GameObject Enemy in EnemyObj)
             {
-                if (Vector3.Distance(Enemy.transform.position, this.transform.position) <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
+                float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
+                if (Distance <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
                 {
-                    float Distance = Vector3.Distance(Enemy.transform.position, this.transform.position);
+                    float DamageValue = item.BlastDamage /(blastDistance - Distance);
+                    Debug.Log((int)DamageValue);
+                    Enemy.GetComponent<Enemy>().Damage_((int)DamageValue, false);
 
                 }
             }
@@ -69,6 +70,18 @@ public class Bullet : MonoBehaviour
         if (item.BulletType == 4)
         {
             Instantiate(item.effect, this.transform.position, Quaternion.identity);
+        }
+
+        if (HitObj.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = HitObj.GetComponent<Enemy>();
+            enemy.Damage_(item.Damage, IsHedShot(HitObj));
+
+        }
+        else if (HitObj.GetComponent<Player>() != null)
+        {
+            Player player = HitObj.GetComponent<Player>();
+            player.PlayerHP = player._hp.Decrease(player.PlayerHP, item.Damage);
         }
     }
     public bool IsHedShot(GameObject HitObj)
@@ -80,5 +93,12 @@ public class Bullet : MonoBehaviour
             HedShot = true;
         }
         return HedShot;
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+       if(collision.gameObject.GetComponent<Enemy>() != null)
+       {
+            HitObjList.Add(collision.gameObject);
+       }
     }
 }

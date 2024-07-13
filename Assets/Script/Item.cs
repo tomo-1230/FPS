@@ -56,6 +56,7 @@ public class Item : MonoBehaviour
     public float ShotAim;
     public int ShotAmount;
     public GameObject RocketBullet;
+    public GameObject RayPositionObj;
     [Space(10)]
     [Header("--------------------")]
     [Header("ItemType == bullet ‚Ì‚Ý")]
@@ -71,6 +72,7 @@ public class Item : MonoBehaviour
     [Header("•K—v‚É‰ž‚¶‚Ä")]
     [Header("--------------------")]
     public float BlastDistance;
+    public float BlastDamage;
     [Space(5)]
     [Header("UI")]
     [Space(1)]

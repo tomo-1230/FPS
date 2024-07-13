@@ -59,7 +59,7 @@ public class InventoryData : MonoBehaviour
     }
     public void RemoveItem(int index, int count)
     {
-        Debug.Log("InventoryData.RemoveItem");
+        //Debug.Log("InventoryData.RemoveItem");
         ItemCount[index] -= count;
         if (ItemCount[index] <= 0)
         {

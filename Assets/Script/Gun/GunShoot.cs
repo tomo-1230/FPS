@@ -7,7 +7,7 @@ public class GunShoot : MonoBehaviour
 {
     private bool firing;
     private GameObject RayPositonObject;
-    private Player player;
+    public Player player;
     private Inventory inventory;
     private GameObject FiringEffect;
     private Ray ray;
@@ -15,7 +15,7 @@ public class GunShoot : MonoBehaviour
     public void settings(GameObject rpo, Player pl, Inventory inve, GameObject eff, float aim = 0)
     {
         RayPositonObject = rpo;
-        if(player == null)
+        if(pl == null)
         {
             FiringEffect = eff;
             return;
@@ -80,6 +80,7 @@ public class GunShoot : MonoBehaviour
     }
     public void BulletComponent(GameObject CloneObject, GameObject CloneGun)
     {
+        Debug.Log("Clone");
         Bullet bullet = CloneObject.AddComponent<Bullet>();
         bullet.item = CloneGun.GetComponent<Item>();
         if (player == null)

@@ -148,21 +148,21 @@ public class Enemy : MonoBehaviour
     {
         gunShoot.Shooting(CloneGun);
     }
-    async void reload(Item item)
-    {
-        if (reloading)
-        {
-            return;
-        }
-        reloading = true;
-        anim.SetBool("reload", true);
-        anim.SetFloat("speed", item.ReRoadTiem / 100 * item.TimeTweak);
-        await Task.Delay(item.ReRoadTiem);
-        item.SetBullet = item.MaxBullet;
-        anim.SetBool("reload", false);
+    //async void reload(Item item)
+    //{
+    //    if (reloading)
+    //    {
+    //        return;
+    //    }
+    //    reloading = true;
+    //    anim.SetBool("reload", true);
+    //    anim.SetFloat("speed", item.ReRoadTiem / 100 * item.TimeTweak);
+    //    await Task.Delay(item.ReRoadTiem);
+    //    item.SetBullet = item.MaxBullet;
+    //    anim.SetBool("reload", false);
 
-        reloading = false;
-    }
+    //    reloading = false;
+    //}
     public void Ray()
     {
         enemyData = enemyRay.PlayerView(enemyData);

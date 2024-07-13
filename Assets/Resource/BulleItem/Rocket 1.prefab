@@ -115,8 +115,10 @@ MonoBehaviour:
   ItemName: "\u30ED\u30B1\u30C3\u30C8\u5F3E"
   ThisType: 1
   CloneObjectNumber: 9
+  ShowCanvas: 0
   HavePosition: {x: 0, y: 0, z: 0}
   GumImage: {fileID: 0}
+  BulletImage: {fileID: 0}
   Have_cross_hair: {fileID: 0}
   Set_cross_hair: {fileID: 0}
   ZoomValue: 0
@@ -132,10 +134,19 @@ MonoBehaviour:
   HeadDamage: 0
   FiringInterval: 0
   RapidFire: 0
+  ShotAim: 0
+  ShotAmount: 0
+  RocketBullet: {fileID: 0}
   ThisBulletType: 4
   count: 10
   Firing_Bullet: {fileID: 5525513028256590456, guid: 5deb3bb00af12b9449c191ae6f20b45b, type: 3}
-  CLoneObject: {fileID: 0}
+  CloneObject: {fileID: 0}
+  BlastDistance: 0
+  ItemCanvas: {fileID: 0}
+  TextName: {fileID: 0}
+  TextBullet: {fileID: 0}
+  ImageBullet: {fileID: 0}
+  effect: {fileID: 0}
 --- !u!1 &6063962838436067755
 GameObject:
   m_ObjectHideFlags: 0

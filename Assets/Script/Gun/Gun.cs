@@ -91,15 +91,6 @@ public class Gun : MonoBehaviour
     public void zoom()
     {
         RectTransform rect = Reticle_Object.GetComponent<RectTransform>();
-        //if (reloading)
-        //{
-        //    player.CameraObject.GetComponent<Camera>().fieldOfView = ZoomValue;
-        //    pointer.sprite = cross_hair;
-        //    player.ChangeCameraSpeed(Player.CameraSpeed.Normal);
-        //    rect.localScale = new Vector3(Reticle_u, Reticle_u, Reticle_u);
-        //    return;
-        //}
-        // Debug.Log(gunZoom, PrefabGun);
         if(CloneGun != null)
         {
             gunZoom.Zoom(PrefabGun);
