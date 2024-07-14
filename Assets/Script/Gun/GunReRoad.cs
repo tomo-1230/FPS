@@ -11,7 +11,8 @@ public class GunReRoad : MonoBehaviour
     public Inventory inventory;
     public void settings(GameObject circle, Animator ani, Inventory inve = null)
     {
-        if(circle == null)
+        
+        if (circle == null)
         {
             anim = ani;
             return;

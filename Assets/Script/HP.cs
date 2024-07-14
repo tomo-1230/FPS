@@ -102,4 +102,13 @@ public class HP : MonoBehaviour
         transform.DOShakePosition(duration / 2f, strength, vibrate);
         return HP;
     }
+    public int Recovery(int PlayerHP,int value)
+    {
+        int RecoveryHP = PlayerHP + value;
+        if(RecoveryHP > MaxHP)
+        {
+            RecoveryHP = MaxHP;
+        }
+        return RecoveryHP;
+    }
 }

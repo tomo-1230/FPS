@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public static ItemData _itemData;
     public HP _hp;
     public int PlayerHP;
+    public int PlayerRecoveryQuantity;
     public Gun _gun;
     public  Clone clone;
     private PlayerMove playerMove;
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         moveData = playerMove.Assignment(this.transform);
         playerJump.Acquisition(JumpPower);
         playerCamera.ChangeSpeed(CameraSpeedNormal);
+        
     }
     // Update is called once per frame
     void Update()
@@ -95,6 +97,10 @@ public class Player : MonoBehaviour
         {
             playerCamera.ChangeSpeed(Zoom_Moderate);
         }
+    }
+    public void Recovery()
+    {
+        PlayerHP = _hp.Recovery(PlayerHP, PlayerRecoveryQuantity);
     }
 
 }

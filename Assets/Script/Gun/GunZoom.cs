@@ -17,6 +17,7 @@ public class GunZoom : MonoBehaviour
         ReticulePointer = Reticule;
         NormalReticleScale = NR;
         BigReticleScale = BR;
+        player.CameraObject.GetComponent<Camera>().fieldOfView = NormalFieldOfView;
     }
     public void Zoom(GameObject GunObject)
     {

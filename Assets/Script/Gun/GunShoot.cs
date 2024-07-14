@@ -12,15 +12,17 @@ public class GunShoot : MonoBehaviour
     private GameObject FiringEffect;
     private Ray ray;
     private float AIM;
+    private bool BulletInfinite;
     public void settings(GameObject rpo, Player pl, Inventory inve, GameObject eff, float aim = 0)
     {
         RayPositonObject = rpo;
+        BulletInfinite = false;
         if(pl == null)
         {
             FiringEffect = eff;
             return;
         }
-        
+        BulletInfinite = PlayerPrefs.GetInt("BulletInfinite") == 1;
         player = pl;
         inventory = inve;
         FiringEffect = eff;
@@ -69,8 +71,11 @@ public class GunShoot : MonoBehaviour
                 Amount++;
             } while (Amount <= CloneGun.GetComponent<Item>().ShotAmount);
         }
-        item.SetBullet--;
-        if(inventory != null)
+        if (!BulletInfinite)
+        {
+            item.SetBullet--;
+        }
+        if (inventory != null)
         {
            inventory.ReRoad(true, true);
         }

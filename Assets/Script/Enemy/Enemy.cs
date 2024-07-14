@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public int ListNumber;
     public Clone clone;
+    public ItemData itemData;
     public enum Action
     {
         Wait, patrol, chase, attack
@@ -70,7 +71,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        nav = GetComponent<NavMeshAgent>();
+        nav = this.gameObject.GetComponent<NavMeshAgent>();
+
+       
     }
     void Start()
     {
@@ -79,7 +82,7 @@ public class Enemy : MonoBehaviour
         RayDistance = PlayerPrefs.GetInt("Ray");
         Aim = PlayerPrefs.GetInt("aim") / 100;
         HP = PlayerPrefs.GetInt("EnemyHP");
-
+        GetCloneGun();
         enemyData = this.gameObject.AddComponent<EnemyData>();
         enemyData.Initialization(nav, anim, PlayerObject, this.gameObject, PatrolPoint);
         enemyData.SettingValue(RunDistance, PlayerDistance, WalkSpeed, RunSpeed);
@@ -99,6 +102,11 @@ public class Enemy : MonoBehaviour
         gunReRoad = this.gameObject.AddComponent<GunReRoad>();
         gunReRoad.settings(null, anim);
        CloneGun =  haveGun.CloneGun(PrefabGun, 1, setBulletData);
+    }
+    public void GetCloneGun()
+    {
+       int number =  PlayerPrefs.GetInt("EnemyCloneGun");
+        PrefabGun = itemData.ItemObject[number];
     }
     // Update is called once per frame
     async void Update()
@@ -148,21 +156,6 @@ public class Enemy : MonoBehaviour
     {
         gunShoot.Shooting(CloneGun);
     }
-    //async void reload(Item item)
-    //{
-    //    if (reloading)
-    //    {
-    //        return;
-    //    }
-    //    reloading = true;
-    //    anim.SetBool("reload", true);
-    //    anim.SetFloat("speed", item.ReRoadTiem / 100 * item.TimeTweak);
-    //    await Task.Delay(item.ReRoadTiem);
-    //    item.SetBullet = item.MaxBullet;
-    //    anim.SetBool("reload", false);
-
-    //    reloading = false;
-    //}
     public void Ray()
     {
         enemyData = enemyRay.PlayerView(enemyData);
@@ -217,6 +210,7 @@ public class Enemy : MonoBehaviour
     public void erase()
     {
         player.clone.Removed(ListNumber);
+        player.Recovery();
         Destroy(ThisObj);
     }
 }
