@@ -14,10 +14,12 @@ public class Clone : MonoBehaviour
     public List<GameObject> ClonedEnemyObj = new List<GameObject>();
     private bool addition = false;
     public Clone clone;
+    public EnemyCounter enemyCounter;
     // Start is called before the first frame update
     void OnEnable()
     {
         EnemyAmount = PlayerPrefs.GetInt("EnemyAmount");
+        enemyCounter.SetCount(EnemyAmount);
         foreach (int i in UsePoint)
         {
             copy.Add(i);
@@ -110,6 +112,7 @@ public class Clone : MonoBehaviour
             a.GetComponent<Enemy>().ListNumber = i;
             i++;
         }
+        enemyCounter.EnemyKill();
     }
     public static void GetList(ref List<GameObject> a)
     {

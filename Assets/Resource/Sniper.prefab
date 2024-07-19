@@ -333,10 +333,13 @@ MonoBehaviour:
   ShotAim: 0
   ShotAmount: 0
   RocketBullet: {fileID: 0}
+  RayPositionObj: {fileID: 0}
   ThisBulletType: 0
   count: 0
   Firing_Bullet: {fileID: 0}
-  CLoneObject: {fileID: 0}
+  CloneObject: {fileID: 0}
+  BlastDistance: 0
+  BlastDamage: 0
   ItemCanvas: {fileID: 2510484323131841973}
   TextName: {fileID: 2424258388258643565}
   TextBullet: {fileID: 686271221346921466}
@@ -532,7 +535,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1edc180901882244fb5f8028d04774f1, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -612,8 +615,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: 1edc180901882244fb5f8028d04774f1, type: 3}
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
