@@ -26,7 +26,7 @@ public class SliderData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (settingUI.auto.isOn && !(Data == 0 || Data == 1 || Data == 8 || 10 < Data))
+        if (settingUI.auto.isOn && !(Data == 0 || Data == 1 || Data == 8 || 16 < Data))
         {
 
             if (slider == null)

@@ -582,8 +582,8 @@ MonoBehaviour:
   HavePosition: {x: -0.146, y: 0.006, z: 0.077}
   GumImage: {fileID: 21300000, guid: 4938b2784e9ab8346bfc7499ef5704a7, type: 3}
   BulletImage: {fileID: 21300000, guid: a34bc7e2962f44c478f91bf62dba0803, type: 3}
-  Have_cross_hair: {fileID: 21300000, guid: 677f446d12aa5c443bc046e4d8073ddb, type: 3}
-  Set_cross_hair: {fileID: 21300000, guid: 71b47ae573cd2a443a2e043e2b3a903f, type: 3}
+  Have_cross_hair: {fileID: 21300000, guid: 552478a654d2eb8478c30045279d5688, type: 3}
+  Set_cross_hair: {fileID: 21300000, guid: 7789b657ea330f94d9b70d6d4a117aed, type: 3}
   ZoomValue: 25
   SetBullet: 5
   MaxBullet: 10
