@@ -49,8 +49,8 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent nav;
     private float time;
     private int Point;
-    private bool firng = false;
-    private bool reloading = false;
+    //private bool firng = false;
+    //private bool reloading = false;
 
     public GameObject HavePosition;
     public GameObject PrefabGun;

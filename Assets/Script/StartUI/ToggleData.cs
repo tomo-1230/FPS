@@ -6,14 +6,14 @@ public class ToggleData : MonoBehaviour
 {
     public int ListNumber;
     public SettingUI settingUI;
-    private Toggle toggle;
+    private ToggleButtonControl toggle;
     private int isOn;
     // Start is called before the first frame update
     void Start()
     {
-        if(this.gameObject.GetComponent<Toggle>() != null)
+        if(this.gameObject.GetComponent<ToggleButtonControl>() != null)
         {
-            toggle = this.gameObject.GetComponent<Toggle>();
+            toggle = this.gameObject.GetComponent<ToggleButtonControl>();
         }
     }
 

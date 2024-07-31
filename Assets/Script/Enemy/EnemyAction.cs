@@ -6,6 +6,10 @@ public class EnemyAction : MonoBehaviour
 {
     public void Action(EnemyData enemyData)
     {
+        if(enemyData.nav == null)
+        {
+            return;
+        }
         if (enemyData.Status == EnemyData.Action.Wait)
         {
             enemyData.nav.stoppingDistance = 100;

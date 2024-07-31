@@ -15,6 +15,6 @@ public class DropDownData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        settingUI.Slider(this.GetComponent<Dropdown>().value, 17);
+        settingUI.Slider(this.GetComponent<DropDownControl>().value, 17);
     }
 }

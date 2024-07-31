@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class SettingUI : MonoBehaviour
 {
     [Header("è„ÇÃÉ{É^Éì")]
     [Space(1)]
     public List<GameObject> Button;
     public List<GameObject> Obj;
+    public GameObject back;
     [Space(3)]
     [Header("All")]
     [Space(1)]
-    public Toggle auto;
+    public ToggleButtonControl auto;
     public Slider sDifficulty;
     public Text tDifficulty;
     public List<int> SettingData;
@@ -34,6 +36,9 @@ public class SettingUI : MonoBehaviour
     // Start is called before the first frame updateo
     void Awake()
     {
+        ButtonClick(3);
+        ButtonClick(2);
+        ButtonClick(1);
         ButtonClick(0);
         for (int a = 0; a > 20; a++)
         {
@@ -77,6 +82,12 @@ public class SettingUI : MonoBehaviour
             SettingData[7] = OffensePower.Data[Level];
             SettingData[9] = EnemyAIM.Data[Level];
             SettingData[10] = ItemAmount.Data[Level];
+            SettingData[11] = 5;
+            SettingData[12] = 5;
+            SettingData[13] = 5;
+            SettingData[14] = 5;
+            SettingData[15] = 5;
+            SettingData[16] = 5;
         }
 
     }
@@ -96,16 +107,17 @@ public class SettingUI : MonoBehaviour
             return;
         }
         Button button = ClickButton.GetComponent<Button>();
-        ColorBlock colorBlock = button.colors;
-        colorBlock.normalColor = Color.white;
-        button.colors = colorBlock;
+        back.transform.DOMoveX(ClickButton.transform.position.x, 0.3f);
+        //ColorBlock colorBlock = button.colors;
+        //colorBlock.normalColor = Color.white;
+        //button.colors = colorBlock;
         IndicationObj.SetActive(true);
         if (ShowButton != null && ShowObj != null)
         {
-            button = ShowButton.GetComponent<Button>();
-            colorBlock = button.colors;
-            colorBlock.normalColor = color;
-            button.colors = colorBlock;
+            //button = ShowButton.GetComponent<Button>();
+            //colorBlock = button.colors;
+            //colorBlock.normalColor = color;
+            //button.colors = colorBlock;
             ShowObj.SetActive(false);
         }
         ShowButton = ClickButton;
