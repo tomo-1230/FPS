@@ -201,6 +201,7 @@ public class Enemy : MonoBehaviour
             hP.Damagae(value, HitColor);
 
         }
+        Player.player.scoreCounter.Hit(HedShot);
         HP -= value;
         if (HP <= 0)
         {
@@ -211,6 +212,13 @@ public class Enemy : MonoBehaviour
     {
         player.clone.Removed(ListNumber);
         player.Recovery();
+        enemyData.Status = EnemyData.Action.Wait;
+        Destroy(this.gameObject.GetComponent<CapsuleCollider>());
+        enemyData.nav.speed = 0;
+        enemyData.Detoroy = true;
+        EnemyDyingAnim Danim = new EnemyDyingAnim();
+        Danim.Anim(Enemy_anim, skinned,this.gameObject);
+        Instantiate(PrefabGun, this.transform.position, Quaternion.identity);
         Destroy(ThisObj);
     }
 }

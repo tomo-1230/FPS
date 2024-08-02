@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 29845684981371573}
   - component: {fileID: 8630453186913495102}
   - component: {fileID: -5419776512700249014}
+  - component: {fileID: -6326121877059419423}
   m_Layer: 0
   m_Name: Rocket 1
   m_TagString: Untagged
@@ -137,16 +138,34 @@ MonoBehaviour:
   ShotAim: 0
   ShotAmount: 0
   RocketBullet: {fileID: 0}
+  RayPositionObj: {fileID: 0}
   ThisBulletType: 4
   count: 10
   Firing_Bullet: {fileID: 5525513028256590456, guid: 5deb3bb00af12b9449c191ae6f20b45b, type: 3}
   CloneObject: {fileID: 0}
   BlastDistance: 0
+  BlastDamage: 0
   ItemCanvas: {fileID: 0}
   TextName: {fileID: 0}
   TextBullet: {fileID: 0}
   ImageBullet: {fileID: 0}
   effect: {fileID: 0}
+--- !u!54 &-6326121877059419423
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525513028256590456}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &6063962838436067755
 GameObject:
   m_ObjectHideFlags: 0

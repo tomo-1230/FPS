@@ -49,7 +49,7 @@ public class MoveAnimation : MonoBehaviour
         else
         {
             anim.SetBool("Have", false);
-            anim.SetLayerWeight(2, 0f);
+           anim.SetLayerWeight(2, 0f);
         }
 
         return anim;

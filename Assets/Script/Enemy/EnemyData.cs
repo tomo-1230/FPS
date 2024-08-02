@@ -23,6 +23,7 @@ public class EnemyData : MonoBehaviour
     public float RunSpeed;
     public List<Vector3> PatrolPoint;
     public int Point;
+    public bool Detoroy = false;
     public void Initialization(NavMeshAgent n, Animator ani, GameObject player, GameObject enemy, List<Vector3> list)
     {
         Status = Action.Wait;

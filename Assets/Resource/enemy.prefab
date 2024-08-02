@@ -1075,7 +1075,7 @@ MonoBehaviour:
   HitColor: {r: 0, g: 1, b: 0.8881695, a: 1}
   HedColor: {r: 1, g: 0.8564266, b: 0, a: 1}
   Transparency: {r: 1, g: 1, b: 1, a: 1}
-  Enemy_anim: {fileID: 2100000, guid: cbbe2bb71d4362f4cbb9ad855363d108, type: 2}
+  Enemy_anim: {fileID: 2100000, guid: 1654ec2413acdbd4481c58b3371dbec3, type: 2}
   skinned: {fileID: 8118470645597227569}
   ThisObj: {fileID: 8118470644888124028}
   ListNumber: 0
@@ -1795,7 +1795,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d9e26d5d02be9f4c91fbd6d382fc966, type: 2}
+  - {fileID: 2100000, guid: 5bfae0fb4183d0946962f5ab68bdcf31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

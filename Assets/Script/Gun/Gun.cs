@@ -23,6 +23,8 @@ public class Gun : MonoBehaviour
     public GameObject CloneGun;
     public int CloneGunSelect;
 
+   
+
     public HaveGun haveGun;
     public SetBulletData setBulletData;
     public GunZoom gunZoom;

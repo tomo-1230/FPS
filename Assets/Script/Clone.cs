@@ -77,18 +77,7 @@ public class Clone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ClonedEnemyObj.Count == 0)
-        {
-            
-            if(StartScene.startScene == null)
-            {
-                StartScene.Staticback(true);
-            }
-            else
-            {
-                StartScene.startScene.back(true);
-            }
-        }
+        
     }
     public void Removed(int value)
     {
@@ -113,6 +102,17 @@ public class Clone : MonoBehaviour
             i++;
         }
         enemyCounter.EnemyKill();
+    }
+    public void ChangeStartScene()
+    {
+        if (StartScene.startScene == null)
+        {
+            StartScene.Staticback(true);
+        }
+        else
+        {
+            StartScene.startScene.back(true);
+        }
     }
     public static void GetList(ref List<GameObject> a)
     {

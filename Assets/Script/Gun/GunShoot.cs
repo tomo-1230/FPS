@@ -78,10 +78,12 @@ public class GunShoot : MonoBehaviour
         if (inventory != null)
         {
            inventory.ReRoad(true, true);
+            player.scoreCounter.Shot();
         }
         
         await Task.Delay(item.FiringInterval);
         firing = false;
+       
     }
     public void BulletComponent(GameObject CloneObject, GameObject CloneGun)
     {

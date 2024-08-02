@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public int PlayerRecoveryQuantity;
     public Gun _gun;
     public  Clone clone;
+    public ScoreCounter scoreCounter;
+    public static Player player;
     private PlayerMove playerMove;
     private MoveAnimation moveAnimation;
     private PlayerCamera playerCamera;
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
         moveData = playerMove.Assignment(this.transform);
         playerJump.Acquisition(JumpPower);
         playerCamera.ChangeSpeed(CameraSpeedNormal);
-        
+        player = this.gameObject.GetComponent<Player>();
     }
     // Update is called once per frame
     void Update()

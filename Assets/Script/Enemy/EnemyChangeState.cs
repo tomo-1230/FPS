@@ -16,8 +16,14 @@ public class EnemyChangeState : MonoBehaviour
     }
     public EnemyData ChangeState(EnemyData enemyData)
     {
+        
         //Debug.Log("A");
         EnemyData Data = enemyData;
+        if (Data.Detoroy)
+        {
+            Data.Status = EnemyData.Action.Wait;
+            return Data;
+        }
         float Range = Vector3.Distance(enemyData.PlayerObj.transform.position, enemyData.ThisEnemeyObj.transform.position);
         if (Data.PlayerView)//Ž‹ŠE‚É“ü‚Á‚Ä‚¢‚é
         {
