@@ -9,6 +9,10 @@ public class EnemyDyingAnim : MonoBehaviour
         Material CloneMaterial = new Material(BasicMaterial);
         Enemy.material = CloneMaterial;
         float i = 1;
+        if(thisObj == null)
+        {
+            return;
+        }
         do
         {
             Color color = CloneMaterial.color;

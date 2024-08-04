@@ -93,6 +93,7 @@ public class Clone : MonoBehaviour
        
         if (ClonedEnemyObj.Count == 0)
         {
+            ChangeStartScene();
             return;
         }
         int i = 0;
@@ -105,14 +106,8 @@ public class Clone : MonoBehaviour
     }
     public void ChangeStartScene()
     {
-        if (StartScene.startScene == null)
-        {
-            StartScene.Staticback(true);
-        }
-        else
-        {
+       
             StartScene.startScene.back(true);
-        }
     }
     public static void GetList(ref List<GameObject> a)
     {

@@ -208,17 +208,20 @@ public class Enemy : MonoBehaviour
             erase();
         }
     }
-    public void erase()
+    async void erase()
     {
         player.clone.Removed(ListNumber);
         player.Recovery();
         enemyData.Status = EnemyData.Action.Wait;
-        Destroy(this.gameObject.GetComponent<CapsuleCollider>());
+        if(this.gameObject != null && this.gameObject.GetComponent<CapsuleCollider>() != null)
+        {
+            Destroy(this.gameObject.GetComponent<CapsuleCollider>());
+        }
         enemyData.nav.speed = 0;
         enemyData.Detoroy = true;
         EnemyDyingAnim Danim = new EnemyDyingAnim();
         Danim.Anim(Enemy_anim, skinned,this.gameObject);
         Instantiate(PrefabGun, this.transform.position, Quaternion.identity);
-        Destroy(ThisObj);
+        await Task.Delay(1000);
     }
 }

@@ -8,7 +8,9 @@ public class StartScene : MonoBehaviour
     public GameObject setting;
     public SettingUI settingUI;
     public static StartScene startScene;
-
+    public ScoreView scoreView;
+    public static ScoreView sscoreView;
+    
     public void Start()
     {
         startScene = this.gameObject.GetComponent<StartScene>();
@@ -34,12 +36,13 @@ public class StartScene : MonoBehaviour
     }
     public static void Staticback(bool clear)
     {
-        SceneManager.LoadScene("Start");
-        
+        ScoreCounter.Count.save();
+        SceneManager.LoadScene("Clear");
     }
     public void back(bool clear)
     {
-        SceneManager.LoadScene("Start");
+        ScoreCounter.Count.save();
+        SceneManager.LoadScene("Clear");
         settingUI.DataLoad();
     }
 }
