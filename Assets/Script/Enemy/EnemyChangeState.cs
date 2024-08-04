@@ -17,28 +17,28 @@ public class EnemyChangeState : MonoBehaviour
     public EnemyData ChangeState(EnemyData enemyData)
     {
         
-        //Debug.Log("A");
         EnemyData Data = enemyData;
         if (Data.Detoroy)
         {
             Data.Status = EnemyData.Action.Wait;
             return Data;
         }
-        float Range = Vector3.Distance(enemyData.PlayerObj.transform.position, enemyData.ThisEnemeyObj.transform.position);
-        if (Data.PlayerView)//Ž‹ŠE‚É“ü‚Á‚Ä‚¢‚é
+        Vector3 PlayerPosition = enemyData.PlayerObj.transform.position;
+        Vector3 EnemyPosition = enemyData.ThisEnemeyObj.transform.position;
+        float Range = Vector3.Distance(PlayerPosition,EnemyPosition);
+        if (Data.PlayerView)
         {
-            if (Range <= AttackDistance)//UŒ‚‰Â”\‹——£
+            if (Range <= AttackDistance)
             {
                 Data.Status = EnemyData.Action.attack;
                 return Data;
             }
-            //Debug.Log("B");
             Data.Status = EnemyData.Action.chase;
             return Data;
         }
-        if (Data.Status == EnemyData.Action.chase)//Œ©Ž¸‚Á‚½
+        if (Data.Status == EnemyData.Action.chase)
         {
-            if (Vector3.Distance(this.gameObject.transform.position, Data.TargetPosition) > Data.PlayerDistance)
+            if (Vector3.Distance(EnemyPosition, Data.TargetPosition) > Data.PlayerDistance)
             {
                 Data.Status = EnemyData.Action.chase;
                 return Data;
@@ -46,7 +46,7 @@ public class EnemyChangeState : MonoBehaviour
             Data.Status = EnemyData.Action.Wait;
             return Data;
         }
-        if (Data.WaitTime <= 0)//‘Ò‹@I—¹
+        if (Data.WaitTime <= 0)
         {
             Data.Status = EnemyData.Action.patrol;
             return Data;
