@@ -95,6 +95,11 @@ public class Item : MonoBehaviour
         {
             RocketBullet.SetActive(SetBullet != 0);
         }
+        if(ItemCanvas != null)
+        {
+
+            ItemCanvas.transform.LookAt(Player.player.CameraObject.transform.position);
+        }
 
     }
     public void ShowDescription(bool a)

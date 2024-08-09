@@ -78,8 +78,8 @@ public class Player : MonoBehaviour
     }
     public void Camera()
     {
-        CameraObject = playerCamera.CameraMove(CameraObject);
-        PlayerObject = playerCamera.PlayerCameraMove(PlayerObject, PlayerMesh);
+        CameraObject = playerCamera.CameraMove(CameraObject, PlayerMesh);
+        PlayerObject = playerCamera.PlayerCameraMove(PlayerObject);
     }
     public void ChangeCameraSpeed(CameraSpeed speed)
     {

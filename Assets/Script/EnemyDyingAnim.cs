@@ -18,7 +18,7 @@ public class EnemyDyingAnim : MonoBehaviour
             Color color = CloneMaterial.color;
             color.a = i;
             CloneMaterial.color = color;
-            i -= 0.01f;
+            i -= 0.1f;
             await Task.Delay(1);
 
         } while (i >= 0);

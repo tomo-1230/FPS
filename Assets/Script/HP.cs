@@ -9,7 +9,7 @@ public class HP : MonoBehaviour
     public Text HPvaule;
     public Image Fill;
     public int MaxHP;
-
+    public WinLossManager Loss;
     public float duration = 0.5f;
     public float strength = 20f;
     public int vibrate = 100;
@@ -30,15 +30,8 @@ public class HP : MonoBehaviour
         {
             Debug.Log("Gameover");
             value = 0;
-
-            if (StartScene.startScene == null)
-            {
-                StartScene.Staticback(false);
-            }
-            else
-            {
-                StartScene.startScene.back(false);
-            }
+            Loss.Loss();
+            
         }
         if (value > MaxHP)
         {

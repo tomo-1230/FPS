@@ -597,7 +597,7 @@ MonoBehaviour:
   HeadDamage: 90
   FiringInterval: 1000
   RapidFire: 1
-  ShotAim: 1
+  ShotAim: 0.5
   ShotAmount: 5
   RocketBullet: {fileID: 0}
   RayPositionObj: {fileID: 0}

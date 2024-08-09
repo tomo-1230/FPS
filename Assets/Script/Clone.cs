@@ -15,6 +15,7 @@ public class Clone : MonoBehaviour
     private bool addition = false;
     public Clone clone;
     public EnemyCounter enemyCounter;
+    public WinLossManager win;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -93,7 +94,7 @@ public class Clone : MonoBehaviour
        
         if (ClonedEnemyObj.Count == 0)
         {
-            ChangeStartScene();
+            win.Win();
             return;
         }
         int i = 0;

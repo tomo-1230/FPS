@@ -10,7 +10,7 @@ public class PlayerCamera : MonoBehaviour
     {
         CameraSpeed = speed;
     }
-    public GameObject CameraMove(GameObject Camera)
+    public GameObject CameraMove(GameObject Camera ,GameObject Player_Mesh)
     {
         float x_Rotation = Input.GetAxis("Mouse X");
         float y_Rotation = Input.GetAxis("Mouse Y");
@@ -20,6 +20,7 @@ public class PlayerCamera : MonoBehaviour
         vector.y -= y_Rotation / 10 * CameraSpeed;
         result.transform.localEulerAngles = vector;
         vector = result.transform.localEulerAngles;
+        Debug.Log(vector.y);
         if (vector.y < 300 && vector.y > 180)
         {
             vector.y = 300;
@@ -30,16 +31,17 @@ public class PlayerCamera : MonoBehaviour
 
         }
         result.transform.localEulerAngles = vector;
+        Player_Mesh.SetActive(!(vector.y > 15 && vector.y < 100));
         return result;
     }
-    public GameObject PlayerCameraMove(GameObject Player, GameObject Player_Mesh)
+    public GameObject PlayerCameraMove(GameObject Player)
     {
         float x_Rotation = Input.GetAxis("Mouse X");
         GameObject result = Player;
 
         Vector3 vector = Player.transform.localEulerAngles;
         vector.y += x_Rotation / 10 * CameraSpeed;
-        Player_Mesh.SetActive(vector.y < 30);
+        
         result.transform.localEulerAngles = vector;
         return result;
     }
