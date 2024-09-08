@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
                 if (Distance <= blastDistance)//’e‚Æ“G‚Ì‹——£‚ª”š•—‹——£‚æ‚è‹ß‚©‚Á‚½‚ç
                 {
                     float DamageValue = item.BlastDamage /(blastDistance - Distance);
-                    Debug.Log((int)DamageValue);
+                    //Debug.Log((int)DamageValue);
                     Enemy.GetComponent<Enemy>().Damage_((int)DamageValue, false);
 
                 }

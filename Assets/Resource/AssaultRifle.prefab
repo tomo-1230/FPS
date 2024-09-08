@@ -309,7 +309,7 @@ MonoBehaviour:
   MuzzleObj: {fileID: 737486830564659535}
   BulletType: 1
   distance: 100
-  Damage: 25
+  Damage: 20
   HeadDamage: 40
   FiringInterval: 10
   RapidFire: 1

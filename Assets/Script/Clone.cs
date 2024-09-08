@@ -95,6 +95,7 @@ public class Clone : MonoBehaviour
         if (ClonedEnemyObj.Count == 0)
         {
             win.Win();
+            enemyCounter.EnemyKill();
             return;
         }
         int i = 0;

@@ -20,7 +20,7 @@ public class PlayerCamera : MonoBehaviour
         vector.y -= y_Rotation / 10 * CameraSpeed;
         result.transform.localEulerAngles = vector;
         vector = result.transform.localEulerAngles;
-        Debug.Log(vector.y);
+        //Debug.Log(vector.y);
         if (vector.y < 300 && vector.y > 180)
         {
             vector.y = 300;

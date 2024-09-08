@@ -87,7 +87,7 @@ public class GunShoot : MonoBehaviour
     }
     public void BulletComponent(GameObject CloneObject, GameObject CloneGun)
     {
-        Debug.Log("Clone");
+        //Debug.Log("Clone");
         Bullet bullet = CloneObject.AddComponent<Bullet>();
         bullet.item = CloneGun.GetComponent<Item>();
         if (player == null)

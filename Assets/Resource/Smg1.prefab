@@ -146,7 +146,7 @@ MonoBehaviour:
   MuzzleObj: {fileID: 3132336080370437555}
   BulletType: 2
   distance: 70
-  Damage: 20
+  Damage: 10
   HeadDamage: 50
   FiringInterval: 30
   RapidFire: 1

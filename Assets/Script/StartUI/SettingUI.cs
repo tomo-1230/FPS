@@ -45,7 +45,7 @@ public class SettingUI : MonoBehaviour
             SettingData.Add(0);
         }
         sDifficulty.value = 10;
-        Level = 9;
+        Level = 0;
         SettingData[2] = PlayerHP.Data[Level];
         SettingData[3] = EnemyAmount.Data[Level];
         SettingData[4] = EnemyMoveSpeed.Data[Level];

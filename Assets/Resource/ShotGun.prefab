@@ -594,7 +594,7 @@ MonoBehaviour:
   BulletType: 3
   distance: 100
   Damage: 30
-  HeadDamage: 90
+  HeadDamage: 60
   FiringInterval: 1000
   RapidFire: 1
   ShotAim: 0.5

@@ -18,6 +18,14 @@ public class ScoreView : MonoBehaviour
     public Button clause;
     public void Start()
     {
+        if(PlayerPrefs.GetInt("win") == 1)
+        {
+            Game.text = "GameClear";
+        }
+        else
+        {
+            Game.text = "GameOver";
+        }
         view(true);   
     }
     async void view(bool clear)
@@ -28,11 +36,12 @@ public class ScoreView : MonoBehaviour
         await Task.Delay(500);
         ScoreMove(HedShotScore, PlayerPrefs.GetInt("HedShotCount") + "‰ñ");
         await Task.Delay(500);
-        float rate = PlayerPrefs.GetInt("HitCount") / PlayerPrefs.GetInt("ShotCount");
-        ScoreMove(HitRateScore, rate*100 + "%");
-        Debug.Log(PlayerPrefs.GetInt("HitCount") + ":" + PlayerPrefs.GetInt("ShotCount"));
+        float rate = (float)PlayerPrefs.GetInt("HitCount") / (float)PlayerPrefs.GetInt("ShotCount");
+        ScoreMove(HitRateScore,((int)(rate*100) + "%"));
+        Debug.Log(PlayerPrefs.GetInt("HitCount")+":"+PlayerPrefs.GetInt("ShotCount"));
         await Task.Delay(500);
-        ScoreMove(HeadShotRateScore, PlayerPrefs.GetInt("HedShotCount") / PlayerPrefs.GetInt("HitCount") *100 + "%");
+        rate = (float)PlayerPrefs.GetInt("HedShotCount") / (float)PlayerPrefs.GetInt("HitCount");
+        ScoreMove(HeadShotRateScore, ((int)(rate * 100) + "%"));
         await Task.Delay(500);
         int m = (int)(PlayerPrefs.GetFloat("time") / 60);
         int s = (int)(PlayerPrefs.GetFloat("time") % 60);
