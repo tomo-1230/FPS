@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 public class ScoreView : MonoBehaviour
 {
     public GameObject ShotScore;
@@ -74,5 +75,9 @@ public class ScoreView : MonoBehaviour
         Text valueText = Score.transform.Find("value").gameObject.GetComponent<Text>();
         valueText.text = value;
         Score.SetActive(true);
+    }
+    public void OnClick()
+    {
+        SceneManager.LoadScene("Start");
     }
 }
